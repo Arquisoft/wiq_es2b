@@ -64,3 +64,54 @@ The agents involved in the WIQ system environment are the following:
 
 * *Question's API*: is given by the system to provide information about the questions generated.
 
+
+
+****
+
+
+=== Technical Context
+
+[role="arc42help"]
+****
+.Technical Context Diagram
+
+:imagesdir: ../images
+image::03-TechnicalContextDiagram-Lucidchart.png[Technical Context Diagram]
+
+
+.WIQ
+[cols="1,2,3"]
+|===
+
+| Channels
+| Type
+| Input/Output
+
+| SSH
+| Input
+| User -> Frontend Web
+
+| HTTP/REST
+| Output
+| WIQ -> User's API
+
+| HTTP/REST
+| Output
+| WIQ -> Question's API
+
+| HTTP/REST
+| Input
+| Database -> Wikidata
+
+| HTTP
+| Input
+| Database -> WIQ
+
+| HTTP
+| Output
+| WIQ -> Database
+
+|===
+
+
+
