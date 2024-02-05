@@ -19,7 +19,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 :imagesdir: ../images
 image::03-BusinessContextDiagram-Lucidchart.png[Business Context Diagram]
-
+****
 
 
 
@@ -66,8 +66,6 @@ The agents involved in the WIQ system environment are the following:
 
 
 
-****
-
 
 === Technical Context
 
@@ -77,7 +75,7 @@ The agents involved in the WIQ system environment are the following:
 
 :imagesdir: ../images
 image::03-TechnicalContextDiagram-Lucidchart.png[Technical Context Diagram]
-
+****
 
 .WIQ
 [cols="1,2,3"]
