@@ -10,7 +10,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 | _Git_ | _Software version control system_ 
 | _GitHub_ | _Cloud-based service that hosts the aforementioned version control system, Git._ 
 | _React_ | _JavaScript library that allows us to create interactive user interfaces in a simple way. It is based on components._ 
-| _MongoDB_ | _Sistema de base de datos orientado a documentos y código abierto_ 
+| _MongoDB_ | _Open source, document-oriented database system_ 
 | _Docker_ | _A tool that makes it easy to create, deploy and run applications using containers. Containers allow you to package an application with all the parts you need, such as libraries and other dependencies, and deploy it as a single package._ 
 | _API_ | _Se usará una API externa para mostrar el mapa_ 
 | _Javascript_ | _An interpreted programming language based on prototypes, imperative and dynamic. We will use it on both frontend and backend._
