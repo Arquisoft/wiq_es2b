@@ -13,31 +13,20 @@ Any requirement that constraints software architects in their freedom of design 
 Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
 Constraints must always be dealt with; they may be negotiable, though.
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-
-
-.Further Information
-
-See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 documentation.
-
 
 === 2.1 Technical Constraints
 [cols="1,1", options="header"]
 |===
 | Constraint | Description
 | Application Server Version | Usage of version X.X of the application server is required.
-| Compatibility with Operating Systems | The application must be compatible with Windows and Linux operating systems.
+| Compatibility with Operating Systems | The application must be compatible with Windows .
 |===
 
 === 2.2 Legal and Regulatory Constraints
 [cols="1,1", options="header"]
 |===
 | Constraint | Description
-| Compliance with Privacy Regulations | The application must comply with privacy regulations in country Y.
+| Compliance with Privacy Regulations | The application must comply with privacy regulations in country Spain.
 |===
 
 === 2.3 Development Constraints
@@ -83,14 +72,5 @@ See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 doc
 | Scalability | The application is expected to be scalable to handle a 20% increase in workload.
 |===
 
-=== 2.9 Other Relevant Constraints
-[cols="1,1", options="header"]
-|===
-| Constraint | Description
-| [Add any additional constraint here] | [Description of the additional constraint]
-|===
-
-=== 2.10 Impact on Design Decisions
-These constraints will influence the selection of design patterns, technologies, and implementation approaches. It is crucial to consider these limitations when making design decisions, although some constraints may be negotiable.
 
 ****
