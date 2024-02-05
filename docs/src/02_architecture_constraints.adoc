@@ -13,15 +13,64 @@ Any requirement that constraints software architects in their freedom of design 
 Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
 Constraints must always be dealt with; they may be negotiable, though.
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
 
+=== 2.1 Technical Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Application Server Version | Usage of version X.X of the application server is required.
+| Compatibility with Operating Systems | The application must be compatible with Windows .
+|===
 
-.Further Information
+=== 2.2 Legal and Regulatory Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Compliance with Privacy Regulations | The application must comply with privacy regulations in country Spain.
+|===
 
-See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 documentation.
+=== 2.3 Development Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Development Methodology | The team will follow an agile development methodology.
+| Build Tool | The Z build tool will be used for the compilation process.
+|===
+
+=== 2.4 Organizational Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Internal Security Policies | Internal security policies of the organization will be adhered to.
+|===
+
+=== 2.5 Interoperability Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Communication Standard | The application must be compatible with communication standard ABC.
+|===
+
+=== 2.6 Security Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Two-Factor Authentication | Two-factor authentication is mandatory for all users.
+|===
+
+=== 2.7 Performance Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Response Time | The application's response time should not exceed 2 seconds.
+|===
+
+=== 2.8 Maintenance and Scalability Constraints
+[cols="1,1", options="header"]
+|===
+| Constraint | Description
+| Scalability | The application is expected to be scalable to handle a 20% increase in workload.
+|===
+
 
 ****
