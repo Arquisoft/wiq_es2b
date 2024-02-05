@@ -3,9 +3,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-architecture-constraints]]
 == Architecture Constraints
 
-
-[role="arc42help"]
-****
 .Contents
 Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
 
@@ -73,4 +70,3 @@ Constraints must always be dealt with; they may be negotiable, though.
 |===
 
 
-****
