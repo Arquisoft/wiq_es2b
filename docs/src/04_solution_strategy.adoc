@@ -3,8 +3,9 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-solution-strategy]]
 == Solution Strategy
 
-.Technology decisions
+=== Technology decisions
 
+[options="header",cols="1,2"]
 |===
 |Technology|Description
 | _Git_ | _Software version control system_ 
@@ -17,7 +18,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 | _CSS_ | _A graphic programming language oriented to define the repesentation of a document._
 |===
 
-.Decisions on how to achieve key quality goals
+=== Decisions on how to achieve key quality goals
 
 * Usability: the team will take care to design a clear and accessible interface for any user. This will be based on web usability standards.
 
@@ -27,7 +28,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 * Testability: this is an important quality objective to ensure that the software is reliable, robust and error-free. It is important to implement appropriate software development practices, such as separation of concerns and modular design.
 
-.Relevant Organizational Decisions
+=== Relevant Organizational Decisions
 
 Regarding the organization within the team, we have taken the following decisions:
 
@@ -38,29 +39,3 @@ Regarding the organization within the team, we have taken the following decision
 * We use a Kanban board within github to have well organized and in a very clear way the tasks that each team member has to perform/is performing.
 
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes
-
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
-
-.Motivation
-These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.
-
-.Form
-Keep the explanations of such key decisions short.
-
-Motivate what was decided and why it was decided that way,
-based upon problem statement, quality goals and key constraints.
-Refer to details in the following sections.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
-
-****
