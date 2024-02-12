@@ -454,62 +454,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_stakeholders">1.3. Stakeholders</a></li>
 </ul>
 </li>
-<li><a href="#section-architecture-constraints">2. Architecture Constraints</a>
-<ul class="sectlevel2">
-<li><a href="#_technical_constraints">2.1. Technical Constraints</a></li>
-<li><a href="#_legal_and_regulatory_constraints">2.2. Legal and Regulatory Constraints</a></li>
-<li><a href="#_development_constraints">2.3. Development Constraints</a></li>
-<li><a href="#_organizational_constraints">2.4. Organizational Constraints</a></li>
-<li><a href="#_interoperability_constraints">2.5. Interoperability Constraints</a></li>
-<li><a href="#_security_constraints">2.6. Security Constraints</a></li>
-<li><a href="#_performance_constraints">2.7. Performance Constraints</a></li>
-<li><a href="#_maintenance_and_scalability_constraints">2.8. Maintenance and Scalability Constraints</a></li>
-</ul>
-</li>
+<li><a href="#section-architecture-constraints">2. Architecture Constraints</a></li>
 <li><a href="#section-system-scope-and-context">3. System Scope and Context</a>
 <ul class="sectlevel2">
 <li><a href="#_business_context">3.1. Business Context</a></li>
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
-<li><a href="#section-building-block-view">5. Building Block View</a>
-<ul class="sectlevel2">
-<li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_level_2">5.2. Level 2</a></li>
-<li><a href="#_level_3">5.3. Level 3</a></li>
-</ul>
-</li>
-<li><a href="#section-runtime-view">6. Runtime View</a>
-<ul class="sectlevel2">
-<li><a href="#_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</a></li>
-<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
-<li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
-</ul>
-</li>
-<li><a href="#section-deployment-view">7. Deployment View</a>
-<ul class="sectlevel2">
-<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
-<li><a href="#_infrastructure_level_2">7.2. Infrastructure Level 2</a></li>
-</ul>
-</li>
-<li><a href="#section-concepts">8. Cross-cutting Concepts</a>
-<ul class="sectlevel2">
-<li><a href="#_concept_1">8.1. <em>&lt;Concept 1&gt;</em></a></li>
-<li><a href="#_concept_2">8.2. <em>&lt;Concept 2&gt;</em></a></li>
-<li><a href="#_concept_n">8.3. <em>&lt;Concept n&gt;</em></a></li>
-</ul>
-</li>
-<li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
-<li><a href="#section-quality-scenarios">10. Quality Requirements</a>
-<ul class="sectlevel2">
-<li><a href="#_quality_tree">10.1. Quality Tree</a></li>
-<li><a href="#_quality_scenarios">10.2. Quality Scenarios</a></li>
-</ul>
-</li>
-<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
-<li><a href="#section-glossary">12. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -587,37 +538,10 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="paragraph">
 <p>It consists of an application in which users can register and enter to play the quiz game.</p>
 </div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Describes the relevant requirements and the driving forces that software architects and development team must consider.
-These include</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>underlying business goals,</p>
-</li>
-<li>
-<p>essential features,</p>
-</li>
-<li>
-<p>essential functional requirements,</p>
-</li>
-<li>
-<p>quality goals for the architecture and</p>
-</li>
-<li>
-<p>relevant stakeholders and their expectations</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="sect2">
 <h3 id="_requirements_overview">1.1. Requirements Overview</h3>
 <div class="ulist">
-<div class="title">Requisitos de alto nivel</div>
+<div class="title">High level Requirements</div>
 <ul>
 <li>
 <p>The system will have at least one web frontend deployed and access will be through the Web.</p>
@@ -642,64 +566,9 @@ These include</p>
 </li>
 </ul>
 </div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.</p>
-</div>
-<div class="paragraph">
-<p>Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-1/">Introduction and Goals</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_quality_goals">1.2. Quality Goals</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders.
-We really mean quality goals for the architecture. Don&#8217;t confuse them with project goals.
-They are not necessarily identical.</p>
-</div>
-<div class="paragraph">
-<p>Consider this overview of potential topics (based upon the ISO 25010 standard):</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/01_2_iso-25010-topics-EN.drawio.png" alt="Categories of Quality Requirements">
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions.
-Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>A table with quality goals and concrete scenarios, ordered by priorities</p>
-</div>
-</div>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -733,43 +602,6 @@ If you as an architect do not know how the quality of your work will be judged&#
 </div>
 <div class="sect2">
 <h3 id="_stakeholders">1.3. Stakeholders</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>should know the architecture</p>
-</li>
-<li>
-<p>have to be convinced of the architecture</p>
-</li>
-<li>
-<p>have to work with the architecture or with code</p>
-</li>
-<li>
-<p>need the documentation of the architecture for their work</p>
-</li>
-<li>
-<p>have to come up with decisions about the system or its development</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Table with role names, person names, and their expectations with respect to the architecture and its documentation.</p>
-</div>
-</div>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -813,6 +645,8 @@ These stakeholders determine the extent and the level of detail of your work and
 <div class="sect1">
 <h2 id="section-architecture-constraints">2. Architecture Constraints</h2>
 <div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
 <p>Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.</p>
@@ -822,8 +656,9 @@ These stakeholders determine the extent and the level of detail of your work and
 <p>Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
 Constraints must always be dealt with; they may be negotiable, though.</p>
 </div>
-<div class="sect2">
-<h3 id="_technical_constraints">2.1. Technical Constraints</h3>
+<div class="paragraph">
+<p>=== 2.1 Technical Constraints</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -846,9 +681,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.2 Legal and Regulatory Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_legal_and_regulatory_constraints">2.2. Legal and Regulatory Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -867,9 +702,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.3 Development Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_development_constraints">2.3. Development Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -892,9 +727,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.4 Organizational Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_organizational_constraints">2.4. Organizational Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -913,9 +748,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.5 Interoperability Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_interoperability_constraints">2.5. Interoperability Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -934,9 +769,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.6 Security Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_security_constraints">2.6. Security Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -955,9 +790,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.7 Performance Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_performance_constraints">2.7. Performance Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -976,9 +811,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== 2.8 Maintenance and Scalability Constraints</p>
 </div>
-<div class="sect2">
-<h3 id="_maintenance_and_scalability_constraints">2.8. Maintenance and Scalability Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -997,19 +832,28 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
 </div>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="section-system-scope-and-context">3. System Scope and Context</h2>
 <div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+
+</div>
+</div>
 <div class="sect2">
 <h3 id="_business_context">3.1. Business Context</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="imageblock">
 <div class="content">
 <img src="./images/03-BusinessContextDiagram-Lucidchart.png" alt="Business Context Diagram">
 </div>
+<div class="title">Figure 1. Business Context Diagram</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. WIQ</caption>
@@ -1074,12 +918,17 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </ul>
 </div>
 </div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_technical_context">3.2. Technical Context</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="imageblock">
 <div class="content">
 <img src="./images/03-TechnicalContextDiagram-Lucidchart.png" alt="Technical Context Diagram">
 </div>
+<div class="title">Figure 2. Technical Context Diagram</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. WIQ</caption>
@@ -1127,23 +976,24 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
+<div id="section-solution-strategy" class="paragraph">
+<p>== Solution Strategy</p>
 </div>
+<div class="paragraph">
+<p>=== Technology decisions</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="section-solution-strategy">4. Solution Strategy</h2>
-<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Technology decisions</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Technology</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<th class="tableblock halign-left valign-top">Technology</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Git</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Software version control system</em></p></td>
@@ -1178,8 +1028,10 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>=== Decisions on how to achieve key quality goals</p>
+</div>
 <div class="ulist">
-<div class="title">Decisions on how to achieve key quality goals</div>
 <ul>
 <li>
 <p>Usability: the team will take care to design a clear and accessible interface for any user. This will be based on web usability standards.</p>
@@ -1196,7 +1048,9 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </ul>
 </div>
 <div class="paragraph">
-<div class="title">Relevant Organizational Decisions</div>
+<p>=== Relevant Organizational Decisions</p>
+</div>
+<div class="paragraph">
 <p>Regarding the organization within the team, we have taken the following decisions:</p>
 </div>
 <div class="ulist">
@@ -1212,55 +1066,12 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </li>
 </ul>
 </div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>technology decisions</p>
-</li>
-<li>
-<p>decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern</p>
-</li>
-<li>
-<p>decisions on how to achieve key quality goals</p>
-</li>
-<li>
-<p>relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Keep the explanations of such key decisions short.</p>
-</div>
-<div class="paragraph">
-<p>Motivate what was decided and why it was decided that way,
-based upon problem statement, quality goals and key constraints.
-Refer to details in the following sections.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-4/">Solution Strategy</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
 <div style="page-break-after: always;"></div>
+<div id="section-building-block-view" class="paragraph">
+<p>== Building Block View</p>
 </div>
 </div>
-<div class="sect1">
-<h2 id="section-building-block-view">5. Building Block View</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
+</div>
 <div class="paragraph">
 <div class="title">Content</div>
 <p>The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes, interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations, data structures, &#8230;&#8203;) as well as their dependencies (relationships, associations, &#8230;&#8203;)</p>
@@ -1302,12 +1113,13 @@ Thus it contains the white box description of selected building blocks of level 
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-5/">Building Block View</a> in the arc42 documentation.</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p>=== Whitebox Overall System</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Here you describe the decomposition of the overall system using the following white box template. It contains</p>
 </div>
@@ -1342,8 +1154,8 @@ In the best case you will get away with examples or simple signatures.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
 <p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
 </div>
@@ -1363,8 +1175,8 @@ In the best case you will get away with examples or simple signatures.</p>
 </dd>
 </dl>
 </div>
-<div class="sidebarblock arc42help">
-<div class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>Insert your explanations of black boxes from level 1:</p>
 </div>
@@ -1398,12 +1210,13 @@ responsibility according to the following schema:</p>
 <p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
 Its headline is the name of the black box.</p>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p>==== &lt;Name black box 1&gt;</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Here you describe &lt;black box 1&gt;
 according the the following black box template:</p>
@@ -1430,8 +1243,8 @@ according the the following black box template:</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
 <p><em>&lt;Purpose/Responsibility&gt;</em></p>
 </div>
@@ -1450,34 +1263,32 @@ according the the following black box template:</p>
 <div class="paragraph">
 <p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name black box 2&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name black box n&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name interface 1&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name interface m&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
-
+<div class="paragraph">
+<p>=== Level 2</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
+</div>
 <div class="paragraph">
 <p>Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.</p>
 </div>
@@ -1486,41 +1297,41 @@ according the the following black box template:</p>
 Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
 Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p>==== White Box <em>&lt;building block 1&gt;</em></p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>&#8230;&#8203;describes the internal structure of <em>building block 1</em>.</p>
 </div>
-</div>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== White Box <em>&lt;building block 2&gt;</em></p>
 </div>
-<div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
+<div class="paragraph">
+<p>==== White Box <em>&lt;building block m&gt;</em></p>
 </div>
-<div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>=== Level 3</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
+</div>
 <div class="paragraph">
 <p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
 </div>
@@ -1528,42 +1339,39 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 <p>When you need more detailed levels of your architecture please copy this
 part of arc42 for additional levels.</p>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p>==== White Box &lt;_building block x.1_&gt;</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Specifies the internal structure of <em>building block x.1</em>.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== White Box &lt;_building block x.2_&gt;</p>
 </div>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
 <div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
+<p>==== White Box &lt;_building block y.1_&gt;</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
 <div style="page-break-after: always;"></div>
+<div id="section-runtime-view" class="paragraph">
+<p>== Runtime View</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="section-runtime-view">6. Runtime View</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
 <p>The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:</p>
@@ -1622,10 +1430,11 @@ You will mainly capture scenarios in your documentation to communicate your arch
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-6/">Runtime View</a> in the arc42 documentation.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>=== &lt;Runtime Scenario 1&gt;</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1645,26 +1454,21 @@ building block instances depicted in this diagram.&gt;</em></p>
 <img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="340" height="346">
 </div>
 </div>
+<div class="paragraph">
+<p>=== &lt;Runtime Scenario 2&gt;</p>
 </div>
-<div class="sect2">
-<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
-
+<div class="paragraph">
+<p>=== &#8230;&#8203;</p>
 </div>
-<div class="sect2">
-<h3 id="">6.3. &#8230;&#8203;</h3>
-
+<div class="paragraph">
+<p>=== &lt;Runtime Scenario n&gt;</p>
 </div>
-<div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
+<div id="section-deployment-view" class="paragraph">
+<p>== Deployment View</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="section-deployment-view">7. Deployment View</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
 <div class="title">Content</div>
 <p>The deployment view describes:</p>
@@ -1715,12 +1519,13 @@ when your infrastructure is more complex.</p>
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-7/">Deployment View</a> in the arc42 documentation.</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p>=== Infrastructure Level 1</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Describe (usually in a combination of diagrams, tables, and text):</p>
 </div>
@@ -1743,8 +1548,8 @@ when your infrastructure is more complex.</p>
 <div class="paragraph">
 <p>For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.</p>
 </div>
-</div>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
 <p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
 </div>
@@ -1764,49 +1569,46 @@ when your infrastructure is more complex.</p>
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p>=== Infrastructure Level 2</p>
 </div>
-<div class="sect2">
-<h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>Here you can include the internal structure of (some) infrastructure elements from level 1.</p>
 </div>
 <div class="paragraph">
 <p>Please copy the structure from level 1 for each selected element.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>==== <em>&lt;Infrastructure Element 1&gt;</em></p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== <em>&lt;Infrastructure Element 2&gt;</em></p>
 </div>
-<div class="sect3">
-<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
+<div class="paragraph">
+<p>==== <em>&lt;Infrastructure Element n&gt;</em></p>
 </div>
-<div class="sect3">
-<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 <div style="page-break-after: always;"></div>
+<div id="section-concepts" class="paragraph">
+<p>== Cross-cutting Concepts</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="section-concepts">8. Cross-cutting Concepts</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
 <div class="title">Content</div>
 <p>This section describes overall, principal regulations and solution ideas that are relevant in multiple parts (= cross-cutting) of your system.
@@ -1902,37 +1704,35 @@ on this list.</p>
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-8/">Concepts</a> in the arc42 documentation.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>=== <em>&lt;Concept 1&gt;</em></p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_concept_1">8.1. <em>&lt;Concept 1&gt;</em></h3>
 <div class="paragraph">
 <p><em>&lt;explanation&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>=== <em>&lt;Concept 2&gt;</em></p>
 </div>
-<div class="sect2">
-<h3 id="_concept_2">8.2. <em>&lt;Concept 2&gt;</em></h3>
 <div class="paragraph">
 <p><em>&lt;explanation&gt;</em></p>
 </div>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
+<div class="paragraph">
+<p>=== <em>&lt;Concept n&gt;</em></p>
 </div>
-<div class="sect2">
-<h3 id="_concept_n">8.3. <em>&lt;Concept n&gt;</em></h3>
 <div class="paragraph">
 <p><em>&lt;explanation&gt;</em></p>
 </div>
 <div style="page-break-after: always;"></div>
+<div id="section-design-decisions" class="paragraph">
+<p>== Architecture Decisions</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="section-design-decisions">9. Architecture Decisions</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
 <p>Important, expensive, large scale or risky architecture decisions including rationales.
@@ -1973,117 +1773,67 @@ Refer to section 4, where you already captured the most important decisions of y
 <p>See <a href="https://docs.arc42.org/section-9/">Architecture Decisions</a> in the arc42 documentation.
 There you will find links and examples about ADR.</p>
 </div>
-</div>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div style="page-break-after: always;"></div>
+<div id="section-quality-scenarios" class="paragraph">
+<p>== Quality Requirements</p>
 </div>
+<div class="paragraph">
+<p>=== Quality Tree</p>
 </div>
-<div class="sect1">
-<h2 id="section-quality-scenarios">10. Quality Requirements</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
+<div class="imageblock">
 <div class="content">
-<div class="paragraph">
-<div class="title">Content</div>
-<p>This section contains all quality requirements as quality tree with scenarios. The most important ones have already been described in section 1.2. (quality goals)</p>
+<img src="./images/10_1_Quality_Tree.png" alt="Business Context Diagram">
 </div>
-<div class="paragraph">
-<p>Here you can also capture quality requirements with lesser priority,
-which will not create high risks when they are not fully achieved.</p>
 </div>
 <div class="paragraph">
-<div class="title">Motivation</div>
-<p>Since quality requirements will have a lot of influence on architectural
-decisions you should know for every stakeholder what is really important to them,
-concrete and measurable.</p>
+<p>=== Quality Scenarios</p>
 </div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-10/">Quality Requirements</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_quality_tree">10.1. Quality Tree</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Content</div>
-<p>The quality tree (as defined in ATAM – Architecture Tradeoff Analysis Method) with quality/evaluation scenarios as leafs.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>The tree structure with priorities provides an overview for a sometimes large number of quality requirements.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>The quality tree is a high-level overview of the quality goals and requirements:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>tree-like refinement of the term "quality". Use "quality" or "usefulness" as a root</p>
-</li>
-<li>
-<p>a mind map with quality categories as main branches</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In any case the tree should include links to the scenarios of the following section.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Concretization of (sometimes vague or implicit) quality requirements using (quality) scenarios.</p>
-</div>
-<div class="paragraph">
-<p>These scenarios describe what should happen when a stimulus arrives at the system.</p>
-</div>
-<div class="paragraph">
-<p>For architects, two kinds of scenarios are important:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Usage scenarios (also called application scenarios or use case scenarios) describe the system’s runtime reaction to a certain stimulus. This also includes scenarios that describe the system’s efficiency or performance. Example: The system reacts to a user’s request within one second.</p>
-</li>
-<li>
-<p>Change scenarios describe a modification of the system or of its immediate environment. Example: Additional functionality is implemented or requirements for a quality attribute change.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Scenarios make quality requirements concrete and allow to
-more easily measure or decide whether they are fulfilled.</p>
-</div>
-<div class="paragraph">
-<p>Especially when you want to assess your architecture using methods like
-ATAM you need to describe your quality goals (from section 1.2)
-more precisely down to a level of scenarios that can be discussed and evaluated.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Tabular or free form text.</p>
-</div>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Quality Requirements</th>
+<th class="tableblock halign-left valign-top">Scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Priority</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Privacity</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>We will respect the privacy of the users, the user&#8217;s data will be protected at all times. We will ensure the highest possible security, storing the user&#8217;s sensitive information securely and trying to prevent any kind of attack or risk.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usability</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>We want to offer the user the possibility to see his personal statistics, as well as a service of access to information and data storage, in an intuitive and efficient system for customers (as fast as possible).</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Maintainability</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The design and architecture will allow for flexibility in the face of unexpected events during development, this feature is important because we want to reduce costs in terms of time.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medium</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testeability</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The application will be subjected to unit, acceptance and load testing to prove that it works correctly. If new functionality is added to the map, it must be thoroughly tested before deployment.</em></p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+<div id="section-technical-risks" class="paragraph">
+<p>== Risks and Technical Debts</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
 <p>A list of identified technical risks or technical debts, ordered by priority</p>
@@ -2103,16 +1853,14 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-11/">Risks and Technical Debt</a> in the arc42 documentation.</p>
 </div>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="section-glossary">12. Glossary</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
+<div style="page-break-after: always;"></div>
+<div id="section-glossary" class="paragraph">
+<p>== Glossary</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <div class="title">Contents</div>
 <p>The most important domain and technical terms that your stakeholders use when discussing the system.</p>
@@ -2145,8 +1893,8 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-12/">Glossary</a> in the arc42 documentation.</p>
 </div>
-</div>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -2169,6 +1917,9 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
