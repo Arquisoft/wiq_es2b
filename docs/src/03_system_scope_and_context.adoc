@@ -17,7 +17,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 .Business Context Diagram
 
-:imagesdir: ../images
+
 image::03-BusinessContextDiagram-Lucidchart.png[Business Context Diagram]
 
 
@@ -75,7 +75,7 @@ The agents involved in the WIQ system environment are the following:
 ****
 .Technical Context Diagram
 
-:imagesdir: ../images
+
 image::03-TechnicalContextDiagram-Lucidchart.png[Technical Context Diagram]
 
 
