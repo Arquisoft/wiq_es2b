@@ -4,70 +4,26 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Cross-cutting Concepts
 
 
-[role="arc42help"]
-****
-.Content
-This section describes overall, principal regulations and solution ideas that are relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+=== Domain model
 
-* models, especially domain models
-* architecture or design patterns
-* rules for using specific technology
-* principal, often technical decisions of an overarching (= cross-cutting) nature
-* implementation rules
+* Hacer el diagrama del dominio
 
 
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity) of the architecture. 
-Thus, they are an important contribution to achieve inner qualities of your system.
+=== Privacity
+Security is a very important concept in the context of a system. Since we manage user information, it is important to ensure that the information is secure and that the system is not compromised.
 
-Some of these concepts cannot be assigned to individual building blocks, e.g. security or safety. 
+In addition, we add back-end security to prevent unauthorized requests to the RestAPI, as well as to prevent the execution of malicious code.
 
+=== Usability
+Usability is a fundamental aspect of any application, as it determines the ease and efficiency with which users can interact with it. To ensure the usability of our application, we have followed a series of specific practices and techniques.
 
-.Form
-The form can be varied:
+We have thoroughly researched user needs and expectations, which has allowed us to design an intuitive and easy-to-use user interface.
 
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
+=== Maintainability
+The maintainability of the application is an important section since it is necessary that the code is easily modifiable in case in the future we are asked for new features to implement.
 
-.Structure
-A potential (but not mandatory) structure for this section could be:
-
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
-
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
-
-image::08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
+We are going to use React, which is a framework that facilitates interactivity with the user interface, so it is important to reach users.
 
 
-.Further Information
-
-See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
-****
-
-
-=== _<Concept 1>_
-
-_<explanation>_
-
-
-
-=== _<Concept 2>_
-
-_<explanation>_
-
-...
-
-=== _<Concept n>_
-
-_<explanation>_
+=== Testeability
+As a best practice, throughout development, we will subject our code to multiple unit tests, in order to ensure the robustness and effectiveness of our product before it is deployed on the web. As well, we will  test the functionality of the whole app itself, so that the user experience is the best possible.
