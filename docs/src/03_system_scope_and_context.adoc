@@ -4,23 +4,12 @@ ifndef::imagesdir[:imagesdir: ../images]
 == System Scope and Context
 
 
-[role="arc42help"]
-****
-
-****
-
 
 === Business Context
 
-[role="arc42help"]
-****
-
-.Business Context Diagram
 
 
 image::03-BusinessContextDiagram-Lucidchart.png[Business Context Diagram]
-
-
 
 
 .WIQ
@@ -66,18 +55,12 @@ The agents involved in the WIQ system environment are the following:
 
 
 
-****
-
 
 === Technical Context
 
-[role="arc42help"]
-****
-.Technical Context Diagram
 
 
 image::03-TechnicalContextDiagram-Lucidchart.png[Technical Context Diagram]
-
 
 .WIQ
 [cols="1,2,3"]
