@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import Game from './Game';
+import HistoricalData from './HistoricalData';
+import App from '../App';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,10 +14,8 @@ const Login = () => {
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  // Declara la variable showGame y el metodo que la modifica. Se inicializa a false
+  // Declara las variables (izquierda) y el metodo que la modifica (derecha). Se inicializa a false (useState)
   const [showGame, setShowGame] = useState(false);
-
-  // Declara la variable showHistoricalData y el metodo que la modifica. Se inicializa a false
   const [showHistoricalData, setShowHistoricaData] = useState(false);
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -50,9 +50,15 @@ const Login = () => {
 
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+      {/* Los operadores logicos funcionan de la manera: 
+      condicion ? (lo que se hace si se cumple) : (lo que se hace si no se cumple) */}
       {loginSuccess ? (
-        showGame ? (
-          <Game/>
+        showGame || showHistoricalData ? (
+          showGame ? (
+            <Game/>
+          ):(
+            <HistoricalData/>
+          )
         ) : (
           <div>
             <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
@@ -61,10 +67,12 @@ const Login = () => {
             <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
               Your account was created on {new Date(createdAt).toLocaleDateString()}.
             </Typography>
+
+            {/* Se declaran los botones en los q al hacer click se ejecuta el metodo especificado en onClick*/}
             <Button variant="contained" color="primary" onClick={handleShowGame}>
               Empieza juego
             </Button>
-            <Button variant="contained" color="primary" onClick={handleShowHistoricalData}>
+            <Button variant="contained" color="primary" onClick={handleShowHistoricalData}> 
               Historico de partidas de jugador
             </Button>
           </div>
