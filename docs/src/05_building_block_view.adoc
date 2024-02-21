@@ -5,208 +5,105 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 == Building Block View
 
-[role="arc42help"]
-****
-.Content
-The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes, interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations, data structures, ...) as well as their dependencies (relationships, associations, ...)
-
-This view is mandatory for every architecture documentation.
-In analogy to a house this is the _floor plan_.
-
-.Motivation
-Maintain an overview of your source code by making its structure understandable through
-abstraction.
-
-This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.
-
-.Form
-The building block view is a hierarchical collection of black boxes and white boxes
-(see figure below) and their descriptions.
-
-image::05_building_blocks-EN.png["Hierarchy of building blocks"]
-
-*Level 1* is the white box description of the overall system together with black
-box descriptions of all contained building blocks.
-
-*Level 2* zooms into some building blocks of level 1.
-Thus it contains the white box description of selected building blocks of level 1, together with black box descriptions of their internal building blocks.
-
-*Level 3* zooms into selected building blocks of level 2, and so on.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-5/[Building Block View] in the arc42 documentation.
-
-****
 
 === Whitebox Overall System
 
-[role="arc42help"]
-****
-Here you describe the decomposition of the overall system using the following white box template. It contains
+image::DOCsection5-1.png[Level 1]
 
- * an overview diagram
- * a motivation for the decomposition
- * black box descriptions of the contained building blocks. For these we offer you alternatives:
+.Motivation
+WIQ is the general structure of the system, where the users are going to register in the database, play answering the questions generated with Wikidata or view their previous games among other functionalities. 
 
-   ** use _one_ table for a short and pragmatic overview of all contained building blocks and their interfaces
-   ** use a list of black box descriptions of the building blocks according to the black box template (see below).
-   Depending on your choice of tool this list could be sub-chapters (in text files), sub-pages (in a Wiki) or nested elements (in a modeling tool).
+.Contained Building Blocks
 
+[options="header",cols="1,3"] 
+|=== 
+| Name | Description
 
- * (optional:) important interfaces, that are not explained in the black box templates of a building block, but are very important for understanding the white box.
-Since there are so many ways to specify interfaces why do not provide a specific template for them.
- In the worst case you have to specify and describe syntax, semantics, protocols, error handling,
- restrictions, versions, qualities, necessary compatibilities and many things more.
-In the best case you will get away with examples or simple signatures.
+| *_Actor_*
+| Client/User of the application which will interact with it. 
 
-****
+| *_WIQ application_*  
+| System developed to be used by the users.   
 
-_**<Overview Diagram>**_
-
-Motivation::
-
-_<text explanation>_
-
-
-Contained Building Blocks::
-_<Description of contained building block (black boxes)>_
-
-Important Interfaces::
-_<Description of important interfaces>_
-
-[role="arc42help"]
-****
-Insert your explanations of black boxes from level 1:
-
-If you use tabular form you will only describe your black boxes with name and
-responsibility according to the following schema:
-
-[cols="1,2" options="header"]
-|===
-| **Name** | **Responsibility**
-| _<black box 1>_ | _<Text>_
-| _<black box 2>_ | _<Text>_
-|===
-
-
-
-If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
-Its headline is the name of the black box.
-****
-
-
-==== <Name black box 1>
-
-[role="arc42help"]
-****
-Here you describe <black box 1>
-according the the following black box template:
-
-* Purpose/Responsibility
-* Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.
-* (Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, ....
-* (Optional) directory/file location
-* (Optional) Fulfilled requirements (if you need traceability to requirements).
-* (Optional) Open issues/problems/risks
-
-****
-
-_<Purpose/Responsibility>_
-
-_<Interface(s)>_
-
-_<(Optional) Quality/Performance Characteristics>_
-
-_<(Optional) Directory/File Location>_
-
-_<(Optional) Fulfilled Requirements>_
-
-_<(optional) Open Issues/Problems/Risks>_
-
-
-
-
-==== <Name black box 2>
-
-_<black box template>_
-
-==== <Name black box n>
-
-_<black box template>_
-
-
-==== <Name interface 1>
-
-...
-
-==== <Name interface m>
-
-
+| *_Wikidata_*  
+| Provides data to elaborate all the questions
+|=== 
 
 === Level 2
 
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.
+image::DOCsection5-2.png[Level 2]
 
-You have to decide which building blocks of your system are important enough to justify such a detailed description.
-Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
-Leave out normal, simple, boring or standardized parts of your system
-****
+.Motivation
+Shows how is the system internally in general terms. 
 
-==== White Box _<building block 1>_
+.Contained Building Blocks
 
-[role="arc42help"]
-****
-...describes the internal structure of _building block 1_.
-****
+[options="header",cols="1,3"] 
+|=== 
+| Name | Description
 
-_<white box template>_
+| *_Webapp_*
+| It contains the user interface (frontend) and the development branch (backend).
 
-==== White Box _<building block 2>_
+| *_Users API_*  
+| API to manage all the functionalities related to users.
 
+| *_Questions API_*  
+| API to manage all the functionalities related to questions/answers.
 
-_<white box template>_
-
-...
-
-==== White Box _<building block m>_
-
-
-_<white box template>_
-
-
+| *_MongoDB_* 
+| Database where user data is recorded and stored.
+|=== 
 
 === Level 3
 
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.
+image::DOCsection5-3.png[Level 3]
 
-When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.
-****
+.Motivation
+Detailed structure of the system. Focused on the components of the Webapp, Users API and Questions API.
 
+.Contained Building Blocks
 
-==== White Box <_building block x.1_>
+[options="header",cols="1,3"] 
+|=== 
+| Name | Description
 
-[role="arc42help"]
-****
-Specifies the internal structure of _building block x.1_.
-****
+| *_Register / Login_*
+| Component to create a new user or log in the system.
 
+| *_Games History_*  
+| Component to store games played by each user and where user can watch their previous games.
 
-_<white box template>_
+| *_Play New Games_*  
+| Component to create all related to play a new game.
 
+| *_Questions History_* 
+| Component to store previous questions and where user can watch them.
 
-==== White Box <_building block x.2_>
+| *_Home_*  
+| Initial screen of the application.
 
-_<white box template>_
+| *_Menu_*  
+| Component to navigate through the system.
 
+| *_Help_*  
+| Offers help to the user.
 
+| *_About_*  
+| Adds info about the development of the project.
 
-==== White Box <_building block y.1_>
+| *_AddUser_* 
+| Component to create a new user.
 
-_<white box template>_
+| *_Login_* 
+| Component to access the system by the user.
+
+| *_Profile_* 
+| Component to store and manage the user data.
+
+| *_NewQuestion_* 
+| Component to create new questions for the games.
+
+| *_UsedQuestions_* 
+| Component to store and manage the used questions.
+|=== 
