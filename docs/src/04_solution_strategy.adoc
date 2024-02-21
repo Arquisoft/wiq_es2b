@@ -20,13 +20,13 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Decisions on how to achieve key quality goals
 
-* Usability: the team will take care to design a clear and accessible interface for any user. This will be based on web usability standards.
+* Usability: The team will take care to design a clear and accessible interface for any user. This will be based on web usability standards.
 
-* Privacy: users' private information will be stored in such a way that it will not be accessible to external factors.
+* Performance: Minimize delays in data processing, communication, or task execution to improve overall system responsiveness. As well, optimize system components, algorithms, and configurations.
 
-* Security: we will take care to implement all the measures we deem appropriate to secure our application.
+* Maintainbility: The architecture of the application must allow new functionalities to be added or existing ones to be modified with as few changes as possible.
 
-* Testability: this is an important quality objective to ensure that the software is reliable, robust and error-free. It is important to implement appropriate software development practices, such as separation of concerns and modular design.
+* Testability: This is an important quality objective to ensure that the software is reliable, robust and error-free. It is important to implement appropriate software development practices, such as separation of concerns and modular design.
 
 === Relevant Organizational Decisions
 
