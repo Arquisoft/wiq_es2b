@@ -6,13 +6,12 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Domain model
 
-* Hacer el diagrama del dominio
+image::DOCsection8-1.png[Domain model]
 
+=== Performance
+A system that performs well provides a positive user experience. Users expect applications and services to respond promptly to their requests. A higher performance leads to increased user satisfaction and engagement. Also, a good performance help to get a better efficiency.
 
-=== Privacity
-Security is a very important concept in the context of a system. Since we manage user information, it is important to ensure that the information is secure and that the system is not compromised.
-
-In addition, we add back-end security to prevent unauthorized requests to the RestAPI, as well as to prevent the execution of malicious code.
+We are going to look for a good performance with the code optimization, wihout overloading the system and memory and doing some performance test.
 
 === Usability
 Usability is a fundamental aspect of any application, as it determines the ease and efficiency with which users can interact with it. To ensure the usability of our application, we have followed a series of specific practices and techniques.
