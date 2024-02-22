@@ -38,16 +38,16 @@ const Login = () => {
       {loginSuccess ? (
         <div>
           <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-            Hello {username}!
+            Bienvenido {username}!
           </Typography>
           <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-            Your account was created on {new Date(createdAt).toLocaleDateString()}.
+            Cuenta creada a las {new Date(createdAt).toLocaleDateString()}.
           </Typography>
         </div>
       ) : (
         <div>
           <Typography component="h1" variant="h5">
-            Login
+            Inicio de sesión
           </Typography>
           <TextField
             margin="normal"
