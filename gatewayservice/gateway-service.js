@@ -8,6 +8,7 @@ const port = 8000;
 
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
+const creationServiceUrl = process.env.CREATION_SERVICE_URL || 'http://localhost:8005';
 
 app.use(cors());
 app.use(express.json());
@@ -23,8 +24,10 @@ app.get('/health', (_req, res) => {
 
 app.post('/login', async (req, res) => {
   try {
-    // Forward the login request to the authentication service
+    // Crea una peticion a la url (le llegará a auth-service.js) con la opcion /login 
+    // y los parametros req.body
     const authResponse = await axios.post(authServiceUrl+'/login', req.body);
+    // Almacena en un Json la respuesta de la anterior peticion
     res.json(authResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -33,9 +36,24 @@ app.post('/login', async (req, res) => {
 
 app.post('/adduser', async (req, res) => {
   try {
-    // Forward the add user request to the user service
+    // Crea una peticion a la url (le llegará a user-service.js) con la opcion /login 
+    // y los parametros req.body
     const userResponse = await axios.post(userServiceUrl+'/adduser', req.body);
+    // Almacena en un Json la respuesta de la anterior peticion
     res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.post('/createquestion', async (req, res) => {
+  try {
+    console.log('eyou');
+    // Crea una peticion a la url (le llegará a creation-service.js) con la opcion /login 
+    // y los parametros req.body
+    const questionResponse = await axios.post(creationServiceUrl+'/createquestion', req.body);
+    // Almacena en un Json la respuesta de la anterior peticion
+    res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
