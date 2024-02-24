@@ -11,6 +11,20 @@ services:
     networks:
       - mynetwork
 
+  creationervice:
+    container_name: creationservice-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_es2b/creationservice:latest
+    profiles: ["dev", "prod"]
+    build: ./questions/creationservice
+    depends_on:
+      - mongodb
+    ports:
+      - "8005:8005"
+    networks:
+      - mynetwork
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/userdb
+
   authservice:
     container_name: authservice-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_es2b/authservice:latest
