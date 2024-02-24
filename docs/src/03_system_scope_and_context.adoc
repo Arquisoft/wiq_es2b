@@ -8,8 +8,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 === Business Context
 
 
-
-image::03-BusinessContextDiagram-Lucidchart.png[Business Context Diagram]
+image::03-BusinessContextDiagram-Lucidchart.png[title="Business Context Diagram"]
 
 
 .WIQ
