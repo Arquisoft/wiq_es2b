@@ -8,7 +8,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Whitebox Overall System
 
-image::DOCsection5-1.png[Level 1]
+image:DOCsection5_1.png["Level 1"]
 
 .Motivation
 WIQ is the general structure of the system, where the users are going to register in the database, play answering the questions generated with Wikidata or view their previous games among other functionalities. 
@@ -31,7 +31,7 @@ WIQ is the general structure of the system, where the users are going to registe
 
 === Level 2
 
-image::DOCsection5-2.png[Level 2]
+image::DOCsection5_2.png["Level 2"]
 
 .Motivation
 Shows how is the system internally in general terms. 
@@ -57,7 +57,7 @@ Shows how is the system internally in general terms.
 
 === Level 3
 
-image::DOCsection5-3.png[Level 3]
+image:DOCsection5_3.png["Level 3"]
 
 .Motivation
 Detailed structure of the system. Focused on the components of the Webapp, Users API and Questions API.
