@@ -19,7 +19,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 | Wikidata
 | Website where the information is taken from
 
-| Docker_ 
+| Docker 
 | A tool that makes it easy to create, deploy and run applications using containers.
 
 | MongoDB
@@ -34,9 +34,22 @@ ifndef::imagesdir[:imagesdir: ../images]
 | Draw.io
 | Free application for diagramming.
 
+| Lucidchart
+| Web-based diagramming tool that allows users to collaborate and work together in real time, creating flowcharts, flowcharts, website schematics, UML designs, mind maps, software prototypes and many other types of diagrams.
+
 | Visual Studio Code
 | Independent source code editor.
 
 | Microsoft Azure
 | Cloud computing platform created by Microsoft to build, test, deploy and manage applications and services using its data centers.
+
+| Grafana
+| Grafana is a real-time data analysis and visualisation platform, especially used for monitoring and observability.
+
+| Prometheus
+| Prometheus is an open source monitoring and alarming system designed to collect metrics, store them and enable queries and alerts in modern technology environments.
+
+| API (Application Programming Interface)
+| A set of rules and tools that allow different software to communicate with each other. It facilitates the interaction and exchange of data, functions or services between different applications.
+
 |===
