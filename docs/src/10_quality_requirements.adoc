@@ -5,8 +5,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Quality Tree
 
-:imagesdir: ../images
-image::10_1_Quality_Tree.png[Business Context Diagram]
+image:10_1_Quality_Tree.png[Business Context Diagram]
 
 === Quality Scenarios
 
@@ -14,8 +13,8 @@ image::10_1_Quality_Tree.png[Business Context Diagram]
 |===
 | Quality Requirements | Scenarios | Priority
 
-| *_Privacity_* 
-| We will respect the privacy of the users, the user's data will be protected at all times. We will ensure the highest possible security, storing the user's sensitive information securely and trying to prevent any kind of attack or risk. 
+| *_Performance_* 
+| We'll run some performance testing and search for a good code optimization performance without taxing the system's resources or memory. Optimize the setups, algorithms, and system parts as well.
 | High
 
 | *_Usability_* 
