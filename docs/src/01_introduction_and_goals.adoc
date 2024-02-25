@@ -30,7 +30,7 @@ It consists of an application in which users can register and enter to play the 
 [options="header",cols="1,2"]
 |===
 |Goals|Details
-| _Privacity_ | _The data of registered users will be saved, ensuring their security_ 
+| _Performance_ | _We are going to need the application to have a good performance since we are going to make several calls and we need that these calls do not take too much time for the system to be efficient and dynamic during its use_ 
 | _Usability_ | _The use of the application must be an intuitive and simple process for the client user_
 | _Maintainability_ | _We will try to take care of the architecture of the application so that functionality can be added, modified or removed with as few changes as possible_
 | _Testeability_| _Our application may also be testable, that is, it will be subjected to a series of unit tests that we will perform to ensure proper operation of the system, in addition to identifying small errors and being able to correct them in such a case_

@@ -8,37 +8,36 @@ ifndef::imagesdir[:imagesdir: ../images]
 === Business Context
 
 
-
-image::03-BusinessContextDiagram-Lucidchart.png[Business Context Diagram]
+image::03-BusinessContextDiagram-Lucidchart.png[title="Business Context Diagram"]
 
 
 .WIQ
-[cols="1,2,3"]
+[cols="1,2"]
 |===
 
 |*Comunication Partner*
-|*Inputs*
-|*Outputs*
+|*Description*
 
 | User
-| Registration and participation in the competition
-| Quiz results, correct and wrong questions, times and statistics
+| Registration and participation in the competition and 1uiz results, correct and wrong questions, times and statistics.
 
 | Database
-| Queries and user-related writing and questions
-| System-related results, questions and users
+| Queries and user-related writing and questions and system-related results, questions and users.
 
 | Wikidata
-| Requesting data for question generation from properties and categories
-| Data to generate questions and answers
+| Requesting data for question generation from properties and categories and data to generate questions and answers.
 
 | User's API
-| Request user information
-| User data, history and game statistics
+| Request user information and user data, history and game statistics.
 
 | Question's API
-| Request generated questions
-| History of generated questions and answers
+| Request generated questions and history of generated questions and answers
+
+| Graphana
+| Visualization and analytics of data integrates with Prometheus to create dashboards and display metrics.
+
+| Prometheus
+| Monitoring time-series data of the application. Used to gather metrics related to the performance and health of the system.
 |===
 
 The agents involved in the WIQ system environment are the following:
@@ -53,7 +52,7 @@ The agents involved in the WIQ system environment are the following:
 
 * *Question's API*: is given by the system to provide information about the questions generated.
 
-
+* *Grafana and Prometheus*: are used to collect data about the application and display the metrics obtained.
 
 
 === Technical Context
@@ -84,15 +83,19 @@ image::03-TechnicalContextDiagram-Lucidchart.png[Technical Context Diagram]
 
 | HTTP/REST
 | Input
-| Database -> Wikidata
+| WIQ -> Wikidata
 
 | HTTP
 | Input
-| Database -> WIQ
+| WIQ -> Database communication
 
 | HTTP
 | Output
-| WIQ -> Database
+| WIQ -> Database communication
+
+| HTTP
+| Output
+| WIQ -> Data monitoring and visualization
 
 |===
 
