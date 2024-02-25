@@ -3,10 +3,9 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-concepts]]
 == Cross-cutting Concepts
 
-
 === Domain model
 
-image::DOCsection8-1.png["Domain model"]
+image::DOCsection8_1.png["Domain model"]
 
 === Performance
 A system that performs well provides a positive user experience. Users expect applications and services to respond promptly to their requests. A higher performance leads to increased user satisfaction and engagement. Also, a good performance help to get a better efficiency.
