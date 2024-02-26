@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Cambiado de Switch a Routes
 import AddUser from './components/AddUser';
 import Login from './components/Login';
-import Juego from './components/Juego';
+import Game from './components/Game';
+import HistoricalData from './components/HistoricalData';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -26,7 +27,8 @@ function App() {
         </Typography>
 
         <Routes>
-          <Route path="/juego" element={<Juego />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/historicaldata" element={<HistoricalData />} />
           <Route path="/" element={
             <>
               {showLogin ? <Login /> : <AddUser />}

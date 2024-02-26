@@ -2,9 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
-import Game from './Game';
+import { useNavigate } from 'react-router-dom';
 import HistoricalData from './HistoricalData';
-import App from '../App';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -15,8 +14,8 @@ const Login = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   // Declara las variables (izquierda) y el metodo que la modifica (derecha). Se inicializa a false (useState)
-  const [showGame, setShowGame] = useState(false);
   const [showHistoricalData, setShowHistoricaData] = useState(false);
+  const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -41,11 +40,13 @@ const Login = () => {
   };
 
   const handleShowGame = () => {
-    setShowGame(true);
+    let path= '/Game';
+    navigate(path);
   };
 
   const handleShowHistoricalData = () => {
-    setShowHistoricaData(true);
+    let path= '/HistoricalData';
+    navigate(path);
   };
 
   return (
@@ -53,13 +54,7 @@ const Login = () => {
       {/* Los operadores logicos funcionan de la manera: 
       condicion ? (lo que se hace si se cumple) : (lo que se hace si no se cumple) */}
       {loginSuccess ? (
-        showGame || showHistoricalData ? (
-          showGame ? (
-            <Game/>
-          ):(
-            <HistoricalData/>
-          )
-        ) : (
+        
           <div>
             <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
               Hello {username}!
@@ -76,7 +71,7 @@ const Login = () => {
               Historico de partidas de jugador
             </Button>
           </div>
-        )
+        
       ) : (
         <div>
           <Typography component="h1" variant="h5">
