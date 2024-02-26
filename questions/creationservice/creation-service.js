@@ -24,7 +24,7 @@ app.post('/createquestion', async (req, res) => {
   
   try {
     const respuestaWikidata = await fetch(apiUrl, {headers});
-    console.log('eyou4');
+    console.log(respuestaWikidata);
     if (respuestaWikidata.ok) {
       console.log('Entro al if');
       const data = await respuestaWikidata.json();//obtengo los datos en json

@@ -5,9 +5,9 @@ import { Container, Typography, TextField, Button, Snackbar } from '@mui/materia
 const HistoricalData = () => {
 
   return (
-    <div>
-        <h1>Esta sería la pagina del historico de partidas</h1>
-    </div>
+    <Typography variant="h4" gutterBottom>
+          Pagina del HistoricalData
+    </Typography>
   );
 };
 

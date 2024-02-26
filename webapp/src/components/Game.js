@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { Container, Typography, TextField, Button, Snackbar, Paper } from '@mui/material';
 
 const Game = () => {
+  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [askForQuestion, setAskForQuestion] = useState(false);
   const [pais, setpais] = useState('');
-  const [capital, setcapital] = useState('');
-
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  const [capitalCorrecta, setcapital] = useState('');
+  const [capitalIcnorrecta1, setcapitalIcnorrecta1] = useState('');
+  const [capitalIcnorrecta2, setcapitalIcnorrecta2] = useState('');
+  const [capitalIcnorrecta3, setcapitalIcnorrecta3] = useState('');
   
   // Esta es la llamada al servicio de generar las preguntas
   const  handleShowQuestion = async () => {
@@ -36,35 +38,51 @@ const Game = () => {
     if (respuestaWikidata.ok) {
     const data = await respuestaWikidata.json();
     const numEles = data.results.bindings.length;
-    const index = Math.floor(Math.random() * numEles);
-    const result = data.results.bindings[index];
+    const indexCapCorre = Math.floor(Math.random() * numEles);
+    const result = data.results.bindings[indexCapCorre];
     setpais(result.countryLabel.value);
     setcapital(result.capitalLabel.value);
+
+    const indexCapIncorre1 = Math.floor(Math.random() * numEles);
+    const indexCapIncorre2 = Math.floor(Math.random() * numEles);
+    const indexCapIncorre3 = Math.floor(Math.random() * numEles);
+    setcapitalIcnorrecta1(data.results.bindings[indexCapIncorre1].capitalLabel.value);
+    setcapitalIcnorrecta2(data.results.bindings[indexCapIncorre2].capitalLabel.value);
+    setcapitalIcnorrecta3(data.results.bindings[indexCapIncorre3].capitalLabel.value);
     } else {
       console.error("Error al realizar la consulta en Wikidata. Estado de respuesta:", respuestaWikidata.status);
     }
   }
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-      <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-        Esta sería la pagina del juego
-      </Typography>
+    <Container maxWidth="md" style={{ marginTop: '2rem' }}>
+      <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
+        <Typography variant="h4" gutterBottom>
+          Saber y Ganar Juego
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Pregunta: ¿Cuál es la capital de {pais}?
+        </Typography>
+        {/* Botones de opción */}
+        <Button variant="outlined" style={{ margin: '0.5rem' }}>
+          {capitalCorrecta}
+        </Button>
+        <Button variant="outlined" style={{ margin: '0.5rem' }}>
+          {capitalIcnorrecta1}
+        </Button>
+        <Button variant="outlined" style={{ margin: '0.5rem' }}>
+          {capitalIcnorrecta2}
+        </Button>
+        <Button variant="outlined" style={{ margin: '0.5rem' }}>
+          {capitalIcnorrecta3}
+        </Button>
+      </Paper>
       <Button variant="contained" color="primary" onClick={handleShowQuestion}>
         Genera pregunta NO FUNCIONA AUNQUE DEBERIA
       </Button>
       <Button variant="contained" color="primary" onClick={deberiaIrEnelServicio}>
         Genera pregunta FUNCIONA
       </Button>
-      {askForQuestion ? (
-        <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-          Pais {pais} capital {capital}
-        </Typography>
-      ) : (
-        <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-          Dale al boton
-        </Typography>
-      ) }
     </Container>
   );
 };
