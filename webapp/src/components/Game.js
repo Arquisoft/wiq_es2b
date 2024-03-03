@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar, Paper } from '@mui/material';
+import { Container, Typography, Button, Paper } from '@mui/material';
 
 const Game = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-  const [askForQuestion, setAskForQuestion] = useState(false);
   const [pais, setpais] = useState('');
   const [capitalCorrecta, setcapital] = useState('');
   const [capitalIcnorrecta1, setcapitalIcnorrecta1] = useState('');
@@ -14,7 +13,6 @@ const Game = () => {
   
   // Esta es la llamada al servicio de generar las preguntas
   const  handleShowQuestion = async () => {
-    //setAskForQuestion(true);
     try{
       // Se declara esta variable unicamente para probar cosas con ella en la peticion
       const eyou = "aa"
@@ -30,7 +28,6 @@ const Game = () => {
   // TODO ESTO ES LO QUE ESTA COMENTADO EN CREATION-SERVICE.JS
   // CREO QUE DEBERIA IR ALLI PERO COMO NO FUNCIONA LO PROBE AQUI
   const deberiaIrEnelServicio = async () => {
-    setAskForQuestion(true);
     const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
     const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}`;
     const headers = { "Accept": "application/json" }
