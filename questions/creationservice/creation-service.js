@@ -18,23 +18,26 @@ app.post('/createquestion', async (req, res) => {
   // TODO LO COMENTADO ES UN INTENTO DE HACER LAS QUERIES
   // PERO COMO SALTA UN ERROR ANTES, NO SE PRUEBA CON ELLAS
 
-  /*const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
+  const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
   const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}`;
-  const headers = { "Accept": "application/json" };*/
+  const headers = { "Accept": "application/json" };
   
   try {
-
-    //const respuestaWikidata = await fetch(apiUrl, {headers});
-    //if (respuestaWikidata.ok) {
-      //const data = await respuestaWikidata.json();//obtengo los datos en json
-      //const numEles = data.results.bindings.length;
-      //const index = Math.floor(Math.random() * numEles);//index al azar
-      //result = data.results.bindings[index];
+    const respuestaWikidata = await fetch(apiUrl, {headers});
+    console.log(respuestaWikidata);
+    if (respuestaWikidata.ok) {
+      console.log('Entro al if');
+      const data = await respuestaWikidata.json();//obtengo los datos en json
+      const numEles = data.results.bindings.length;
+      const index = Math.floor(Math.random() * numEles);//index al azar
       
-      console.log(req);
+      res = data.results.bindings[index];
       // Hardcodeo el resultado para hacer pruebas
-      res.json({ token: 'asdf'});
-    //}
+      // res.json({ token: 'asdf'});
+    }else{
+      console.log('no entra al if');
+      console.log('la peticion tiene un status:' ,respuestaWikidata.status);
+    }
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
