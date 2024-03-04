@@ -1,56 +1,85 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const fetch = require('node-fetch');
 
 const app = express();
-// Puerto en el que escuchará el servicio
-const port = 8005; 
+const port = 8005;
 
-// Middleware to parse JSON in request body
 app.use(express.json());
 
-// Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
-mongoose.connect(mongoUri);
+const query = async (SPARQL) => {
+  const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(SPARQL)}&format=json`;
 
+  const response = await fetch(apiUrl, {
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    console.error('Error al realizar la consulta a Wikidata:', response.statusText);
+    return;
+  }
+
+  const datos = await response.json();
+
+  const resultados = datos.results.bindings.map((resultado) => {
+    const resultadoFormateado = {};
+    Object.keys(resultado).forEach((clave) => {
+      resultadoFormateado[clave] = resultado[clave].value;
+    });
+
+    return resultadoFormateado;
+  });
+
+  return resultados;
+};
+
+const surroundWithCache = (func) => {
+  let cache = {};
+
+  return async (param) => {
+    if (param in cache) {
+      return cache[param];
+    }
+
+    let res = await func(param);
+
+    cache[param] = res;
+
+    return res;
+  };
+};
+
+const cachedQuery = surroundWithCache(query);
 
 app.post('/createquestion', async (req, res) => {
-
-  // TODO LO COMENTADO ES UN INTENTO DE HACER LAS QUERIES
-  // PERO COMO SALTA UN ERROR ANTES, NO SE PRUEBA CON ELLAS
-
   const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
-  const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}`;
-  const headers = { "Accept": "application/json" };
-  
+
   try {
-    const respuestaWikidata = await fetch(apiUrl, {headers});
-    console.log(respuestaWikidata);
-    if (respuestaWikidata.ok) {
-      console.log('Entro al if');
-      const data = await respuestaWikidata.json();//obtengo los datos en json
-      const numEles = data.results.bindings.length;
-      const index = Math.floor(Math.random() * numEles);//index al azar
-      
-      res = data.results.bindings[index];
-      // Hardcodeo el resultado para hacer pruebas
-      // res.json({ token: 'asdf'});
-    }else{
-      console.log('no entra al if');
-      console.log('la peticion tiene un status:' ,respuestaWikidata.status);
+    const data = await cachedQuery(sparqlQuery);
+    const numEles = data.length;
+
+    if (numEles > 0) {
+      const index = Math.floor(Math.random() * numEles);
+      const result = data[index];
+      res.json(result);
+    } else {
+      console.log('No se encontraron resultados en Wikidata.');
+      res.status(404).json({ error: 'No se encontraron resultados en Wikidata.' });
     }
   } catch (error) {
+    console.error('Error al realizar la consulta:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Start the server
 const server = app.listen(port, () => {
   console.log(`Creation Service listening at http://localhost:${port}`);
 });
 
 server.on('close', () => {
-    // Close the Mongoose connection
-    mongoose.connection.close();
-  });
+  mongoose.connection.close();
+});
 
-module.exports = server
+module.exports = server;
