@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import reportWebVitals from './reportWebVitals';
+import {Route,  Routes,  MemoryRouter as Router} from "react-router-dom";
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Game from './components/Game';
+import HistoricalData from './components/HistoricalData';
+import MainPage from './components/MainPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<App/>}></Route>
+        <Route path="/mainPage" element={<MainPage />}> </Route>
+        <Route path="/game" element={<Game />}> </Route>
+        <Route path="/historicaldata" element={<HistoricalData />}> </Route>
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 

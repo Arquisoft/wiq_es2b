@@ -48,7 +48,6 @@ app.post('/adduser', async (req, res) => {
 
 app.post('/createquestion', async (req, res) => {
   try {
-    console.log('eyou');
     // Crea una peticion a la url (le llegará a creation-service.js) con la opcion /login 
     // y los parametros req.body
     const questionResponse = await axios.post(creationServiceUrl+'/createquestion', req.body);
