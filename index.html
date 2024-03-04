@@ -454,14 +454,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-architecture-constraints">2. Architecture Constraints</a>
 <ul class="sectlevel2">
-<li><a href="#_technical_constraints">2.1. Technical Constraints</a></li>
-<li><a href="#_legal_and_regulatory_constraints">2.2. Legal and Regulatory Constraints</a></li>
-<li><a href="#_development_constraints">2.3. Development Constraints</a></li>
-<li><a href="#_organizational_constraints">2.4. Organizational Constraints</a></li>
-<li><a href="#_interoperability_constraints">2.5. Interoperability Constraints</a></li>
-<li><a href="#_security_constraints">2.6. Security Constraints</a></li>
-<li><a href="#_performance_constraints">2.7. Performance Constraints</a></li>
-<li><a href="#_maintenance_and_scalability_constraints">2.8. Maintenance and Scalability Constraints</a></li>
+<li><a href="#_functionality_related_constraints">2.1. Functionality-related Constraints</a></li>
+<li><a href="#_process_related_constraints">2.2. Process-related Constraints</a></li>
+<li><a href="#_data_management_constraints">2.3. Data Management Constraints</a></li>
+<li><a href="#_user_interface_constraints">2.4. User Interface Constraints</a></li>
 </ul>
 </li>
 <li><a href="#section-system-scope-and-context">3. System Scope and Context</a>
@@ -704,16 +700,14 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-architecture-constraints">2. Architecture Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<div class="title">Contents</div>
-<p>Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.</p>
+<div class="title">Introduction</div>
+<p>In the development of the WIQ  Application, various constraints have been identified to guide the project towards success. These constraints are crucial in aligning with user expectations and meeting the diverse needs of stakeholders.</p>
 </div>
+<div class="sect2">
+<h3 id="_functionality_related_constraints">2.1. Functionality-related Constraints</h3>
 <div class="paragraph">
-<div class="title">Motivation</div>
-<p>Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.</p>
+<p>These constraints pertain to the core functionality of the application.</p>
 </div>
-<div class="sect2">
-<h3 id="_technical_constraints">2.1. Technical Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -722,23 +716,30 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Application Server Version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Usage of version X.X of the application server is required.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integration with Wikidata API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enabling seamless integration with the Wikidata API is imperative. This integration allows automatic generation of questions and responses, enhancing the application&#8217;s functionality.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compatibility with Operating Systems</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application must be compatible with Windows .</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Authentication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation of a robust login system is mandated to safeguard user privacy and control access to sensitive information within the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Deployment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must be easily deployable, ensuring convenient access for users through the web.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_legal_and_regulatory_constraints">2.2. Legal and Regulatory Constraints</h3>
+<h3 id="_process_related_constraints">2.2. Process-related Constraints</h3>
+<div class="paragraph">
+<p>These constraints focus on the development process itself.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -747,19 +748,22 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compliance with Privacy Regulations</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application must comply with privacy regulations in country Spain.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version Control (GitHub)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Utilization of GitHub and Git for version control is essential. This facilitates collaboration and maintains a structured workflow with effective monitoring of team contributions.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_development_constraints">2.3. Development Constraints</h3>
+<h3 id="_data_management_constraints">2.3. Data Management Constraints</h3>
+<div class="paragraph">
+<p>These constraints are associated with the management of application data.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -768,23 +772,22 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Development Methodology</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The team will follow an agile development methodology.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Build Tool</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Z build tool will be used for the compilation process.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application will leverage MongoDB, a NoSQL document database known for its flexibility in handling dynamic data structures, scalability, and high performance.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_organizational_constraints">2.4. Organizational Constraints</h3>
+<h3 id="_user_interface_constraints">2.4. User Interface Constraints</h3>
+<div class="paragraph">
+<p>These constraints focus on the user interface design.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -793,19 +796,20 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Internal Security Policies</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Internal security policies of the organization will be adhered to.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React for User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application&#8217;s user interface will be built using React, a JavaScript library with a component-based architecture. This choice aims to provide a user-friendly and modular interface with efficient UI updates.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<div class="title">Recommended Technologies</div>
+<p>While not constraints, the following technologies are recommended for optimal performance and functionality of the WIQ Application.</p>
 </div>
-<div class="sect2">
-<h3 id="_interoperability_constraints">2.5. Interoperability Constraints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -813,80 +817,28 @@ Constraints must always be dealt with; they may be negotiable, though.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Technology</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Communication Standard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application must be compatible with communication standard ABC.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A JavaScript library for building user interfaces, known for its component-based architecture and efficient UI updates.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExpressJS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A fast and minimalist web framework for Node.js, suitable for server-side tasks and supporting various web applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A NoSQL document database, offering schema flexibility, scalability, and high performance for storing application data.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>These constraints and recommended technologies collectively shape the architectural decisions, ensuring a robust and effective development process for the WIQ  Application.</p>
 </div>
-<div class="sect2">
-<h3 id="_security_constraints">2.6. Security Constraints</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Two-Factor Authentication</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Two-factor authentication is mandatory for all users.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_performance_constraints">2.7. Performance Constraints</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Response Time</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application&#8217;s response time should not exceed 2 seconds.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_maintenance_and_scalability_constraints">2.8. Maintenance and Scalability Constraints</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Scalability</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application is expected to be scalable to handle a 20% increase in workload.</p></td>
-</tr>
-</tbody>
-</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1514,41 +1466,53 @@ building block instances depicted in this diagram.&gt;</em></p>
 <p>Important, expensive, large scale or risky architecture decisions including rationales.
 With "decisions" we mean selecting one alternative based on given criteria.</p>
 </div>
-<div class="paragraph">
-<p>Please use your judgement to decide whether an architectural decision should be documented
-here in this central section or whether you better document it locally
-(e.g. within the white box template of one building block).</p>
-</div>
-<div class="paragraph">
-<p>Avoid redundancy.
-Refer to section 4, where you already captured the most important decisions of your architecture.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Stakeholders of your system should be able to comprehend and retrace your decisions.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Various options:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>ADR (<a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">Documenting Architecture Decisions</a>) for every important decision</p>
-</li>
-<li>
-<p>List or table, ordered by importance and consequences or:</p>
-</li>
-<li>
-<p>more detailed in form of separate sections per decision</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-9/">Architecture Decisions</a> in the arc42 documentation.
-There you will find links and examples about ADR.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consequences</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Risks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de React.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Facilitates the development of user interfaces.
+                  - React.js is a widely popular library in the development community.
+                  - Improves the efficiency of frontend development.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Limited experience with React.js.
+                                                               - Possible learning curve for the team.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de JavaScript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Team&#8217;s prior knowledge in JavaScript.
+                     - Extensive support and resources available.
+                     - Suitable language for frontend and backend development.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Limitations in compile-time error detection.
+                                                               - Potential challenges in performance for large projects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Flexible schema and horizontal scalability.
+                 - Widely used in modern applications.
+                 - Compatibility with unstructured data.
+                 - Already implemented in user registration and login.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Not familiar with NoSQL databases.
+                                                    - Possible learning curve.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Containerization that facilitates deployment and scalability.
+                 - Consistent environment in development and production.
+                 - Streamlines dependency management.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Potential initial complexity in Docker configuration.
+                                                      - Requires additional learning resources.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1738,7 +1702,7 @@ There you will find links and examples about ADR.</p>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-25 23:07:06 +0100
+Last updated 2024-03-04 13:59:32 +0100
 </div>
 </div>
 </body>
