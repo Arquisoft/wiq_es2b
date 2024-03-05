@@ -11,15 +11,11 @@ const Game = () => {
   const [capitalIcnorrecta2, setcapitalIcnorrecta2] = useState('');
   const [capitalIcnorrecta3, setcapitalIcnorrecta3] = useState('');
   
-  // Esta es la llamada al servicio de generar las preguntas
+  // This method will call the create question service
   const  handleShowQuestion = async () => {
     try{
-      // Se declara esta variable unicamente para probar cosas con ella en la peticion
-      const eyou = "aa"
-      // Se hace una peticion a la api (llega a gateway-service.js) con la opcion createquestion
-      // y los parametros de entrada aa, aa
-      const response = await axios.post(`${apiEndpoint}/createquestion`, { eyou, eyou });
-      console.log(response);
+      // It makes a petition to the api and store the response
+      const response = await axios.post(`${apiEndpoint}/createquestion`, { });
     }catch (error){
       console.error('Error:', error);
     }    
