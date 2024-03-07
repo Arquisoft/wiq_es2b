@@ -1,0 +1,19 @@
+button[title="sigPreg"] {
+    margin: 1em;
+    margin-left: 2em;
+    background-color: rgba(31, 60, 134, 0.764);
+}
+
+button[title="contador"]:disabled{
+    margin: 1em;
+    background-color: rgba(31, 60, 134, 0.764);
+    color: white;
+}
+
+button[title="btnsPreg"]{
+    margin: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    background-color: rgba(41, 120, 152, 0.764);
+}
+
