@@ -1,56 +1,39 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar, Paper } from '@mui/material';
+import { Container, Typography, Button, Paper } from '@mui/material';
 
 const Game = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-  const [askForQuestion, setAskForQuestion] = useState(false);
-  const [pais, setpais] = useState('');
-  const [capitalCorrecta, setcapital] = useState('');
-  const [capitalIcnorrecta1, setcapitalIcnorrecta1] = useState('');
-  const [capitalIcnorrecta2, setcapitalIcnorrecta2] = useState('');
-  const [capitalIcnorrecta3, setcapitalIcnorrecta3] = useState('');
+  const [country, setCountry] = useState('');
+  const [capitalCorrect, setCapitalCorrect] = useState('');
+  const [capitalOptions, setcapitalOptions] = useState([]);
   
-  // Esta es la llamada al servicio de generar las preguntas
+  // This method will call the create question service
   const  handleShowQuestion = async () => {
-    //setAskForQuestion(true);
     try{
-      // Se declara esta variable unicamente para probar cosas con ella en la peticion
-      const eyou = "aa"
-      // Se hace una peticion a la api (llega a gateway-service.js) con la opcion createquestion
-      // y los parametros de entrada aa, aa
-      const response = await axios.post(`${apiEndpoint}/createquestion`, { eyou, eyou });
-      console.log(response);
+      // It makes a petition to the api and store the response
+      const response = await axios.post(`${apiEndpoint}/createquestion`, { });
+      // Extract all the info of the response and store it
+      setCountry(response.data.responseCountry);
+      setCapitalCorrect(response.data.responseCapitalCorrect);
+      setcapitalOptions(response.data.responseCapitalOptions);
     }catch (error){
       console.error('Error:', error);
     }    
   }
 
-  // TODO ESTO ES LO QUE ESTA COMENTADO EN CREATION-SERVICE.JS
-  // CREO QUE DEBERIA IR ALLI PERO COMO NO FUNCIONA LO PROBE AQUI
-  const deberiaIrEnelServicio = async () => {
-    setAskForQuestion(true);
-    const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
-    const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}`;
-    const headers = { "Accept": "application/json" }
-    const respuestaWikidata = await fetch(apiUrl, {headers});
-    if (respuestaWikidata.ok) {
-    const data = await respuestaWikidata.json();
-    const numEles = data.results.bindings.length;
-    const indexCapCorre = Math.floor(Math.random() * numEles);
-    const result = data.results.bindings[indexCapCorre];
-    setpais(result.countryLabel.value);
-    setcapital(result.capitalLabel.value);
-
-    const indexCapIncorre1 = Math.floor(Math.random() * numEles);
-    const indexCapIncorre2 = Math.floor(Math.random() * numEles);
-    const indexCapIncorre3 = Math.floor(Math.random() * numEles);
-    setcapitalIcnorrecta1(data.results.bindings[indexCapIncorre1].capitalLabel.value);
-    setcapitalIcnorrecta2(data.results.bindings[indexCapIncorre2].capitalLabel.value);
-    setcapitalIcnorrecta3(data.results.bindings[indexCapIncorre3].capitalLabel.value);
-    } else {
-      console.error("Error al realizar la consulta en Wikidata. Estado de respuesta:", respuestaWikidata.status);
+  // Method that checks if the answer clicked is the correct one
+  const handleAnswerClick = (option, index) => {
+    // Get what component is the button to change its color later
+    //const button = document.getElementById(`button_${index}`);
+    if(option === capitalCorrect){
+      //button.style.backgroundColor = "green";
+      alert("CORRECTO");
+    }else{
+      //button.style.backgroundColor = "red";
+      alert("INCORRECTO");
     }
   }
 
@@ -61,27 +44,18 @@ const Game = () => {
           Saber y Ganar Juego
         </Typography>
         <Typography variant="body1" paragraph>
-          Pregunta: ¿Cuál es la capital de {pais}?
+          Pregunta: ¿Cuál es la capital de {country}?
         </Typography>
-        {/* Botones de opción */}
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalCorrecta}
-        </Button>
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalIcnorrecta1}
-        </Button>
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalIcnorrecta2}
-        </Button>
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalIcnorrecta3}
-        </Button>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+        {capitalOptions.map((option, index) => (
+          <Button id={`button_${index}`} key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
+            {option}
+          </Button>
+        ))}
+      </div>
       </Paper>
       <Button variant="contained" color="primary" onClick={handleShowQuestion}>
-        Genera pregunta NO FUNCIONA AUNQUE DEBERIA
-      </Button>
-      <Button variant="contained" color="primary" onClick={deberiaIrEnelServicio}>
-        Genera pregunta FUNCIONA
+        Genera pregunta
       </Button>
     </Container>
   );

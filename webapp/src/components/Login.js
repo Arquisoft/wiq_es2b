@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import HistoricalData from './HistoricalData';
 
 const Login = () => {
+  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,10 +15,9 @@ const Login = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   // Declara las variables (izquierda) y el metodo que la modifica (derecha). Se inicializa a false (useState)
-  const [showHistoricalData, setShowHistoricaData] = useState(false);
   const navigate = useNavigate();
 
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  
 
   const loginUser = async () => {
     try {
@@ -39,39 +39,12 @@ const Login = () => {
     setOpenSnackbar(false);
   };
 
-  const handleShowGame = () => {
-    let path= '/Game';
-    navigate(path);
-  };
-
-  const handleShowHistoricalData = () => {
-    let path= '/HistoricalData';
-    navigate(path);
-  };
-
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
       {/* Los operadores logicos funcionan de la manera: 
       condicion ? (lo que se hace si se cumple) : (lo que se hace si no se cumple) */}
       {loginSuccess ? (
-        
-          <div>
-            <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-              Hello {username}!
-            </Typography>
-            <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-              Your account was created on {new Date(createdAt).toLocaleDateString()}.
-            </Typography>
-
-            {/* Se declaran los botones en los q al hacer click se ejecuta el metodo especificado en onClick*/}
-            <Button variant="contained" color="primary" onClick={handleShowGame}>
-              Empieza juego
-            </Button>
-            <Button variant="contained" color="primary" onClick={handleShowHistoricalData}> 
-              Historico de partidas de jugador
-            </Button>
-          </div>
-        
+        navigate("/MainPage")
       ) : (
         <div>
           <Typography component="h1" variant="h5">
