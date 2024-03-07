@@ -2,6 +2,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper } from '@mui/material';
+import './Game.css';
+
+const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
+const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
 
 const Game = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -9,6 +13,7 @@ const Game = () => {
   const [country, setCountry] = useState('');
   const [capitalCorrect, setCapitalCorrect] = useState('');
   const [capitalOptions, setcapitalOptions] = useState([]);
+  const [count, setCount] = useState(0);
   
   // This method will call the create question service
   const  handleShowQuestion = async () => {
@@ -19,6 +24,13 @@ const Game = () => {
       setCountry(response.data.responseCountry);
       setCapitalCorrect(response.data.responseCapitalCorrect);
       setcapitalOptions(response.data.responseCapitalOptions);
+      const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+      buttons.forEach(button => {
+        button.name = "sinContestar";
+        button.disabled = false;
+        button.style.backgroundColor = colorPreguntas;
+        button.onmouse = colorOnMousePreguntas;
+      });
     }catch (error){
       console.error('Error:', error);
     }    
@@ -28,14 +40,30 @@ const Game = () => {
   const handleAnswerClick = (option, index) => {
     // Get what component is the button to change its color later
     //const button = document.getElementById(`button_${index}`);
-    if(option === capitalCorrect){
-      //button.style.backgroundColor = "green";
-      alert("CORRECTO");
+    if(option === capitalCorrect) {
+      const buttonId = `button_${index}`;
+      const correctButton = document.getElementById(buttonId);
+      if (correctButton) {
+        correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
+        increment();
+      }
     }else{
-      //button.style.backgroundColor = "red";
-      alert("INCORRECTO");
+      const buttonId = `button_${index}`;
+      const incorrectButton = document.getElementById(buttonId);
+      incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
     }
+
+    const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+    buttons.forEach(button => {
+      button.disabled = true;
+      button.onmouse = null;
+    });
+
   }
+
+  const increment = () => {
+    setCount(count + 1);
+  };
 
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
@@ -46,16 +74,19 @@ const Game = () => {
         <Typography variant="body1" paragraph>
           Pregunta: ¿Cuál es la capital de {country}?
         </Typography>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
         {capitalOptions.map((option, index) => (
-          <Button id={`button_${index}`} key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
+          <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
             {option}
           </Button>
         ))}
       </div>
       </Paper>
-      <Button variant="contained" color="primary" onClick={handleShowQuestion}>
-        Genera pregunta
+      <Button title="contador" onmouse="null" variant="contained" color="primary" disabled="true" >
+        Correctas: {count}
+      </Button>
+      <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>
+        Siguiente pregunta
       </Button>
     </Container>
   );
