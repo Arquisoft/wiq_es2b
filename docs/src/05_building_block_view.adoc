@@ -68,13 +68,10 @@ Detailed structure of the system. Focused on the components of the Webapp, Users
 |=== 
 | Name | Description
 
-| *_Register / Login_*
-| Component to create a new user or log in the system.
-
 | *_Games History_*  
 | Component to store games played by each user and where user can watch their previous games.
 
-| *_Play New Games_*  
+| *_Play New Game_*  
 | Component to create all related to play a new game.
 
 | *_Questions History_* 
@@ -100,6 +97,9 @@ Detailed structure of the system. Focused on the components of the Webapp, Users
 
 | *_Profile_* 
 | Component to store and manage the user data.
+
+| *_Game_* 
+| Component to create a new game.
 
 | *_NewQuestion_* 
 | Component to create new questions for the games.
