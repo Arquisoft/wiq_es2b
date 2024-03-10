@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, Paper } from '@mui/material';
+import { Container, Typography, Button, Paper, TimerIcon } from '@mui/material';
+
 import './Game.css';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
@@ -13,7 +14,26 @@ const Game = () => {
   const [country, setCountry] = useState('');
   const [capitalCorrect, setCapitalCorrect] = useState('');
   const [capitalOptions, setcapitalOptions] = useState([]);
-  const [count, setCount] = useState(0);
+  const [correctCounter, setCorrectCounter] = useState(0);
+
+  const [questionCounter, setQuestionCounter] = useState(0);
+  const [incorrectCounter, setIncorrectCounter] = useState(0);
+
+  // Temporizador
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    handleShowQuestion();
+  }, []);
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSeconds(prevSeconds => prevSeconds + 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   
   // This method will call the create question service
   const  handleShowQuestion = async () => {
@@ -31,6 +51,8 @@ const Game = () => {
         button.style.backgroundColor = colorPreguntas;
         button.onmouse = colorOnMousePreguntas;
       });
+
+      incrementQuestion();
     }catch (error){
       console.error('Error:', error);
     }    
@@ -45,12 +67,13 @@ const Game = () => {
       const correctButton = document.getElementById(buttonId);
       if (correctButton) {
         correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
-        increment();
+        incrementCorrect();
       }
     }else{
       const buttonId = `button_${index}`;
       const incorrectButton = document.getElementById(buttonId);
       incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
+      incrementIncorrect();
     }
 
     const buttons = document.querySelectorAll('button[title="btnsPreg"]');
@@ -59,11 +82,26 @@ const Game = () => {
       button.onmouse = null;
     });
 
+    // Cambiar a la siguiente pregunta después de 3 segundos
+    setTimeout(() => {
+      handleShowQuestion();
+    }, 1500);
+
+    
+
   }
 
-  const increment = () => {
-    setCount(count + 1);
+  const incrementCorrect = () => {
+    setCorrectCounter(correctCounter + 1);
   };
+
+  const incrementIncorrect = () => {
+    setIncorrectCounter(incorrectCounter + 1);
+  }
+
+  const incrementQuestion = () => {
+    setQuestionCounter(questionCounter + 1);
+  }
 
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
@@ -72,7 +110,7 @@ const Game = () => {
           Saber y Ganar Juego
         </Typography>
         <Typography variant="body1" paragraph>
-          Pregunta: ¿Cuál es la capital de {country}?
+          Pregunta {questionCounter}: ¿Cuál es la capital de {country}?
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
         {capitalOptions.map((option, index) => (
@@ -82,12 +120,28 @@ const Game = () => {
         ))}
       </div>
       </Paper>
-      <Button title="contador" onmouse="null" variant="contained" color="primary" disabled="true" >
-        Correctas: {count}
+
+      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+        Correctas: {correctCounter}
       </Button>
-      <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>
+
+      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+        Incorrectas: {incorrectCounter}
+      </Button>
+
+      <div>
+      <svg data-testid="TimerIcon"></svg>
+
+
+      <span>Elapsed Time: {seconds} seconds</span>
+      </div>
+
+
+      {/* <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>
         Siguiente pregunta
-      </Button>
+      </Button> */}
+
+
     </Container>
   );
 };
