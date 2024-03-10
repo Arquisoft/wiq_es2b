@@ -20,7 +20,9 @@ const Game = () => {
   const [incorrectCounter, setIncorrectCounter] = useState(0);
 
   // Temporizador
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(120); // 2 minutes
+
+
 
   useEffect(() => {
     handleShowQuestion();
@@ -29,7 +31,7 @@ const Game = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setSeconds(prevSeconds => prevSeconds + 1);
+      setSeconds(prevSeconds => prevSeconds - 1);
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -133,7 +135,9 @@ const Game = () => {
       <svg data-testid="TimerIcon"></svg>
 
 
-      <span>Elapsed Time: {seconds} seconds</span>
+      <div>
+        <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
+      </div>
       </div>
 
 
