@@ -1,56 +1,86 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const fetch = require('node-fetch');
 
 const app = express();
-// Puerto en el que escuchará el servicio
-const port = 8005; 
+const port = 8005;
 
-// Middleware to parse JSON in request body
 app.use(express.json());
 
-// Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
-mongoose.connect(mongoUri);
+// It will be the country of the question
+var country= "";
+// It will be the correct capital of the question
+var capitalCorrect = "";
+// It will be the different options for the answers
+var capitalOptions = [];
 
+// Recieves the information of the query and select wich data use on the question (country and capitals)
+function getQuestionInfo(info){
+  capitalOptions = [];
+  fourRows = [];
+  const numEles = info.length;
+
+  // Select 4 random rows of the data
+  for (let i = 0; i<4; i++){
+    var indexRow = Math.floor(Math.random() * numEles);
+    fourRows.push(info[indexRow]);
+    // Store the 4 posible answers
+    capitalOptions.push(info[indexRow].capitalLabel.value);
+  }
+  
+  // Select the row where it will extract the country and capital
+  const indexQuestion = Math.floor(Math.random() * 4);
+  // Store the country choosen and its capital
+  country=fourRows[indexQuestion].countryLabel.value;
+  capitalCorrect = fourRows[indexQuestion].capitalLabel.value;
+}
 
 app.post('/createquestion', async (req, res) => {
-
-  // TODO LO COMENTADO ES UN INTENTO DE HACER LAS QUERIES
-  // PERO COMO SALTA UN ERROR ANTES, NO SE PRUEBA CON ELLAS
-
   const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
-  const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}`;
-  const headers = { "Accept": "application/json" };
-  
+  const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}&format=json`;
+
   try {
-    const respuestaWikidata = await fetch(apiUrl, {headers});
-    console.log(respuestaWikidata);
-    if (respuestaWikidata.ok) {
-      console.log('Entro al if');
-      const data = await respuestaWikidata.json();//obtengo los datos en json
-      const numEles = data.results.bindings.length;
-      const index = Math.floor(Math.random() * numEles);//index al azar
-      
-      res = data.results.bindings[index];
-      // Hardcodeo el resultado para hacer pruebas
-      // res.json({ token: 'asdf'});
-    }else{
-      console.log('no entra al if');
-      console.log('la peticion tiene un status:' ,respuestaWikidata.status);
+
+    // Makes the petition to the url
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    // Check if everything was good on the petition
+    if (!response.ok) {
+      console.error('Error al realizar la consulta a Wikidata:', response.statusText);
+      return;
     }
+
+    // Parse the response 
+    const data = await response.json();
+
+    // Send the parsed response to be selected
+    getQuestionInfo(data.results.bindings);
+
+    // Declare what will be return 
+    solution = {
+      responseCountry : country,
+      responseCapitalCorrect : capitalCorrect,
+      responseCapitalOptions : capitalOptions
+    };
+    
+    // Return the resoult with a 200 status
+    res.status(200).json(solution);
   } catch (error) {
+    console.error('Error al realizar la consulta:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Start the server
 const server = app.listen(port, () => {
   console.log(`Creation Service listening at http://localhost:${port}`);
 });
 
 server.on('close', () => {
-    // Close the Mongoose connection
-    mongoose.connection.close();
-  });
+  mongoose.connection.close();
+});
 
-module.exports = server
+module.exports = server;

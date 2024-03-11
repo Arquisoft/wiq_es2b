@@ -24,10 +24,7 @@ app.get('/health', (_req, res) => {
 
 app.post('/login', async (req, res) => {
   try {
-    // Crea una peticion a la url (le llegará a auth-service.js) con la opcion /login 
-    // y los parametros req.body
     const authResponse = await axios.post(authServiceUrl+'/login', req.body);
-    // Almacena en un Json la respuesta de la anterior peticion
     res.json(authResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -36,10 +33,7 @@ app.post('/login', async (req, res) => {
 
 app.post('/adduser', async (req, res) => {
   try {
-    // Crea una peticion a la url (le llegará a user-service.js) con la opcion /login 
-    // y los parametros req.body
     const userResponse = await axios.post(userServiceUrl+'/adduser', req.body);
-    // Almacena en un Json la respuesta de la anterior peticion
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -48,10 +42,12 @@ app.post('/adduser', async (req, res) => {
 
 app.post('/createquestion', async (req, res) => {
   try {
-    // Crea una peticion a la url (le llegará a creation-service.js) con la opcion /login 
-    // y los parametros req.body
+    // Create a petition to the URL (le llegará a creation-service.js) with the option /createquestion and the req.body params
+    console.log("salgo de gateway hacia creation");
     const questionResponse = await axios.post(creationServiceUrl+'/createquestion', req.body);
-    // Almacena en un Json la respuesta de la anterior peticion
+    console.log("vengo de creation y estoy en gateway");
+    console.log(questionResponse.status);
+    // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

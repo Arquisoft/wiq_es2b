@@ -1,54 +1,108 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, Paper } from '@mui/material';
+import { Container, Typography, Button, Paper, TimerIcon } from '@mui/material';
+
+import './Game.css';
+
+const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
+const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
 
 const Game = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-  const [pais, setpais] = useState('');
-  const [capitalCorrecta, setcapital] = useState('');
-  const [capitalIcnorrecta1, setcapitalIcnorrecta1] = useState('');
-  const [capitalIcnorrecta2, setcapitalIcnorrecta2] = useState('');
-  const [capitalIcnorrecta3, setcapitalIcnorrecta3] = useState('');
+  const [country, setCountry] = useState('');
+  const [capitalCorrect, setCapitalCorrect] = useState('');
+  const [capitalOptions, setcapitalOptions] = useState([]);
+  const [correctCounter, setCorrectCounter] = useState(0);
+
+  const [questionCounter, setQuestionCounter] = useState(0);
+  const [incorrectCounter, setIncorrectCounter] = useState(0);
+
+  // Temporizador
+  const [seconds, setSeconds] = useState(120); // 2 minutes
+
+
+
+  useEffect(() => {
+    handleShowQuestion();
+  }, []);
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSeconds(prevSeconds => prevSeconds - 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   
-  // Esta es la llamada al servicio de generar las preguntas
+  // This method will call the create question service
   const  handleShowQuestion = async () => {
     try{
-      // Se declara esta variable unicamente para probar cosas con ella en la peticion
-      const eyou = "aa"
-      // Se hace una peticion a la api (llega a gateway-service.js) con la opcion createquestion
-      // y los parametros de entrada aa, aa
-      const response = await axios.post(`${apiEndpoint}/createquestion`, { eyou, eyou });
-      console.log(response);
+      // It makes a petition to the api and store the response
+      const response = await axios.post(`${apiEndpoint}/createquestion`, { });
+      // Extract all the info of the response and store it
+      setCountry(response.data.responseCountry);
+      setCapitalCorrect(response.data.responseCapitalCorrect);
+      setcapitalOptions(response.data.responseCapitalOptions);
+      const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+      buttons.forEach(button => {
+        button.name = "sinContestar";
+        button.disabled = false;
+        button.style.backgroundColor = colorPreguntas;
+        button.onmouse = colorOnMousePreguntas;
+      });
+
+      incrementQuestion();
     }catch (error){
       console.error('Error:', error);
     }    
   }
 
-  // TODO ESTO ES LO QUE ESTA COMENTADO EN CREATION-SERVICE.JS
-  // CREO QUE DEBERIA IR ALLI PERO COMO NO FUNCIONA LO PROBE AQUI
-  const deberiaIrEnelServicio = async () => {
-    const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
-    const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}`;
-    const headers = { "Accept": "application/json" }
-    const respuestaWikidata = await fetch(apiUrl, {headers});
-    if (respuestaWikidata.ok) {
-    const data = await respuestaWikidata.json();
-    const numEles = data.results.bindings.length;
-    const indexCapCorre = Math.floor(Math.random() * numEles);
-    const result = data.results.bindings[indexCapCorre];
-    setpais(result.countryLabel.value);
-    setcapital(result.capitalLabel.value);
-
-    const indexCapIncorre1 = Math.floor(Math.random() * numEles);
-    const indexCapIncorre2 = Math.floor(Math.random() * numEles);
-    const indexCapIncorre3 = Math.floor(Math.random() * numEles);
-    setcapitalIcnorrecta1(data.results.bindings[indexCapIncorre1].capitalLabel.value);
-    setcapitalIcnorrecta2(data.results.bindings[indexCapIncorre2].capitalLabel.value);
-    setcapitalIcnorrecta3(data.results.bindings[indexCapIncorre3].capitalLabel.value);
-    } else {
-      console.error("Error al realizar la consulta en Wikidata. Estado de respuesta:", respuestaWikidata.status);
+  // Method that checks if the answer clicked is the correct one
+  const handleAnswerClick = (option, index) => {
+    // Get what component is the button to change its color later
+    //const button = document.getElementById(`button_${index}`);
+    if(option === capitalCorrect) {
+      const buttonId = `button_${index}`;
+      const correctButton = document.getElementById(buttonId);
+      if (correctButton) {
+        correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
+        incrementCorrect();
+      }
+    }else{
+      const buttonId = `button_${index}`;
+      const incorrectButton = document.getElementById(buttonId);
+      incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
+      incrementIncorrect();
     }
+
+    const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+    buttons.forEach(button => {
+      button.disabled = true;
+      button.onmouse = null;
+    });
+
+    // Cambiar a la siguiente pregunta después de 3 segundos
+    setTimeout(() => {
+      handleShowQuestion();
+    }, 1500);
+
+    
+
+  }
+
+  const incrementCorrect = () => {
+    setCorrectCounter(correctCounter + 1);
+  };
+
+  const incrementIncorrect = () => {
+    setIncorrectCounter(incorrectCounter + 1);
+  }
+
+  const incrementQuestion = () => {
+    setQuestionCounter(questionCounter + 1);
   }
 
   return (
@@ -58,28 +112,40 @@ const Game = () => {
           Saber y Ganar Juego
         </Typography>
         <Typography variant="body1" paragraph>
-          Pregunta: ¿Cuál es la capital de {pais}?
+          Pregunta {questionCounter}: ¿Cuál es la capital de {country}?
         </Typography>
-        {/* Botones de opción */}
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalCorrecta}
-        </Button>
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalIcnorrecta1}
-        </Button>
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalIcnorrecta2}
-        </Button>
-        <Button variant="outlined" style={{ margin: '0.5rem' }}>
-          {capitalIcnorrecta3}
-        </Button>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
+        {capitalOptions.map((option, index) => (
+          <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
+            {option}
+          </Button>
+        ))}
+      </div>
       </Paper>
-      <Button variant="contained" color="primary" onClick={handleShowQuestion}>
-        Genera pregunta NO FUNCIONA AUNQUE DEBERIA
+
+      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+        Correctas: {correctCounter}
       </Button>
-      <Button variant="contained" color="primary" onClick={deberiaIrEnelServicio}>
-        Genera pregunta FUNCIONA
+
+      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+        Incorrectas: {incorrectCounter}
       </Button>
+
+      <div>
+      <svg data-testid="TimerIcon"></svg>
+
+
+      <div>
+        <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
+      </div>
+      </div>
+
+
+      {/* <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>
+        Siguiente pregunta
+      </Button> */}
+
+
     </Container>
   );
 };
