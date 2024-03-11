@@ -65,12 +65,12 @@ describe('Login component', () => {
 
 import React from 'react';
 import { render } from '@testing-library/react';
-import Login from './Login';; 
+import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+import Login from './Login'; // Assuming Login is the component under test
 
 describe('./Login', () => {
-  it('should render the component without crashing', () => {
-    // Render the component
-    render(<Login />);
-
+  it('should render the Login component without crashing', () => {
+    // Wrap Login within BrowserRouter to provide routing context
+    render(<BrowserRouter><Login /></BrowserRouter>);
   });
 });

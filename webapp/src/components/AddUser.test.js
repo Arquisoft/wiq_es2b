@@ -59,15 +59,17 @@ describe('AddUser component', () => {
   });
 });
 */
+
+import AddUser from './AddUser';
 import React from 'react';
 import { render } from '@testing-library/react';
-import AddUser from './AddUser';
+import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+
 
 describe('./AddUser', () => {
-  it('should render the component without crashing', () => {
-    // Render the component
-    render(<AddUser />);
-
+  it('should render the Login component without crashing', () => {
+    // Wrap Login within BrowserRouter to provide routing context
+    render(<BrowserRouter><AddUser /></BrowserRouter>);
   });
 });
 
