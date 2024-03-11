@@ -62,3 +62,15 @@ describe('Login component', () => {
   });
 });
 */
+
+import React from 'react';
+import { render } from '@testing-library/react';
+import Login from './Login';; 
+
+describe('./Login', () => {
+  it('should render the component without crashing', () => {
+    // Render the component
+    render(<Login />);
+
+  });
+});

@@ -59,3 +59,15 @@ describe('AddUser component', () => {
   });
 });
 */
+import React from 'react';
+import { render } from '@testing-library/react';
+import AddUser from './AddUser';
+
+describe('./AddUser', () => {
+  it('should render the component without crashing', () => {
+    // Render the component
+    render(<AddUser />);
+
+  });
+});
+
