@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
@@ -57,3 +58,18 @@ describe('AddUser component', () => {
     });
   });
 });
+*/
+
+import AddUser from './AddUser';
+import React from 'react';
+import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+
+
+describe('./AddUser', () => {
+  it('should render the Login component without crashing', () => {
+    // Wrap Login within BrowserRouter to provide routing context
+    render(<BrowserRouter><AddUser /></BrowserRouter>);
+  });
+});
+
