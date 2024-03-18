@@ -1,9 +1,12 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, StrictMode } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper, TimerIcon } from '@mui/material';
 
 import './Game.css';
+import '../Timer.css';
+import Timer from './Timer';
+
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
@@ -19,23 +22,12 @@ const Game = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
 
-  // Temporizador
-  const [seconds, setSeconds] = useState(120); // 2 minutes
-
 
 
   useEffect(() => {
     handleShowQuestion();
   }, []);
 
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setSeconds(prevSeconds => prevSeconds - 1);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
   
   // This method will call the create question service
   const  handleShowQuestion = async () => {
@@ -121,6 +113,14 @@ const Game = () => {
           </Button>
         ))}
       </div>
+
+      <Typography variant="h4" gutterBottom>
+        <div>
+          <StrictMode>
+            <Timer />
+          </StrictMode>
+        </div>
+      </Typography>
       </Paper>
 
       <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
@@ -131,19 +131,10 @@ const Game = () => {
         Incorrectas: {incorrectCounter}
       </Button>
 
-      <div>
-      <svg data-testid="TimerIcon"></svg>
+
+      
 
 
-      <div>
-        <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
-      </div>
-      </div>
-
-
-      {/* <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>
-        Siguiente pregunta
-      </Button> */}
 
 
     </Container>
