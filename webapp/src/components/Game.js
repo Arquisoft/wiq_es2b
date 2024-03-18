@@ -11,9 +11,9 @@ const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
 const Game = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-  const [country, setCountry] = useState('');
-  const [capitalCorrect, setCapitalCorrect] = useState('');
-  const [capitalOptions, setcapitalOptions] = useState([]);
+  const [questionObject, setQuestionObject] = useState('');
+  const [correctOption, setCorrectOption] = useState('');
+  const [answerOptions, setAnswerOptions] = useState([]);
   const [correctCounter, setCorrectCounter] = useState(0);
 
   const [questionCounter, setQuestionCounter] = useState(0);
@@ -43,9 +43,9 @@ const Game = () => {
       // It makes a petition to the api and store the response
       const response = await axios.post(`${apiEndpoint}/createquestion`, { });
       // Extract all the info of the response and store it
-      setCountry(response.data.responseCountry);
-      setCapitalCorrect(response.data.responseCapitalCorrect);
-      setcapitalOptions(response.data.responseCapitalOptions);
+      setQuestionObject(response.data.responseQuestionObject);
+      setCorrectOption(response.data.responseCorrectOption);
+      setAnswerOptions(response.data.responseAnswerOptions);
       const buttons = document.querySelectorAll('button[title="btnsPreg"]');
       buttons.forEach(button => {
         button.name = "sinContestar";
@@ -64,7 +64,7 @@ const Game = () => {
   const handleAnswerClick = (option, index) => {
     // Get what component is the button to change its color later
     //const button = document.getElementById(`button_${index}`);
-    if(option === capitalCorrect) {
+    if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
       if (correctButton) {
@@ -88,9 +88,6 @@ const Game = () => {
     setTimeout(() => {
       handleShowQuestion();
     }, 1500);
-
-    
-
   }
 
   const incrementCorrect = () => {
@@ -112,10 +109,10 @@ const Game = () => {
           Saber y Ganar Juego
         </Typography>
         <Typography variant="body1" paragraph>
-          Pregunta {questionCounter}: ¿Cuál es la capital de {country}?
+          Pregunta {questionCounter}: ¿Cuál es la capital de {questionObject}?
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
-        {capitalOptions.map((option, index) => (
+        {answerOptions.map((option, index) => (
           <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
             {option}
           </Button>
