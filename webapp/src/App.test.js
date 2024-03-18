@@ -7,7 +7,7 @@ test('renders learn react link', () => {
     <Router>
       <App />
     </Router>);
-  const linkElement = screen.getByText(/Welcome to the 2024 edition of the Software Architecture course/i);
+  const linkElement = screen.getByText(/Bienvenido a WIQ 2024 del curso de Arquitectura del Software/i);
   expect(linkElement).toBeInTheDocument();
 });
 
