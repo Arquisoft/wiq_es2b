@@ -7,40 +7,51 @@ const port = 8005;
 
 app.use(express.json());
 
+const optionsNumber = 4;
+
 // It will be the country of the question
-var country= "";
+var questionObject= "";
 // It will be the correct capital of the question
-var capitalCorrect = "";
+var correctOption = "";
 // It will be the different options for the answers
-var capitalOptions = [];
+var answerOptions = [];
+
+var randomQuerySelector; 
+// Array of the possible queries
+var queries = ['SELECT DISTINCT ?questionObject ?questionObjectLabel ?answer ?answerLabel WHERE { ?questionObject wdt:P31 wd:Q6256. ?questionObject wdt:P36 ?answer. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}'];
+// Array of the possible questions
+var questions = ["¿Cual es la capital de "];
 
 // Recieves the information of the query and select wich data use on the question (country and capitals)
 function getQuestionInfo(info){
-  capitalOptions = [];
-  fourRows = [];
+  answerOptions = [];
+  var fourRows = [];
   const numEles = info.length;
 
   // Select 4 random rows of the data
-  for (let i = 0; i<4; i++){
+  for (let i = 0; i<optionsNumber; i++){
     var indexRow = Math.floor(Math.random() * numEles);
     fourRows.push(info[indexRow]);
     // Store the 4 posible answers
-    capitalOptions.push(info[indexRow].capitalLabel.value);
+    answerOptions.push(info[indexRow].answerLabel.value);
   }
   
   // Select the row where it will extract the country and capital
-  const indexQuestion = Math.floor(Math.random() * 4);
+  var indexQuestion = Math.floor(Math.random() * optionsNumber);
   // Store the country choosen and its capital
-  country=fourRows[indexQuestion].countryLabel.value;
-  capitalCorrect = fourRows[indexQuestion].capitalLabel.value;
+  questionObject= questions[randomQuerySelector] + fourRows[indexQuestion].questionObjectLabel.value + "?";
+  correctOption = fourRows[indexQuestion].answerLabel.value;
+}
+
+function selectRandomQuery(){
+  randomQuerySelector = Math.floor(Math.random() * queries.length);
 }
 
 app.post('/createquestion', async (req, res) => {
-  const sparqlQuery = 'SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel WHERE { ?country wdt:P31 wd:Q6256. ?country wdt:P36 ?capital. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}';
-  const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}&format=json`;
+  selectRandomQuery();
+  const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(queries[randomQuerySelector])}&format=json`;
 
   try {
-
     // Makes the petition to the url
     const response = await fetch(apiUrl, {
       headers: {
@@ -62,9 +73,9 @@ app.post('/createquestion', async (req, res) => {
 
     // Declare what will be return 
     solution = {
-      responseCountry : country,
-      responseCapitalCorrect : capitalCorrect,
-      responseCapitalOptions : capitalOptions
+      responseQuestionObject : questionObject,
+      responseCorrectOption : correctOption,
+      responseAnswerOptions : answerOptions
     };
     
     // Return the resoult with a 200 status
