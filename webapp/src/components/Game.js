@@ -18,6 +18,8 @@ const Game = () => {
 
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
+  
+  const [numberOfQuestions, setNumberOfQuestions] = useState(10);
 
   // Temporizador
   const [seconds, setSeconds] = useState(120); // 2 minutes
@@ -84,13 +86,20 @@ const Game = () => {
       button.onmouse = null;
     });
 
+    // FIN DE LA PARTIDA
+    finishGame();
+
     // Cambiar a la siguiente pregunta después de 3 segundos
     setTimeout(() => {
       handleShowQuestion();
     }, 1500);
 
-    
+  }
 
+  const finishGame = () => {
+    if ((correctCounter + incorrectCounter) == numberOfQuestions){
+      
+    }
   }
 
   const incrementCorrect = () => {
