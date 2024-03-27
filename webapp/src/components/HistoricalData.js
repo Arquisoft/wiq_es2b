@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState} from 'react';
 import { useNavigate} from 'react-router-dom';
-import { Container, Typography, Button} from '@mui/material';
+import { Container, Button} from '@mui/material';
 
 const HistoricalData = () => {
   const navigate = useNavigate();
