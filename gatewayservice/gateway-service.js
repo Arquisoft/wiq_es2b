@@ -9,6 +9,7 @@ const port = 8000;
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
 const creationServiceUrl = process.env.CREATION_SERVICE_URL || 'http://localhost:8005';
+const retrieveServiceUrl = process.env.RETRIEVE_SERVICE_URL || 'http://localhost:8004';
 
 app.use(cors());
 app.use(express.json());
@@ -43,10 +44,18 @@ app.post('/adduser', async (req, res) => {
 app.post('/createquestion', async (req, res) => {
   try {
     // Create a petition to the URL (le llegará a creation-service.js) with the option /createquestion and the req.body params
-    console.log("salgo de gateway hacia creation");
     const questionResponse = await axios.post(creationServiceUrl+'/createquestion', req.body);
-    console.log("vengo de creation y estoy en gateway");
-    console.log(questionResponse.status);
+    // Return a json response with what we obtained on the petition
+    res.json(questionResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.post('/getquestionshistory', async (req, res) => {
+  try {
+    // Create a petition to the URL (le llegará a retrieve-service.js) with the option /getgeneratedquestions and the req.body params
+    const questionResponse = await axios.post(retrieveServiceUrl+'/getquestionshistory', req.body);
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {
