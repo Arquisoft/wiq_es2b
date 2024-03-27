@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
@@ -15,7 +14,6 @@ const Game = () => {
   const [correctOption, setCorrectOption] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
   const [correctCounter, setCorrectCounter] = useState(0);
-  const [numberOfOptions, setNumberOfOptions] = useState();
 
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
@@ -27,7 +25,7 @@ const Game = () => {
 
   useEffect(() => {
     handleShowQuestion();
-  }, []);
+  });
 
 
   useEffect(() => {
