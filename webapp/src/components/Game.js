@@ -109,7 +109,7 @@ const Game = () => {
           Saber y Ganar Juego
         </Typography>
         <Typography variant="body1" paragraph>
-          Pregunta {questionCounter}: ¿Cuál es la capital de {questionObject}?
+          Pregunta {questionCounter}: {questionObject}
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
           {answerOptions.map((option, index) => (
