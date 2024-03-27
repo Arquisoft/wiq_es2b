@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Container, Typography, Button} from '@mui/material';
+import { useNavigate} from 'react-router-dom';
 
 const MainPage = () => {
     const navigate = useNavigate();
