@@ -25,12 +25,6 @@ const MainPage = () => {
                 Puedes comenzar la partida o ver tu historial.
                 </Typography>
 
-
-                {/* <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-                Your account was created on {createdAt}.
-                </Typography> */}
-
-                {/* Se declaran los botones en los q al hacer click se ejecuta el metodo especificado en onClick*/}
                 <Button variant="contained" color="primary" onClick={handleShowGame}>
                 Empezar juego
                 </Button>

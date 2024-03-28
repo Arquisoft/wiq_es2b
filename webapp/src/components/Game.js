@@ -25,10 +25,10 @@ const Game = () => {
 
   useEffect(() => {
     handleShowQuestion();
-  });
-
+  }, []);
 
   useEffect(() => {
+    console.log("eyou");
     const intervalId = setInterval(() => {
       setSeconds(prevSeconds => prevSeconds - 1);
     }, 1000);
@@ -61,7 +61,6 @@ const Game = () => {
 
   // Method that checks if the answer clicked is the correct one
   const handleAnswerClick = (option, index) => {
-    // Get what component is the button to change its color later
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
