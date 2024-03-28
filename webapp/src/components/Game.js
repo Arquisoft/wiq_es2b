@@ -20,6 +20,9 @@ const Game = () => {
   const [incorrectCounter, setIncorrectCounter] = useState(0);
   
   const [numberOfQuestions, setNumberOfQuestions] = useState(10);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState(10);
+  const [isFinished, setFinished] = useState(false);
+  const [percentage, setPercentage] = useState(0);
 
   // Temporizador
   const [seconds, setSeconds] = useState(120); // 2 minutes
@@ -38,6 +41,13 @@ const Game = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  
+  useEffect(() => {
+    if (isGameFinished()){
+      finishGame();
+    }
+  }, [correctCounter]);
   
   // This method will call the create question service
   const  handleShowQuestion = async () => {
@@ -56,7 +66,15 @@ const Game = () => {
         button.onmouse = colorOnMousePreguntas;
       });
 
+      // FIN DE LA PARTIDA
+      if (isGameFinished()){
+        setFinished(true);
+      }
+
+
       incrementQuestion();
+
+
     }catch (error){
       console.error('Error:', error);
     }    
@@ -85,30 +103,55 @@ const Game = () => {
       button.disabled = true;
       button.onmouse = null;
     });
+    
 
-    // FIN DE LA PARTIDA
-    finishGame();
+    decrementQuestionsToAnswer();
 
-    // Cambiar a la siguiente pregunta después de 3 segundos
-    setTimeout(() => {
-      handleShowQuestion();
-    }, 1500);
+
+    if (!isFinished){
+      // Cambiar a la siguiente pregunta después de 3 segundos
+      setTimeout(() => {
+        handleShowQuestion();
+      }, 1500);
+    }
+
+  }
+
+  const isGameFinished = () => {
+    return questionCounter >= numberOfQuestions;
+  }
+
+  const finishGame = () => {
+    const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+    buttons.forEach(button => {
+      button.disabled = true;
+      button.onmouse = null;
+    });
+    console.log("finishGame " + correctCounter);
+    var correctas = (correctCounter / numberOfQuestions);
+    setPercentage(correctas * 100);
   }
 
   const incrementCorrect = () => {
-    setCorrectCounter(correctCounter + 1);
+    setCorrectCounter(correct => correct + 1);
   };
 
   const incrementIncorrect = () => {
-    setIncorrectCounter(incorrectCounter + 1);
+    setIncorrectCounter(incorrect => incorrect + 1);
+  }
+
+  const decrementQuestionsToAnswer = () => {
+    setQuestionsToAnswer(toAnswer => toAnswer - 1);
   }
 
   const incrementQuestion = () => {
-    setQuestionCounter(questionCounter + 1);
+    setQuestionCounter(qc => qc + 1);
   }
 
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
+
+      {!isFinished && (
       <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
         <Typography variant="h4" gutterBottom>
           Saber y Ganar Juego
@@ -124,14 +167,23 @@ const Game = () => {
         ))}
       </div>
       </Paper>
+     )}
 
+      {!isFinished && (
+      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+        Preguntas restantes: {questionsToAnswer}
+      </Button>
+      )}
+      {!isFinished && (
       <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
         Correctas: {correctCounter}
       </Button>
-
+      )}
+      {!isFinished && (
       <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
         Incorrectas: {incorrectCounter}
       </Button>
+      )}
 
       <div>
       <svg data-testid="TimerIcon"></svg>
@@ -141,6 +193,23 @@ const Game = () => {
         <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
       </div>
       </div>
+
+      
+
+      {isFinished && (
+        <div>
+        <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
+          <Typography variant="h4" gutterBottom>
+            Partida finalizada. ¡Gracias por jugar!
+          </Typography>
+          <div>
+            <Button title='puntuacion' onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+              Puntuación: {percentage.toFixed(2)} % 
+            </Button>
+          </div>
+        </Paper>
+        </div>
+      )}
 
 
       {/* <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>

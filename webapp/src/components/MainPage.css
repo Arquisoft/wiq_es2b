@@ -1,0 +1,12 @@
+div[title="main"]{
+    display: grid;
+    grid-template-columns: 1fr;
+
+}
+
+div[title="main"]>button{
+    margin: 1em;
+    padding: 0.25em;
+    background-color: rgba(31, 60, 134, 0.764);
+    color: white;
+}
