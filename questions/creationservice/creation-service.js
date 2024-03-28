@@ -1,17 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const Question = require('./creation-model');
 
 const app = express();
 const port = 8005;
 
 app.use(express.json());
 
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questiondb';
+mongoose.connect(mongoUri);
+
 const optionsNumber = 4;
 
-// It will be the country of the question
+// It will be the questionObject
 var questionObject= "";
-// It will be the correct capital of the question
+// It will be the correct answer
 var correctOption = "";
 // It will be the different options for the answers
 var answerOptions = [];
@@ -22,7 +26,7 @@ var queries = ['SELECT DISTINCT ?questionObject ?questionObjectLabel ?answer ?an
 // Array of the possible questions
 var questions = ["¿Cual es la capital de "];
 
-// Recieves the information of the query and select wich data use on the question (country and capitals)
+// Recieves the information of the query and select wich data use on the question
 function getQuestionInfo(info){
   answerOptions = [];
   var fourRows = [];
@@ -45,6 +49,28 @@ function getQuestionInfo(info){
 
 function selectRandomQuery(){
   randomQuerySelector = Math.floor(Math.random() * queries.length);
+}
+
+async function saveQuestion(){
+    var incorrectAnswers=[];
+    answerOptions.forEach(e => {
+        if(e!=correctOption)
+        incorrectAnswers.push(e);
+    });
+
+    try {
+        const newQuestion = new Question({
+            question: questionObject,
+            correctAnswer: correctOption,
+            incorrectAnswer1: incorrectAnswers[0],
+            incorrectAnswer2: incorrectAnswers[1],
+            incorrectAnswer3: incorrectAnswers[2]
+        });
+        await newQuestion.save();
+
+    }catch (error){
+        console.error("Error al guardar la pregunta: " + error);
+    }
 }
 
 app.post('/createquestion', async (req, res) => {
@@ -77,6 +103,8 @@ app.post('/createquestion', async (req, res) => {
       responseCorrectOption : correctOption,
       responseAnswerOptions : answerOptions
     };
+
+    saveQuestion();
     
     // Return the resoult with a 200 status
     res.status(200).json(solution);

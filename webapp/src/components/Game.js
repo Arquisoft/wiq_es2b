@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, Paper, TimerIcon } from '@mui/material';
+import { Container, Typography, Button, Paper} from '@mui/material';
 
 import './Game.css';
 
@@ -31,7 +30,7 @@ const Game = () => {
 
   useEffect(() => {
     handleShowQuestion();
-  }, []);
+  });
 
 
   useEffect(() => {
@@ -83,7 +82,6 @@ const Game = () => {
   // Method that checks if the answer clicked is the correct one
   const handleAnswerClick = (option, index) => {
     // Get what component is the button to change its color later
-    //const button = document.getElementById(`button_${index}`);
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -157,15 +155,15 @@ const Game = () => {
           Saber y Ganar Juego
         </Typography>
         <Typography variant="body1" paragraph>
-          Pregunta {questionCounter}: ¿Cuál es la capital de {questionObject}?
+          Pregunta {questionCounter}: {questionObject}
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
-        {answerOptions.map((option, index) => (
-          <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
-            {option}
-          </Button>
-        ))}
-      </div>
+          {answerOptions.map((option, index) => (
+            <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
+              {option}
+            </Button>
+          ))}
+        </div>
       </Paper>
      )}
 
@@ -186,12 +184,11 @@ const Game = () => {
       )}
 
       <div>
-      <svg data-testid="TimerIcon"></svg>
+        <svg data-testid="TimerIcon"></svg>
 
-
-      <div>
-        <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
-      </div>
+        <div>
+          <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
+        </div>
       </div>
 
       
