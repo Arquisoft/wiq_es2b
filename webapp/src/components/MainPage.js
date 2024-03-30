@@ -1,5 +1,7 @@
-import { Container, Typography, Button} from '@mui/material';
-import { useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+import './MainPage.css';
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -16,7 +18,7 @@ const MainPage = () => {
 
     return (
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-            <div>
+            <div title='main'>
                 <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
                 ¡Bienvenido a WIQ 2024!
                 </Typography>
