@@ -43,9 +43,10 @@ const Game = () => {
 
   
   useEffect(() => {
-    if (isGameFinished()){
+    if (isGameFinished() && !isFinished){
       finishGame();
-    }
+      setFinished(true)
+;    }
   }, [correctCounter]);
   
   // This method will call the create question service
@@ -66,7 +67,8 @@ const Game = () => {
       });
 
       // FIN DE LA PARTIDA
-      if (isGameFinished()){
+      if (isGameFinished() && !isFinished){
+        finishGame();
         setFinished(true);
       }
 
@@ -125,8 +127,14 @@ const Game = () => {
       button.onmouse = null;
     });
     console.log("finishGame " + correctCounter);
-    var correctas = (correctCounter / numberOfQuestions);
-    setPercentage(correctas * 100);
+    var correctas = (correctCounter / numberOfQuestions) * 100;
+    console.log("corr1 " + correctas);
+    if (!Number.isInteger(percentage)){
+      correctas = correctas.toFixed(2);
+      console.log("dentro " + correctas);
+    }
+    console.log("corr2 " + correctas);
+    setPercentage(correctas);
   }
 
   const incrementCorrect = () => {
@@ -200,7 +208,7 @@ const Game = () => {
           </Typography>
           <div>
             <Button title='puntuacion' onMouseEnter={null} variant="contained" color="primary" disabled={true}>
-              Puntuación: {percentage.toFixed(2)} % 
+              Puntuación: {percentage} % 
             </Button>
           </div>
         </Paper>
