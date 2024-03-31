@@ -1,21 +1,13 @@
-/*
 import { render, screen } from '@testing-library/react';
+import {BrowserRouter as Router} from "react-router-dom";
 import App from './App';
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Welcome to the 2024 edition of the Software Architecture course/i);
+  render(
+    <Router>
+      <App />
+    </Router>);
+  const linkElement = screen.getByText(/Bienvenido a WIQ 2024 del curso de Arquitectura del Software/i);
   expect(linkElement).toBeInTheDocument();
 });
-*/
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
 
-describe('./App', () => {
-  it('should render the component without crashing', () => {
-    // Render the component
-    render(<App />);
-
-  });
-});

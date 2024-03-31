@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import './MainPage.css';
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const MainPage = () => {
 
     return (
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-            <div>
+            <div title='main'>
                 <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
                 ¡Bienvenido a WIQ 2024!
                 </Typography>
@@ -26,12 +27,6 @@ const MainPage = () => {
                 Puedes comenzar la partida o ver tu historial.
                 </Typography>
 
-
-                {/* <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-                Your account was created on {createdAt}.
-                </Typography> */}
-
-                {/* Se declaran los botones en los q al hacer click se ejecuta el metodo especificado en onClick*/}
                 <Button variant="contained" color="primary" onClick={handleShowGame}>
                 Empezar juego
                 </Button>

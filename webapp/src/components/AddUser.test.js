@@ -1,4 +1,3 @@
-/*
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
@@ -17,7 +16,7 @@ describe('AddUser component', () => {
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Add User/i });
+    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
     // Mock the axios.post request to simulate a successful response
     mockAxios.onPost('http://localhost:8000/adduser').reply(200);
@@ -40,7 +39,7 @@ describe('AddUser component', () => {
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Add User/i });
+    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
     // Mock the axios.post request to simulate an error response
     mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
@@ -58,18 +57,5 @@ describe('AddUser component', () => {
     });
   });
 });
-*/
 
-import AddUser from './AddUser';
-import React from 'react';
-import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
-
-
-describe('./AddUser', () => {
-  it('should render the Login component without crashing', () => {
-    // Wrap Login within BrowserRouter to provide routing context
-    render(<BrowserRouter><AddUser /></BrowserRouter>);
-  });
-});
 

@@ -1,10 +1,10 @@
 {
-    "name": "creationservice",
+    "name": "retrieveservice",
     "version": "1.0.0",
-    "description": " Creation service, in charge of create the questions of the game and store them",
+    "description": " Retrieve service, in charge of claim the questions information stored on de database",
     "main": "service.js",
     "scripts": {
-        "start": "node creation-service.js",
+        "start": "node retrieve-service.js",
         "test": "jest"
     },
     "repository": {
