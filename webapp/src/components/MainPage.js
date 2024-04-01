@@ -16,6 +16,11 @@ const MainPage = () => {
         navigate(path);
     };
 
+    const handleShowHistoricalQuestions = () => {
+        let path= '/HistoricalQuestions';
+        navigate(path);
+    };
+
     return (
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
             <div title='main'>
@@ -32,6 +37,9 @@ const MainPage = () => {
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleShowHistoricalData}> 
                 Histórico de partidas
+                </Button>
+                <Button variant="contained" color="primary" onClick={handleShowHistoricalQuestions}> 
+                Histórico de preguntas
                 </Button>
             </div>
           </Container>
