@@ -68,6 +68,15 @@ const Game = () => {
       const incorrectButton = document.getElementById(buttonId);
       incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
       incrementIncorrect();
+      // mostrar la correcta
+      for (let correctIndex = 0; correctIndex < 4; correctIndex++){
+        const buttonIdCorrect = `button_${correctIndex}`;
+        const correctButton = document.getElementById(buttonIdCorrect);
+        if (correctButton) {
+          correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
+        }
+      }
+      
     }
 
     const buttons = document.querySelectorAll('button[title="btnsPreg"]');
