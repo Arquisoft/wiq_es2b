@@ -16,6 +16,11 @@ const MainPage = () => {
         navigate(path);
     };
 
+    const handleShowHistoricalUserData = () => {
+        let path= '/HistoricalUserData';
+        navigate(path);
+    };
+
     const handleShowHistoricalQuestions = () => {
         let path= '/HistoricalQuestions';
         navigate(path);
@@ -36,7 +41,10 @@ const MainPage = () => {
                 Empezar juego
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleShowHistoricalData}> 
-                Histórico de partidas
+                Histórico de preguntas
+                </Button>
+                <Button variant="contained" color="primary" onClick={handleShowHistoricalUserData}> 
+                Histórico del usuario
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleShowHistoricalQuestions}> 
                 Histórico de preguntas
