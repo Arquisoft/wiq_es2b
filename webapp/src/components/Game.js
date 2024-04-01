@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import './Game.css';
 
@@ -8,6 +9,7 @@ const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
 
 const Game = () => {
+  const navigate = useNavigate();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [questionObject, setQuestionObject] = useState('');
@@ -119,6 +121,30 @@ const Game = () => {
   const isGameFinished = () => {
     return questionCounter >= numberOfQuestions;
   }
+  const handleMainPage = () => {
+    let path= '/mainPage';
+    navigate(path);
+};
+
+const getQuestions = () => {
+  
+  const questionsList = [
+    { 
+      question: '¿Cuál es la capital de Francia?',
+      correctAnswer: 'París',
+      userAnswer: 'París'
+    },
+    {
+      question: '¿Cuál es el río más largo del mundo?',
+      correctAnswer: 'El río Amazonas',
+      userAnswer: 'Hola'
+    },
+   
+  ];
+
+  return questionsList;
+};
+
 
   const finishGame = () => {
     const buttons = document.querySelectorAll('button[title="btnsPreg"]');
@@ -135,8 +161,36 @@ const Game = () => {
     }
     console.log("corr2 " + correctas);
     setPercentage(correctas);
+    const username=localStorage.getItem('username');
+    const newGame = {
+      username: username, 
+      duration: seconds, 
+      questions: getQuestions() ,
+      percentage: correctas,
+     totalQuestions: numberOfQuestions,
+      correctAnswers: correctCounter,
+      incorrectAnswers: numberOfQuestions-correctCounter
+    };
+    console.log("Se va a guardar la siguiente partida:");
+    console.log("Username:", newGame.username);
+    console.log("Duración:", newGame.duration);
+    console.log("Preguntas:", newGame.questions);
+    console.log("Porcentaje de Aciertos:", newGame.percentage);
+    console.log("Número Total de Preguntas:", newGame.totalQuestions);
+    console.log("Número de Respuestas Correctas:", newGame.correctAnswers);
+    console.log("Número de Respuestas Incorrectas:", newGame.incorrectAnswers);
+    
+  
+  
+    axios.post(`${apiEndpoint}/addgame`, newGame)
+  .then(response => {
+    console.log("Respuesta del servidor:", response.data);
+  })
+  .catch(error => {
+    console.error("Error al enviar la solicitud:", error);
+  });
   }
-
+ 
   const incrementCorrect = () => {
     setCorrectCounter(correct => correct + 1);
   };
@@ -189,7 +243,7 @@ const Game = () => {
         Incorrectas: {incorrectCounter}
       </Button>
       )}
-
+       {!isFinished && (
       <div>
         <svg data-testid="TimerIcon"></svg>
 
@@ -197,6 +251,7 @@ const Game = () => {
           <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
         </div>
       </div>
+      )}
 
       
 
@@ -210,6 +265,9 @@ const Game = () => {
             <Button title='puntuacion' onMouseEnter={null} variant="contained" color="primary" disabled={true}>
               Puntuación: {percentage} % 
             </Button>
+            <Button variant="contained" color="primary" onClick={handleMainPage}>
+             Ir a la página principal
+          </Button>
           </div>
         </Paper>
         </div>

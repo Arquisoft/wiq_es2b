@@ -41,6 +41,28 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
+app.post('/addgame', async (req, res) => {
+  try {
+    const userResponse = await axios.post(userServiceUrl+'/addgame', req.body);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+
+app.get('/getgamehistory/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const userResponse = await axios.get(`${userServiceUrl}/getgamehistory/${username}`);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+
+
 app.post('/createquestion', async (req, res) => {
   try {
     // Create a petition to the URL (le llegará a creation-service.js) with the option /createquestion and the req.body params
@@ -62,6 +84,8 @@ app.post('/getquestionshistory', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
+
+
 
 // Start the gateway service
 const server = app.listen(port, () => {
