@@ -25,6 +25,11 @@ const Game = () => {
   const [isFinished, setFinished] = useState(false);
   const [percentage, setPercentage] = useState(0);
 
+
+  //para el final de partida 
+  const [gameUserOptions, setGameUserOptions] = useState([]);
+  const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
+  const [gameQuestions, setGameQuestions] = useState([]);
   // Temporizador
   const [seconds, setSeconds] = useState(120); // 2 minutes
 
@@ -60,6 +65,14 @@ const Game = () => {
       setQuestionObject(response.data.responseQuestionObject);
       setCorrectOption(response.data.responseCorrectOption);
       setAnswerOptions(response.data.responseAnswerOptions);
+
+      //guardar para el final 
+      // Actualizar las preguntas del juego
+     setGameQuestions(prevQuestions => [...prevQuestions, response.data.responseQuestionObject]);
+      // Actualizar las opciones correctas del juego
+      setGameCorrectOptions(prevCorrectOptions => [...prevCorrectOptions, response.data.responseCorrectOption]);
+
+
       const buttons = document.querySelectorAll('button[title="btnsPreg"]');
       buttons.forEach(button => {
         button.name = "sinContestar";
@@ -85,6 +98,8 @@ const Game = () => {
 
   // Method that checks if the answer clicked is the correct one
   const handleAnswerClick = (option, index) => {
+    // Almacenar la opción seleccionada por el usuario en gameUserOptions
+    setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -127,23 +142,20 @@ const Game = () => {
 };
 
 const getQuestions = () => {
-  
-  const questionsList = [
-    { 
-      question: '¿Cuál es la capital de Francia?',
-      correctAnswer: 'París',
-      userAnswer: 'París'
-    },
-    {
-      question: '¿Cuál es el río más largo del mundo?',
-      correctAnswer: 'El río Amazonas',
-      userAnswer: 'Hola'
-    },
-   
-  ];
+  const questionsList = [];
+
+  // Iterar sobre cada pregunta generada dinámicamente y agregarla a la lista
+  for (let i = 0; i < gameQuestions.length; i++) {
+    const questionObject = gameQuestions[i];
+    const correctAnswer = gameCorrectOptions[i];
+    const userAnswer = gameUserOptions[i] || ''; // Establecer la respuesta del usuario como cadena vacía si no hay respuesta
+    questionsList.push({ question: questionObject, correctAnswer, userAnswer });
+  }
 
   return questionsList;
 };
+
+
 
 
   const finishGame = () => {
@@ -161,6 +173,8 @@ const getQuestions = () => {
     }
     console.log("corr2 " + correctas);
     setPercentage(correctas);
+    
+    //a partir de aqui guardar la partida 
     const username=localStorage.getItem('username');
     const newGame = {
       username: username, 

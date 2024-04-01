@@ -94,10 +94,10 @@ app.post('/addgame', async (req, res) => {
 app.get('/getgamehistory/:username', async (req, res) => {
     try {
         const username = req.params.username;
-        console.log("se esta intentnado encontrar el hisotrial del usuario  "+username);
+        console.log("Se está intentando encontrar el historial del usuario " + username);
         // Buscar las partidas asociadas al nombre de usuario proporcionado
-        const games = await Game.find({ username });
-        console.log("se encontro para "+username+"  estos juegos " +games);
+        const games = await Game.find({ username }).populate('questions');
+        console.log("Se encontraron los juegos para " + username + ": ", games);
         res.json(games);
     } catch (error) {
         res.status(400).json({

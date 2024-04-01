@@ -12,10 +12,13 @@ const HistoricalUserData = () => {
 
   const handleLoadHistory = async () => {
     try {
-      const username=localStorage.getItem('username');
-      const response = await axios.get(`${apiEndpoint}/getgamehistory/${username}`, {});
-      
-      setGameHistory(response.data);
+      const username = localStorage.getItem('username');
+    const response = await axios.get(`${apiEndpoint}/getgamehistory/${username}`);
+
+    // Ordenar la lista de historial de partidas por fecha (de más reciente a más antigua)
+    const sortedHistory = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    setGameHistory(sortedHistory);
 
       console.log("el historial actual es  "+gameHistory);
 
@@ -23,6 +26,7 @@ const HistoricalUserData = () => {
       console.error('Error:', error);
     }
   };
+
   const  handlePreviousPage = async () => {
     let path= '/MainPage';
     navigate(path); 
