@@ -142,3 +142,92 @@ paths:
                     type: string
                     description: Error information.
                     example: Internal Server Error
+  /addgame:
+    post:
+      summary: Add a new game to the database.
+      operationId: addGame
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gameName:
+                  type: string
+                  description: Name of the game.
+                  example: Game1
+      responses:
+        '200':
+          description: Game added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Message indicating success.
+                    example: Game added successfully.
+        '400':
+          description: Failed to add game.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Game already exists.
+  
+
+  /getgamehistory/{username}:
+    get:
+      summary: Get game history for a specific user.
+      operationId: getGameHistory
+      parameters:
+        - name: username
+          in: path
+          description: Username for which to retrieve game history.
+          required: true
+          schema:
+            type: string
+          example: student
+      responses:
+        '200':
+          description: Game history retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    gameId:
+                      type: string
+                      description: ID of the game.
+                      example: 12345
+                    gameName:
+                      type: string
+                      description: Name of the game.
+                      example: Game1
+                    score:
+                      type: integer
+                      description: Score achieved in the game.
+                      example: 100
+                    datePlayed:
+                      type: string
+                      description: Date when the game was played.
+                      example: '2024-03-20T15:00:00Z'
+        '400':
+          description: Failed to retrieve game history.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: User not found.
