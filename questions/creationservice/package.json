@@ -1,7 +1,7 @@
 {
     "name": "creationservice",
     "version": "1.0.0",
-    "description": " Creation service, in charge of ",
+    "description": " Creation service, in charge of create the questions of the game and store them",
     "main": "service.js",
     "scripts": {
         "start": "node creation-service.js",

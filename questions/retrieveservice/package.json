@@ -1,10 +1,10 @@
 {
-    "name": "gatewayservice",
+    "name": "retrieveservice",
     "version": "1.0.0",
-    "description": "Gateway service, in charge distributing the requests",
+    "description": " Retrieve service, in charge of claim the questions information stored on de database",
     "main": "service.js",
     "scripts": {
-        "start": "node gateway-service.js",
+        "start": "node retrieve-service.js",
         "test": "jest"
     },
     "repository": {
@@ -18,16 +18,15 @@
     },
     "homepage": "https://github.com/arquisoft/wiq_es2b#readme",
     "dependencies": {
-        "axios": "^1.6.5",
-        "cors": "^2.8.5",
+        "bcrypt": "^5.1.1",
+        "body-parser": "^1.20.2",
         "express": "^4.18.2",
-        "express-openapi": "^12.1.3",
-        "express-prom-bundle": "^7.0.0",
-        "swagger-ui-express": "^5.0.0",
-        "yaml": "^2.4.1"
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.0.4"
     },
     "devDependencies": {
         "jest": "^29.7.0",
+        "mongodb-memory-server": "^9.1.5",
         "supertest": "^6.3.4"
     }
 }

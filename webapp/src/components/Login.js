@@ -11,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   // Declara las variables (izquierda) y el metodo que la modifica (derecha). Se inicializa a false (useState)
@@ -21,12 +20,8 @@ const Login = () => {
 
   const loginUser = async () => {
     try {
-      const response = await axios.post(`${apiEndpoint}/login`, { username, password });
-
-      // Extract data from the response
-      const { createdAt: userCreatedAt } = response.data;
-
-      setCreatedAt(userCreatedAt);
+      await axios.post(`${apiEndpoint}/login`, { username, password });
+      localStorage.setItem('username',username);
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
