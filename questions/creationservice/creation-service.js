@@ -34,10 +34,14 @@ function getQuestionInfo(info){
 
   // Select 4 random rows of the data
   for (let i = 0; i<optionsNumber; i++){
-    var indexRow = Math.floor(Math.random() * numEles);
-    fourRows.push(info[indexRow]);
-    // Store the 4 posible answers
-    answerOptions.push(info[indexRow].answerLabel.value);
+    let indexRow = Math.floor(Math.random() * numEles);
+    if(info[indexRow].answerLabel.value.charAt(0)=='Q' || info[indexRow].questionObjectLabel.value.charAt(0)=='Q'){
+      i = i - 1;
+    }else{
+      fourRows.push(info[indexRow]);
+      // Store the 4 posible answers
+      answerOptions.push(info[indexRow].answerLabel.value);
+    }
   }
   
   // Select the row where it will extract the country and capital
