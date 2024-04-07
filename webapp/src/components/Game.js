@@ -1,4 +1,4 @@
-import React, { useState, useEffect, StrictMode } from 'react';
+import React, { useState, useEffect, StrictMode, useRef } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -34,18 +34,9 @@ const Game = () => {
   const [gameUserOptions, setGameUserOptions] = useState([]);
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
+
   // Temporizador
   const [seconds, setSeconds] = useState(120);
-
-  const [resetTimer, setResetTimer] = useState(false); // Estado para controlar el reinicio del temporizador
-
-  const handleResetTimer = () => {
-    setResetTimer(prevResetTimer => !prevResetTimer); // Cambiar el estado de resetTimer para reiniciar el temporizador
-  };
-  
-
-
-
 
 
   useEffect(() => {
@@ -263,7 +254,7 @@ const getQuestions = () => {
 
 
           <div>
-            <Timer2 resetTimer={resetTimer} /> {/* Pasar la función de reinicio como prop al Timer2 */}
+            <Timer2 />
           </div>
         </Typography>
 
@@ -282,11 +273,6 @@ const getQuestions = () => {
             </Button>
           ))}
         </div>
-
-
-        <Button variant="contained" color="primary" onClick={handleResetTimer}>
-        Reiniciar
-      </Button>
 
 
       </Paper>
