@@ -21,6 +21,7 @@ const MainPage = () => {
         navigate(path);
     };
 
+
     return (
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
             <div title='main'>
