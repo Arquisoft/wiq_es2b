@@ -56,6 +56,11 @@ const Game = () => {
           } else {
             // Se acabó el tiempo
             setTimedOut(true);
+            const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+            buttons.forEach(button => {
+              button.disabled = true;
+              button.onmouse = null;
+            });
           }
         });
       }
