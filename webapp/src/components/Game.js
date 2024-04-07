@@ -61,23 +61,23 @@ const Game = () => {
       }
     }, 1000);
 
-    return () => clearInterval(id); // Limpiar el intervalo cuando el componente se desmonta
-  }, [isTimerActive]); // Asegúrate de que el efecto se ejecute cada vez que cambie el estado del temporizador
+    return () => clearInterval(id);
+  }, [isTimerActive]);
 
 
-  // Calcular el porcentaje de tiempo transcurrido para el círculo
-  const percentageTime = ((20 - time) / 20) * 100; // Calcular el porcentaje en base al tiempo restante
+  // Calcular el porcentaje de tiempo transcurrido para el círculo del temporizador
+  const percentageTime = ((20 - time) / 20) * 100;
 
 
-  // Función para detener el temporizador
+  // Detener el temporizador
   const stopTimer = () => {
-    setIsTimerActive(false); // Cambiar el estado para detener el temporizador
+    setIsTimerActive(false);
   };
 
-  // Función para activar el temporizador
+  // Activar el temporizador
   const restartTimer = () => {
     setTime(20); // Reiniciar el tiempo a 20 segundos
-    setIsTimerActive(true); // Volver a activar el temporizador
+    setIsTimerActive(true);
   };
 
 
@@ -322,20 +322,21 @@ const getQuestions = () => {
 
       )}
 
-        {isTimedOut && (
-          <div className="modal">
-            <div className="modal-content">
-              <p>¡Tiempo agotado!</p>
-              <button onClick={() => setTimedOut(false)}>Cerrar</button>
-
+      {isTimedOut && (
+        <Container>
+          <Paper elevation={3} className="modal">
+            <Typography variant="h6">¡Tiempo agotado!</Typography>
+            <Button onClick={() => {
+              setTimedOut(false);
               incrementIncorrect();
               incrementQuestion();
-
+              decrementQuestionsToAnswer();
               restartTimer();
+            }}>Cerrar</Button>
+          </Paper>
+        </Container>
+      )}
 
-            </div>
-          </div>
-        )}
 
 
       
