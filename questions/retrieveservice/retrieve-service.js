@@ -11,7 +11,7 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questiond
 mongoose.connect(mongoUri);
 
 
-app.post('/getquestionshistory', async (req, res) => {
+app.get('/getquestionshistory', async (req, res) => {
   const questions = await Question.find({});
   
   var solution = [];

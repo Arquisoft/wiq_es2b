@@ -77,7 +77,7 @@ async function saveQuestion(){
     }
 }
 
-app.post('/createquestion', async (req, res) => {
+app.get('/createquestion', async (req, res) => {
   selectRandomQuery();
   const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(queries[randomQuerySelector])}&format=json`;
 

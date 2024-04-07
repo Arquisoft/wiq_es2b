@@ -12,7 +12,7 @@ const HistoricalData = () => {
   const  handleShowHistory = async () => {
     try{
       // It makes a petition to the api and store the response
-      const response = await axios.post(`${apiEndpoint}/getquestionshistory`, { });
+      const response = await axios.get(`${apiEndpoint}/getquestionshistory`, { });
       setQuestionsHistory(response.data);
     }catch (error){
       console.error('Error:', error);
