@@ -35,11 +35,14 @@ const Game = () => {
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
 
-  // Temporizador
   const [seconds, setSeconds] = useState(120);
+
+
+
 
   // Temporizador desde 20 segundos
   const [time, setTime] = useState(20);
+  const [isTimedOut, setTimedOut] = useState(false);
 
   // Estado para controlar si el temporizador está activo o no
   const [isTimerActive, setIsTimerActive] = useState(true);
@@ -51,7 +54,8 @@ const Game = () => {
           if (prev > 0) {
             return prev - 1;
           } else {
-            return 20; // Reiniciar el tiempo a 20 segundos cuando llega a 0
+            // Se acabó el tiempo
+            setTimedOut(true);
           }
         });
       }
@@ -316,9 +320,23 @@ const getQuestions = () => {
           </div>
         </Typography>
 
-
-
       )}
+
+        {isTimedOut && (
+          <div className="modal">
+            <div className="modal-content">
+              <p>¡Tiempo agotado!</p>
+              <button onClick={() => setTimedOut(false)}>Cerrar</button>
+
+              incrementIncorrect();
+              incrementQuestion();
+
+              restartTimer();
+
+            </div>
+          </div>
+        )}
+
 
       
         <Typography variant="body1" paragraph>
