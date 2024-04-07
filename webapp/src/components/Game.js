@@ -22,8 +22,8 @@ const Game = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
   
-  const [numberOfQuestions] = useState(3);
-  const [questionsToAnswer, setQuestionsToAnswer] = useState(3);
+  const [numberOfQuestions] = useState(6);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState(6);
   const [isFinished, setFinished] = useState(false);
 
   // Porcentaje de aciertos
