@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, StrictMode } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import './Game.css';
+
+import '../Timer.css';
+import Timer from './Timer';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
@@ -31,7 +34,7 @@ const Game = () => {
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
   // Temporizador
-  const [seconds, setSeconds] = useState(120); // 2 minutes
+  const [seconds, setSeconds] = useState(120);
 
 
 
@@ -111,6 +114,19 @@ const Game = () => {
       const buttonId = `button_${index}`;
       const incorrectButton = document.getElementById(buttonId);
       incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
+
+      // mostrar la correcta
+      for (let correctIndex = 0; correctIndex < 4; correctIndex++){
+        const buttonIdCorrect = `button_${correctIndex}`;
+        const correctButton = document.getElementById(buttonIdCorrect);
+
+        console.log("BOTON A COMPROBAR: " + correctButton.textContent);
+
+        if (correctButton.textContent === correctOption) {
+          correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
+        }
+      }
+
       incrementIncorrect();
     }
 
@@ -125,10 +141,9 @@ const Game = () => {
 
 
     if (!isFinished){
-      // Cambiar a la siguiente pregunta después de 3 segundos
       setTimeout(() => {
         handleShowQuestion();
-      }, 1500);
+      }, 850);
     }
 
   }
@@ -229,6 +244,18 @@ const getQuestions = () => {
         <Typography variant="h4" gutterBottom>
           Saber y Ganar Juego
         </Typography>
+
+        {!isFinished && (
+        <Typography variant="h4" gutterBottom>
+          <div>
+            <StrictMode>
+              <Timer />
+            </StrictMode>
+          </div>
+        </Typography>
+      )}
+
+      
         <Typography variant="body1" paragraph>
           Pregunta {questionCounter}: {questionObject}
         </Typography>
@@ -239,6 +266,10 @@ const getQuestions = () => {
             </Button>
           ))}
         </div>
+
+
+
+
       </Paper>
      )}
 
@@ -257,15 +288,12 @@ const getQuestions = () => {
         Incorrectas: {incorrectCounter}
       </Button>
       )}
-       {!isFinished && (
-      <div>
-        <svg data-testid="TimerIcon"></svg>
 
-        <div>
-          <span>Time Remaining: {Math.floor(seconds / 60)}:{(seconds % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 })}</span>
-        </div>
-      </div>
-      )}
+
+
+
+      
+
 
       
 
@@ -286,11 +314,6 @@ const getQuestions = () => {
         </Paper>
         </div>
       )}
-
-
-      {/* <Button title="sigPreg" variant="contained" color="primary" onClick={handleShowQuestion}>
-        Siguiente pregunta
-      </Button> */}
 
 
     </Container>
