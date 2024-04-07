@@ -1,5 +1,7 @@
-import { Container, Typography, Button} from '@mui/material';
-import { useNavigate} from 'react-router-dom';
+import React, {  } from 'react';
+import { Container, Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import './MainPage.css';
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -14,9 +16,15 @@ const MainPage = () => {
         navigate(path);
     };
 
+    const handleShowHistoricalUserData = () => {
+        let path= '/HistoricalUserData';
+        navigate(path);
+    };
+
+
     return (
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-            <div>
+            <div title='main'>
                 <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
                 ¡Bienvenido a WIQ 2024!
                 </Typography>
@@ -25,17 +33,14 @@ const MainPage = () => {
                 Puedes comenzar la partida o ver tu historial.
                 </Typography>
 
-
-                {/* <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-                Your account was created on {createdAt}.
-                </Typography> */}
-
-                {/* Se declaran los botones en los q al hacer click se ejecuta el metodo especificado en onClick*/}
                 <Button variant="contained" color="primary" onClick={handleShowGame}>
                 Empezar juego
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleShowHistoricalData}> 
-                Histórico de partidas
+                Histórico de preguntas
+                </Button>
+                <Button variant="contained" color="primary" onClick={handleShowHistoricalUserData}> 
+                Histórico del usuario
                 </Button>
             </div>
           </Container>

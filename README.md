@@ -31,6 +31,12 @@ and launch it with docker compose:
 docker compose --profile dev up --build
 ```
 
+and tear it down:
+
+```sh
+docker compose --profile dev down
+```
+
 ### Starting Component by component
 
 First, start the database. Either install and run Mongo or run it using docker:
@@ -100,10 +106,12 @@ deploy:
         user: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         command: |
-          wget https://raw.githubusercontent.com/arquisoft/wiq_es2b/master/docker-compose.yml -O docker-compose.yml
-          wget https://raw.githubusercontent.com/arquisoft/wiq_es2b/master/.env -O .env
-          docker compose down
-          docker compose --profile prod up -d
+
+          wget https://raw.githubusercontent.com/arquisoft/wiq_0/master/docker-compose.yml -O docker-compose.yml
+          wget https://raw.githubusercontent.com/arquisoft/wiq_0/master/.env -O .env
+          docker compose --profile prod down
+          docker compose --profile prod up -d --pull always
+
 ```
 
 This action uses three secrets that must be configured in the repository:
@@ -111,4 +119,5 @@ This action uses three secrets that must be configured in the repository:
 - DEPLOY_USER: user with permission to execute the commands in the remote machine.
 - DEPLOY_KEY: key to authenticate the user in the remote machine.
 
-Note that this action logs in the remote machine and downloads the docker-compose file from the repository and launches it. Obviously, previous actions have been executed which have uploaded the docker images to the GitHub Packages repository.
+Note that this action logs in the remote machine and downloads the docker-compose file from the repository and launches it. 
+Obviously, previous actions have been executed which have uploaded the docker images to the GitHub Packages repository.

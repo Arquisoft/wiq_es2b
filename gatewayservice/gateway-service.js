@@ -2,6 +2,11 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const promBundle = require('express-prom-bundle');
+//libraries required for OpenAPI-Swagger
+const swaggerUi = require('swagger-ui-express'); 
+const fs = require("fs")
+const YAML = require('yaml')
+
 
 const app = express();
 const port = 8000;
@@ -41,10 +46,33 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
-app.post('/createquestion', async (req, res) => {
+
+app.post('/addgame', async (req, res) => {
+  try {
+    const userResponse = await axios.post(userServiceUrl+'/addgame', req.body);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+
+app.get('/getgamehistory/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const userResponse = await axios.get(`${userServiceUrl}/getgamehistory/${username}`);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+
+
+app.get('/createquestion', async (req, res) => {
   try {
     // Create a petition to the URL (le llegará a creation-service.js) with the option /createquestion and the req.body params
-    const questionResponse = await axios.post(creationServiceUrl+'/createquestion', req.body);
+    const questionResponse = await axios.get(creationServiceUrl+'/createquestion', req.body);
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {
@@ -52,20 +80,40 @@ app.post('/createquestion', async (req, res) => {
   }
 });
 
-app.post('/getquestionshistory', async (req, res) => {
+app.get('/getquestionshistory', async (req, res) => {
   try {
     // Create a petition to the URL (le llegará a retrieve-service.js) with the option /getgeneratedquestions and the req.body params
-    const questionResponse = await axios.post(retrieveServiceUrl+'/getquestionshistory', req.body);
+    const questionResponse = await axios.get(retrieveServiceUrl+'/getquestionshistory', req.body);
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
+
+
+
+// Read the OpenAPI YAML file synchronously
+openapiPath='./openapi.yaml'
+if (fs.existsSync(openapiPath)) {
+  const file = fs.readFileSync(openapiPath, 'utf8');
+
+  // Parse the YAML content into a JavaScript object representing the Swagger document
+  const swaggerDocument = YAML.parse(file);
+
+  // Serve the Swagger UI documentation at the '/api-doc' endpoint
+  // This middleware serves the Swagger UI files and sets up the Swagger UI page
+  // It takes the parsed Swagger document as input
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+} else {
+  console.log("Not configuring OpenAPI. Configuration file not present.")
+}
+
 
 // Start the gateway service
 const server = app.listen(port, () => {
   console.log(`Gateway Service listening at http://localhost:${port}`);
 });
+
 
 module.exports = server
