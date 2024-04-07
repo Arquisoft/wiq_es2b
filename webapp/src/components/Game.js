@@ -23,8 +23,8 @@ const Game = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
   
-  const [numberOfQuestions, setNumberOfQuestions] = useState(10);
-  const [questionsToAnswer, setQuestionsToAnswer] = useState(10);
+  const [numberOfQuestions] = useState(3);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState(3);
   const [isFinished, setFinished] = useState(false);
   const [percentage, setPercentage] = useState(0);
 
@@ -55,9 +55,16 @@ const Game = () => {
   useEffect(() => {
     if (isGameFinished() && !isFinished){
       finishGame();
-      setFinished(true)
+      setFinished(true);
 ;    }
   }, [correctCounter]);
+
+  useEffect(() => {
+    if (isGameFinished() && !isFinished){
+      finishGame();
+      setFinished(true);
+;    }
+  }, [incorrectCounter]);
   
   // This method will call the create question service
   const  handleShowQuestion = async () => {
@@ -84,15 +91,7 @@ const Game = () => {
         button.onmouse = colorOnMousePreguntas;
       });
 
-      // FIN DE LA PARTIDA
-      if (isGameFinished() && !isFinished){
-        finishGame();
-        setFinished(true);
-      }
-
-
       incrementQuestion();
-
 
     }catch (error){
       console.error('Error:', error);
@@ -139,13 +138,11 @@ const Game = () => {
 
     decrementQuestionsToAnswer();
 
-
-    if (!isFinished){
+    if (!isGameFinished()) {
       setTimeout(() => {
         handleShowQuestion();
-      }, 850);
+      }, 1000);
     }
-
   }
 
   const isGameFinished = () => {
