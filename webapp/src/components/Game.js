@@ -84,11 +84,6 @@ const Game = () => {
         button.onmouse = colorOnMousePreguntas;
       });
 
-      // FIN DE LA PARTIDA
-      if (isGameFinished() && !isFinished){
-        finishGame();
-        setFinished(true);
-      }
 
 
       incrementQuestion();

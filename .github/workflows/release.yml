@@ -164,6 +164,10 @@ jobs:
         user: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         command: |
+          wget https://raw.githubusercontent.com/arquisoft/wiq_es2b/master/docker-compose.yml -O docker-compose.yml
+          wget https://raw.githubusercontent.com/arquisoft/wiq_es2b/master/.env -O .env
+          docker compose --profile prod down
+          docker compose --profile prod up -d --pull always
 
           wget https://raw.githubusercontent.com/arquisoft/wiq_0/master/docker-compose.yml -O docker-compose.yml
           wget https://raw.githubusercontent.com/arquisoft/wiq_0/master/.env -O .env
