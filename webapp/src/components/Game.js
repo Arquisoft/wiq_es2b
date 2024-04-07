@@ -1,4 +1,4 @@
-import React, { useState, useEffect, StrictMode, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,8 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './Game.css';
 
 import '../Timer.css';
-import Timer from './Timer';
-import Timer2 from './Timer2';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
@@ -27,6 +25,8 @@ const Game = () => {
   const [numberOfQuestions] = useState(3);
   const [questionsToAnswer, setQuestionsToAnswer] = useState(3);
   const [isFinished, setFinished] = useState(false);
+
+  // Porcentaje de aciertos
   const [percentage, setPercentage] = useState(0);
 
 
@@ -37,6 +37,44 @@ const Game = () => {
 
   // Temporizador
   const [seconds, setSeconds] = useState(120);
+
+  // Temporizador desde 20 segundos
+  const [time, setTime] = useState(20);
+
+  // Estado para controlar si el temporizador está activo o no
+  const [isTimerActive, setIsTimerActive] = useState(true);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (isTimerActive) { // Solo decrementa el tiempo si el temporizador está activo
+        setTime((prev) => {
+          if (prev > 0) {
+            return prev - 1;
+          } else {
+            return 20; // Reiniciar el tiempo a 20 segundos cuando llega a 0
+          }
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(id); // Limpiar el intervalo cuando el componente se desmonta
+  }, [isTimerActive]); // Asegúrate de que el efecto se ejecute cada vez que cambie el estado del temporizador
+
+
+  // Calcular el porcentaje de tiempo transcurrido para el círculo
+  const percentageTime = ((20 - time) / 20) * 100; // Calcular el porcentaje en base al tiempo restante
+
+
+  // Función para detener el temporizador
+  const stopTimer = () => {
+    setIsTimerActive(false); // Cambiar el estado para detener el temporizador
+  };
+
+  // Función para activar el temporizador
+  const restartTimer = () => {
+    setTime(20); // Reiniciar el tiempo a 20 segundos
+    setIsTimerActive(true); // Volver a activar el temporizador
+  };
 
 
   useEffect(() => {
@@ -79,7 +117,7 @@ const Game = () => {
 
       //guardar para el final 
       // Actualizar las preguntas del juego
-     setGameQuestions(prevQuestions => [...prevQuestions, response.data.responseQuestionObject]);
+      setGameQuestions(prevQuestions => [...prevQuestions, response.data.responseQuestionObject]);
       // Actualizar las opciones correctas del juego
       setGameCorrectOptions(prevCorrectOptions => [...prevCorrectOptions, response.data.responseCorrectOption]);
 
@@ -94,6 +132,9 @@ const Game = () => {
 
       incrementQuestion();
 
+      // Resetear temporizador a 20 segundos
+      restartTimer();
+
     }catch (error){
       console.error('Error:', error);
     }    
@@ -103,6 +144,7 @@ const Game = () => {
   const handleAnswerClick = (option, index) => {
     // Almacenar la opción seleccionada por el usuario en gameUserOptions
     setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
+
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -114,6 +156,9 @@ const Game = () => {
       const buttonId = `button_${index}`;
       const incorrectButton = document.getElementById(buttonId);
       incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
+
+      // parar el temporizador
+      stopTimer();
 
       // mostrar la correcta
       for (let correctIndex = 0; correctIndex < 4; correctIndex++){
@@ -250,8 +295,24 @@ const getQuestions = () => {
           </div>
 
 
-          <div>
-            <Timer2 />
+          <div className="Timer">
+            <div className="container">
+              <div className="text">{time}</div>
+              <div
+                style={{ transform: `rotate(${percentageTime * 3.6}deg)` }}
+                className="dot"
+              ></div>
+              <svg>
+                <circle cx="70" cy="70" r="70" />
+                <circle
+                  strokeDashoffset={440 - (percentageTime / 100) * 440}
+                  cx="70"
+                  cy="70"
+                  r="70"
+                />
+              </svg>
+            </div>
+
           </div>
         </Typography>
 
@@ -313,6 +374,8 @@ const getQuestions = () => {
              Ir a la página principal
           </Button>
           </div>
+
+
         </Paper>
         </div>
       )}
