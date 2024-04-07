@@ -7,6 +7,7 @@ import './Game.css';
 
 import '../Timer.css';
 import Timer from './Timer';
+import Timer2 from './Timer2';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
@@ -35,6 +36,15 @@ const Game = () => {
   const [gameQuestions, setGameQuestions] = useState([]);
   // Temporizador
   const [seconds, setSeconds] = useState(120);
+
+  const [resetTimer, setResetTimer] = useState(false); // Estado para controlar el reinicio del temporizador
+
+  const handleResetTimer = () => {
+    setResetTimer(prevResetTimer => !prevResetTimer); // Cambiar el estado de resetTimer para reiniciar el temporizador
+  };
+  
+
+
 
 
 
@@ -236,6 +246,7 @@ const getQuestions = () => {
     setQuestionCounter(qc => qc + 1);
   }
 
+
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
 
@@ -248,11 +259,16 @@ const getQuestions = () => {
         {!isFinished && (
         <Typography variant="h4" gutterBottom>
           <div>
-            <StrictMode>
-              <Timer />
-            </StrictMode>
+          </div>
+
+
+          <div>
+            <Timer2 resetTimer={resetTimer} /> {/* Pasar la función de reinicio como prop al Timer2 */}
           </div>
         </Typography>
+
+
+
       )}
 
       
@@ -268,6 +284,9 @@ const getQuestions = () => {
         </div>
 
 
+        <Button variant="contained" color="primary" onClick={handleResetTimer}>
+        Reiniciar
+      </Button>
 
 
       </Paper>
