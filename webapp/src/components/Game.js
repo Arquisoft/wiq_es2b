@@ -156,7 +156,8 @@ const Game = () => {
   const handleAnswerClick = (option, index) => {
     // Almacenar la opción seleccionada por el usuario en gameUserOptions
     setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
-
+    // parar el temporizador
+    stopTimer();
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -168,9 +169,6 @@ const Game = () => {
       const buttonId = `button_${index}`;
       const incorrectButton = document.getElementById(buttonId);
       incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
-
-      // parar el temporizador
-      stopTimer();
 
       // mostrar la correcta
       for (let correctIndex = 0; correctIndex < 4; correctIndex++){
@@ -337,9 +335,17 @@ const getQuestions = () => {
             <Button onClick={() => {
               setTimedOut(false);
               incrementIncorrect();
-              incrementQuestion();
               decrementQuestionsToAnswer();
               restartTimer();
+
+
+              if (!isGameFinished()) {
+                setTimeout(() => {
+                  handleShowQuestion();
+                }, 1000);
+              }
+
+
             }}>Cerrar</Button>
           </Paper>
         </Container>
