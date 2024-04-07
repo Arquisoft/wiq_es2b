@@ -1,4 +1,4 @@
-import React, { useState, useEffect, StrictMode } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './Game.css';
 
 import '../Timer.css';
-import Timer from './Timer';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
@@ -23,9 +22,11 @@ const Game = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
   
-  const [numberOfQuestions, setNumberOfQuestions] = useState(10);
-  const [questionsToAnswer, setQuestionsToAnswer] = useState(10);
+  const [numberOfQuestions] = useState(6);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState(6);
   const [isFinished, setFinished] = useState(false);
+
+  // Porcentaje de aciertos
   const [percentage, setPercentage] = useState(0);
 
 
@@ -33,9 +34,51 @@ const Game = () => {
   const [gameUserOptions, setGameUserOptions] = useState([]);
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
-  // Temporizador
+
   const [seconds, setSeconds] = useState(120);
 
+
+
+
+  // Temporizador desde 20 segundos
+  const [time, setTime] = useState(20);
+  const [isTimedOut, setTimedOut] = useState(false);
+
+  // Estado para controlar si el temporizador está activo o no
+  const [isTimerActive, setIsTimerActive] = useState(true);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (isTimerActive) { // Solo decrementa el tiempo si el temporizador está activo
+        setTime((prev) => {
+          if (prev > 0) {
+            return prev - 1;
+          } else {
+            // Se acabó el tiempo
+            setTimedOut(true);
+          }
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, [isTimerActive]);
+
+
+  // Calcular el porcentaje de tiempo transcurrido para el círculo del temporizador
+  const percentageTime = ((20 - time) / 20) * 100;
+
+
+  // Detener el temporizador
+  const stopTimer = () => {
+    setIsTimerActive(false);
+  };
+
+  // Activar el temporizador
+  const restartTimer = () => {
+    setTime(20); // Reiniciar el tiempo a 20 segundos
+    setIsTimerActive(true);
+  };
 
 
   useEffect(() => {
@@ -55,9 +98,16 @@ const Game = () => {
   useEffect(() => {
     if (isGameFinished() && !isFinished){
       finishGame();
-      setFinished(true)
+      setFinished(true);
 ;    }
   }, [correctCounter]);
+
+  useEffect(() => {
+    if (isGameFinished() && !isFinished){
+      finishGame();
+      setFinished(true);
+;    }
+  }, [incorrectCounter]);
   
   // This method will call the create question service
   const  handleShowQuestion = async () => {
@@ -71,7 +121,7 @@ const Game = () => {
 
       //guardar para el final 
       // Actualizar las preguntas del juego
-     setGameQuestions(prevQuestions => [...prevQuestions, response.data.responseQuestionObject]);
+      setGameQuestions(prevQuestions => [...prevQuestions, response.data.responseQuestionObject]);
       // Actualizar las opciones correctas del juego
       setGameCorrectOptions(prevCorrectOptions => [...prevCorrectOptions, response.data.responseCorrectOption]);
 
@@ -84,15 +134,10 @@ const Game = () => {
         button.onmouse = colorOnMousePreguntas;
       });
 
-      // FIN DE LA PARTIDA
-      if (isGameFinished() && !isFinished){
-        finishGame();
-        setFinished(true);
-      }
-
-
       incrementQuestion();
 
+      // Resetear temporizador a 20 segundos
+      restartTimer();
 
     }catch (error){
       console.error('Error:', error);
@@ -103,6 +148,7 @@ const Game = () => {
   const handleAnswerClick = (option, index) => {
     // Almacenar la opción seleccionada por el usuario en gameUserOptions
     setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
+
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -114,6 +160,9 @@ const Game = () => {
       const buttonId = `button_${index}`;
       const incorrectButton = document.getElementById(buttonId);
       incorrectButton.style.backgroundColor = "rgba(208, 22, 22, 0.952)";
+
+      // parar el temporizador
+      stopTimer();
 
       // mostrar la correcta
       for (let correctIndex = 0; correctIndex < 4; correctIndex++){
@@ -139,13 +188,11 @@ const Game = () => {
 
     decrementQuestionsToAnswer();
 
-
-    if (!isFinished){
+    if (!isGameFinished()) {
       setTimeout(() => {
         handleShowQuestion();
-      }, 850);
+      }, 1000);
     }
-
   }
 
   const isGameFinished = () => {
@@ -236,6 +283,7 @@ const getQuestions = () => {
     setQuestionCounter(qc => qc + 1);
   }
 
+
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
 
@@ -248,12 +296,48 @@ const getQuestions = () => {
         {!isFinished && (
         <Typography variant="h4" gutterBottom>
           <div>
-            <StrictMode>
-              <Timer />
-            </StrictMode>
+          </div>
+
+
+          <div className="Timer">
+            <div className="container">
+              <div className="text">{time}</div>
+              <div
+                style={{ transform: `rotate(${percentageTime * 3.6}deg)` }}
+                className="dot"
+              ></div>
+              <svg>
+                <circle cx="70" cy="70" r="70" />
+                <circle
+                  strokeDashoffset={440 - (percentageTime / 100) * 440}
+                  cx="70"
+                  cy="70"
+                  r="70"
+                />
+              </svg>
+            </div>
+
           </div>
         </Typography>
+
       )}
+
+      {isTimedOut && (
+        <Container>
+          <Paper elevation={3} className="modal">
+            <Typography variant="h6">¡Tiempo agotado!</Typography>
+            <Button onClick={() => {
+              setTimedOut(false);
+              incrementIncorrect();
+              incrementQuestion();
+              decrementQuestionsToAnswer();
+              restartTimer();
+            }}>Cerrar</Button>
+          </Paper>
+        </Container>
+      )}
+
+
 
       
         <Typography variant="body1" paragraph>
@@ -266,8 +350,6 @@ const getQuestions = () => {
             </Button>
           ))}
         </div>
-
-
 
 
       </Paper>
@@ -311,6 +393,8 @@ const getQuestions = () => {
              Ir a la página principal
           </Button>
           </div>
+
+
         </Paper>
         </div>
       )}

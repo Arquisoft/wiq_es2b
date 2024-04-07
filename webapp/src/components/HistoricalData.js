@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState} from 'react';
 import { useNavigate} from 'react-router-dom';
 import { Container, Button} from '@mui/material';
+import './HistoricalData.css';
 
 const HistoricalData = () => {
   const navigate = useNavigate();
@@ -26,9 +27,9 @@ const HistoricalData = () => {
 
   return (
     
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
       
-      <div>
+      <div title='botones'>
         <Button variant="contained" color="primary" onClick={handlePreviousPage}> 
           Página anterior
         </Button>
@@ -41,11 +42,11 @@ const HistoricalData = () => {
         <table>
           <thead>
             <tr>
-              <th>Pregunta</th>
-              <th>Opción correcta</th>
-              <th>Opción incorrecta 1</th>
-              <th>Opción incorrecta 2</th>
-              <th>Opción incorrecta 3</th>
+              <th title='pregunta'>Pregunta</th>
+              <th title='correcta'>Opción correcta</th>
+              <th title='incorrecta'>Opción incorrecta 1</th>
+              <th title='incorrecta'>Opción incorrecta 2</th>
+              <th title='incorrecta'>Opción incorrecta 3</th>
             </tr>
           </thead>
           <tbody>
