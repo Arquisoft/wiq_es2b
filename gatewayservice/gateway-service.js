@@ -69,10 +69,10 @@ app.get('/getgamehistory/:username', async (req, res) => {
 
 
 
-app.post('/createquestion', async (req, res) => {
+app.get('/createquestion', async (req, res) => {
   try {
     // Create a petition to the URL (le llegará a creation-service.js) with the option /createquestion and the req.body params
-    const questionResponse = await axios.post(creationServiceUrl+'/createquestion', req.body);
+    const questionResponse = await axios.get(creationServiceUrl+'/createquestion', req.body);
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {
@@ -80,10 +80,10 @@ app.post('/createquestion', async (req, res) => {
   }
 });
 
-app.post('/getquestionshistory', async (req, res) => {
+app.get('/getquestionshistory', async (req, res) => {
   try {
     // Create a petition to the URL (le llegará a retrieve-service.js) with the option /getgeneratedquestions and the req.body params
-    const questionResponse = await axios.post(retrieveServiceUrl+'/getquestionshistory', req.body);
+    const questionResponse = await axios.get(retrieveServiceUrl+'/getquestionshistory', req.body);
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {

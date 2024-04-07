@@ -113,7 +113,7 @@ const Game = () => {
   const  handleShowQuestion = async () => {
     try{
       // It makes a petition to the api and store the response
-      const response = await axios.post(`${apiEndpoint}/createquestion`, { });
+      const response = await axios.get(`${apiEndpoint}/createquestion`, { });
       // Extract all the info of the response and store it
       setQuestionObject(response.data.responseQuestionObject);
       setCorrectOption(response.data.responseCorrectOption);
