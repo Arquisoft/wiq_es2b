@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper} from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
 
@@ -88,6 +88,7 @@ const Game = () => {
 
   useEffect(() => {
     handleShowQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -104,14 +105,16 @@ const Game = () => {
     if (isGameFinished() && !isFinished){
       finishGame();
       setFinished(true);
-;    }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctCounter]);
 
   useEffect(() => {
     if (isGameFinished() && !isFinished){
       finishGame();
       setFinished(true);
-;    }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [incorrectCounter]);
   
   // This method will call the create question service
