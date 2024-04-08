@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const User = require('./user-model')
-const Game = require('./playedGame-model')
-const Question = require('./question-model')
 
 const app = express();
 const port = 8001;
@@ -43,62 +41,6 @@ app.post('/adduser', async (req, res) => {
 
         await newUser.save();
         res.json(newUser);
-    } catch (error) {
-        res.status(400).json({
-            error: error.message
-        });
-    }
-});
-
-app.post('/addgame', async (req, res) => {
-    try {
-        // Obtener los datos del juego desde el cuerpo de la solicitud
-        const gameData = req.body;
-
-        // Convertir las preguntas del juego en ObjectId
-        const questionIds = await Promise.all(gameData.questions.map(async (question) => {
-            const existingQuestion = await Question.findOne({
-                question: question.question,
-                correctAnswer: question.correctAnswer,
-                userAnswer: question.userAnswer
-            });
-            if (existingQuestion) {
-                return existingQuestion._id;
-            } else {
-                const newQuestion = new Question(question);
-                await newQuestion.save();
-                return newQuestion._id;
-            }
-        }));
-
-        // Reemplazar las preguntas en el juego con sus ObjectId
-        gameData.questions = questionIds;
-
-        // Crear una nueva instancia del modelo de juego con los datos proporcionados
-        const newGame = new Game(gameData);
-
-        // Guardar el nuevo juego en la base de datos
-        await newGame.save();
-
-        // Enviar una respuesta de éxito
-        res.status(200).json({ message: "Partida guardada exitosamente" });
-    } catch (error) {
-        // Manejar errores y enviar una respuesta de error con el mensaje de error
-        console.error("Error al guardar el juego:", error);
-        res.status(400).json({ error: error.message });
-    }
-});
-
-  
-
-app.get('/getgamehistory/:username', async (req, res) => {
-    try {
-        const username = req.params.username;
-        console.log("Se está intentando encontrar el historial del usuario " + username);
-        // Buscar las partidas asociadas al nombre de usuario proporcionado
-        const games = await Game.find({ username }).populate('questions');
-        console.log("Se encontraron los juegos para " + username + ": ", games);
-        res.json(games);
     } catch (error) {
         res.status(400).json({
             error: error.message

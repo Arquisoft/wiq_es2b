@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const gameSchema = new mongoose.Schema({
     username: { type: String, required: true }, 
     duration: Number,
-    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'QuestionAnswered' }],
     date: { type: Date, default: Date.now } ,
     percentage: Number,
     totalQuestions: Number,
