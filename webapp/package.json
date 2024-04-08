@@ -54,6 +54,6 @@
     "puppeteer": "^21.7.0",
     "serve": "^14.2.1",
     "start-server-and-test": "^2.0.3",
-    "tailwindcss": "^3.4.3"
+    "babel-jest": "^24.9.0"
   }
 }
