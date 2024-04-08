@@ -48,6 +48,17 @@ app.post('/adduser', async (req, res) => {
     }
 });
 
+app.get('/getregisteredusers', async (req, res) => {
+    const registeredUsers = await User.find({});
+  
+    var solution = [];
+    registeredUsers.forEach(row => {
+        solution.push([row.username,new Date(row.createdAt).toLocaleDateString()]);
+    });
+
+  res.status(200).json(solution);
+});
+
 const server = app.listen(port, () => {
     console.log(`User Service listening at http://localhost:${port}`);
 });

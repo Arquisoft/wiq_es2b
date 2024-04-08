@@ -91,6 +91,17 @@ app.get('/getquestionshistory', async (req, res) => {
   }
 });
 
+app.get('/getregisteredusers', async (req, res) => {
+  try {
+    // Create a petition to the URL (le llegará a retrieve-service.js) with the option /getregisteredusers and the req.body params
+    const registeredUsersResponse = await axios.get(userServiceUrl+'/getregisteredusers', req.body);
+    // Return a json response with what we obtained on the petition
+    res.json(registeredUsersResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
 
 
 // Read the OpenAPI YAML file synchronously
