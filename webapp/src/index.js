@@ -8,6 +8,7 @@ import Game from './components/Game';
 import HistoricalData from './components/HistoricalData';
 import MainPage from './components/MainPage';
 import HistoricalUserData from './components/HistoricalUserData';
+import RegisteredUsers from './components/RegisteredUsers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
         <Route path="/game" element={<Game />}> </Route>
         <Route path="/historicaldata" element={<HistoricalData />}> </Route>
         <Route path="/historicalUserdata" element={<HistoricalUserData />}> </Route>
+        <Route path="/RegisteredUsers" element={<RegisteredUsers />}> </Route>
       </Routes>
     </Router>
   </React.StrictMode>
