@@ -49,7 +49,7 @@ app.post('/adduser', async (req, res) => {
 
 app.post('/addgame', async (req, res) => {
   try {
-    const userResponse = await axios.post(userServiceUrl+'/addgame', req.body);
+    const userResponse = await axios.post(retrieveServiceUrl+'/addgame', req.body);
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -60,7 +60,7 @@ app.post('/addgame', async (req, res) => {
 app.get('/getgamehistory/:username', async (req, res) => {
   try {
     const username = req.params.username;
-    const userResponse = await axios.get(`${userServiceUrl}/getgamehistory/${username}`);
+    const userResponse = await axios.get(`${retrieveServiceUrl}/getgamehistory/${username}`);
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
