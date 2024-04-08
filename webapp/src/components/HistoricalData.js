@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate} from 'react-router-dom';
 import { Container, Button} from '@mui/material';
 import './HistoricalData.css';
@@ -9,6 +9,11 @@ const HistoricalData = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [questionsHistory, setQuestionsHistory] = useState([]);
+
+  useEffect(() => {
+    handleShowHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const  handleShowHistory = async () => {
     try{
@@ -34,9 +39,7 @@ const HistoricalData = () => {
           Página anterior
         </Button>
 
-        <Button variant="contained" color="primary" onClick={handleShowHistory}> 
-          Cargar histórico
-        </Button>
+
     </div>
     <div>
         <table>
