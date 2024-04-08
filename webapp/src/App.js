@@ -1,11 +1,6 @@
-// App.js
 import React, { useState } from 'react';
 import AddUser from './components/AddUser';
 import Login from './components/Login';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -14,29 +9,22 @@ function App() {
     setShowLogin(!showLogin);
   };
   
-
   return (
-
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-          Bienvenido a WIQ 2024 del curso de Arquitectura del Software
-        </Typography>
-              {showLogin ? <Login /> : <AddUser />}
-              <Typography component="div" align="center" sx={{ marginTop: 2 }}>
-                {showLogin ? (
-                  <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-                    ¿No tienes una cuenta? Regístrate aquí.
-                  </Link>
-                ) : (
-                  <Link component="button" variant="body2" onClick={handleToggleView}>
-                    ¿Ya tienes cuenta? Inicia sesión aquí.
-                  </Link>
-                )}
-
-              </Typography>
-      </Container>
-
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-bold mb-4">Bienvenido a WIQ 2024 del curso de Arquitectura del Software</h1>
+      {showLogin ? <Login /> : <AddUser />}
+      <div className="mt-4">
+        {showLogin ? (
+          <button className="text-blue-500 hover:text-blue-700" onClick={handleToggleView}>
+            ¿No tienes una cuenta? Regístrate aquí.
+          </button>
+        ) : (
+          <button className="text-blue-500 hover:text-blue-700" onClick={handleToggleView}>
+            ¿Ya tienes cuenta? Inicia sesión aquí.
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 
