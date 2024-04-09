@@ -31,6 +31,7 @@ const MainPage = () => {
 
     return (
         <>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
         <Navbar />
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
             <div title='main'>
