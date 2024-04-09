@@ -144,8 +144,9 @@ const Game = () => {
 
       incrementQuestion();
 
-      // Resetear temporizador a 20 segundos
+      // Poner temporizador a 20 segundos
       restartTimer();
+      setTimedOut(false);
 
     }catch (error){
       console.error('Error:', error);
@@ -293,20 +294,31 @@ const getQuestions = () => {
 
   useEffect(() => {
     if (isTimedOut) {
+      // mostrar la respuesta correcta
+      for (let correctIndex = 0; correctIndex < 4; correctIndex++){
+        const buttonIdCorrect = `button_${correctIndex}`;
+        const correctButton = document.getElementById(buttonIdCorrect);
+
+        console.log("BOTON A COMPROBAR: " + correctButton.textContent);
+
+        if (correctButton.textContent === correctOption) {
+          correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
+        }
+      }
+
+      incrementIncorrect();
+      decrementQuestionsToAnswer();
+
       setTimeout(() => {
         if (!isGameFinished()) {
           setTimeout(() => {
-            handleShowQuestion();
-          }, 500);
+            handleShowQuestion();            
+          }, 1000);
         }
 
-        
-        incrementIncorrect();
-        decrementQuestionsToAnswer();
-        restartTimer();
-        setTimedOut(false);
+      }, 4000);
 
-      }, 3000);
+      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTimedOut]);
@@ -358,11 +370,6 @@ const getQuestions = () => {
         </Container>
       )}
 
-
-
-
-
-      
         <Typography variant="body1" paragraph>
           Pregunta {questionCounter}: {questionObject}
         </Typography>
