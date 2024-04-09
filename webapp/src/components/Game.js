@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, Paper} from '@mui/material';
+import { Container, Typography, Button, Paper, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@mui/material';
+
 import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
@@ -44,8 +45,40 @@ const Game = () => {
   const [time, setTime] = useState(20);
   const [isTimedOut, setTimedOut] = useState(false);
 
+
   // Estado para controlar si el temporizador está activo o no
   const [isTimerActive, setIsTimerActive] = useState(true);
+
+
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleDialogOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const runTimer = () => {
+    // Calcular el tiempo restante para el temporizador
+    const remainingTime = time; 
+    setTime(remainingTime); // Establecer el tiempo restante
+    setIsTimerActive(true);
+  };
+
+  
+  useEffect(() => {
+    if (openDialog) {
+      stopTimer();
+    } else {
+      runTimer();
+    }
+  });
+
+
+  
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -79,11 +112,16 @@ const Game = () => {
     setIsTimerActive(false);
   };
 
+
+  
+
+
   // Activar el temporizador
   const restartTimer = () => {
     setTime(20); // Reiniciar el tiempo a 20 segundos
     setIsTimerActive(true);
   };
+
 
 
   useEffect(() => {
@@ -151,18 +189,22 @@ const Game = () => {
       // Poner temporizador a 20 segundos
       restartTimer();
       setTimedOut(false);
+      
 
     }catch (error){
       console.error('Error:', error);
-    }    
+    }  
+
+
   }
 
   // Method that checks if the answer clicked is the correct one
   const handleAnswerClick = (option, index) => {
-    // Almacenar la opción seleccionada por el usuario en gameUserOptions
-    setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
     // parar el temporizador
     stopTimer();
+
+    // Almacenar la opción seleccionada por el usuario en gameUserOptions
+    setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -316,7 +358,7 @@ const getQuestions = () => {
       setTimeout(() => {
         if (!isGameFinished()) {
           setTimeout(() => {
-            handleShowQuestion();            
+            handleShowQuestion();          
           }, 1000);
         }
 
@@ -364,14 +406,6 @@ const getQuestions = () => {
           </div>
         </Typography>
 
-      )}
-
-      {isTimedOut && (
-        <Container style={{ display: 'block', animation: 'fadeout 5s forwards' }}>
-          <Paper elevation={3} className="modal">
-            <Typography variant="h6">¡Tiempo agotado!</Typography>
-          </Paper>
-        </Container>
       )}
 
         <Typography variant="body1" paragraph>
@@ -432,6 +466,36 @@ const getQuestions = () => {
         </Paper>
         </div>
       )}
+
+
+      <div>
+        <Button title="contador" onClick={handleDialogOpen} variant="contained" color="secondary">
+        Volver al menú principal</Button>
+      </div>
+
+
+      <Dialog
+        open={openDialog}
+        onClose={handleDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirmación</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            ¿Estás seguro de que deseas volver al menú principal? Perderás el progreso actual de la partida.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleMainPage} color="primary" autoFocus>
+            Confirmar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      
 
 
     </Container>

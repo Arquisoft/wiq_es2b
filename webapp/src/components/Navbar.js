@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  // Estado para controlar la visibilidad del dropdown del historial
   const [historialDropdownOpen, setHistorialDropdownOpen] = useState(false);
 
-  // Función para alternar la visibilidad del dropdown del historial
   const toggleHistorialDropdown = () => {
     setHistorialDropdownOpen(!historialDropdownOpen);
   };
