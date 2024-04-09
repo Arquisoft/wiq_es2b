@@ -103,16 +103,20 @@ const Game = () => {
   
   useEffect(() => {
     if (isGameFinished() && !isFinished){
-      finishGame();
-      setFinished(true);
+      setTimeout(() => {
+        finishGame();
+        setFinished(true);
+      }, 4000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctCounter]);
 
   useEffect(() => {
     if (isGameFinished() && !isFinished){
-      finishGame();
-      setFinished(true);
+      setTimeout(() => {
+        finishGame();
+        setFinished(true);
+      }, 4000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [incorrectCounter]);

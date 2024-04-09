@@ -3,6 +3,8 @@ import { Container, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 
+import Navbar from './Navbar';
+
 const MainPage = () => {
     const navigate = useNavigate();
 
@@ -28,6 +30,8 @@ const MainPage = () => {
 
 
     return (
+        <>
+        <Navbar />
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
             <div title='main'>
                 <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
@@ -52,6 +56,7 @@ const MainPage = () => {
                 </Button>
             </div>
           </Container>
+        </>
     )
 }
 
