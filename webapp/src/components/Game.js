@@ -290,6 +290,28 @@ const getQuestions = () => {
   }
 
 
+
+  useEffect(() => {
+    if (isTimedOut) {
+      setTimeout(() => {
+        if (!isGameFinished()) {
+          setTimeout(() => {
+            handleShowQuestion();
+          }, 500);
+        }
+
+        
+        incrementIncorrect();
+        decrementQuestionsToAnswer();
+        restartTimer();
+        setTimedOut(false);
+
+      }, 3000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTimedOut]);
+
+
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
 
@@ -329,27 +351,14 @@ const getQuestions = () => {
       )}
 
       {isTimedOut && (
-        <Container>
+        <Container style={{ display: 'block', animation: 'fadeout 5s forwards' }}>
           <Paper elevation={3} className="modal">
             <Typography variant="h6">¡Tiempo agotado!</Typography>
-            <Button onClick={() => {
-              setTimedOut(false);
-              incrementIncorrect();
-              decrementQuestionsToAnswer();
-              restartTimer();
-
-
-              if (!isGameFinished()) {
-                setTimeout(() => {
-                  handleShowQuestion();
-                }, 1000);
-              }
-
-
-            }}>Cerrar</Button>
           </Paper>
         </Container>
       )}
+
+
 
 
 
