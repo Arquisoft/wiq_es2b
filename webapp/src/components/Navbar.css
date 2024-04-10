@@ -1,0 +1,25 @@
+.nav-link {
+    color: #4c8dbf;
+    font-weight: 400;
+}
+
+.nav-link:hover {
+    color: #BCC3C5;
+    font-weight: 400;
+}
+
+.navbar-brand {
+    color: #0c3667;
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+nav, .dropdown-menu, .dropdown-item {
+    background-color: #4c8dbf;
+    border: none;
+}
+
+
+.dropdown-item {
+    color: #4c8dbf;
+}

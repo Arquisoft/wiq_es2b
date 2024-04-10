@@ -34,7 +34,10 @@ const MainPage = () => {
 
             <div title='main-title'>
                 <Typography component="h1" className='main-title' variant="h5" sx={{ textAlign: 'center' }}>
-                    ¡Bienvenido a WIQ 2024!
+                    ¡Bienvenido a
+                </Typography>
+                <Typography component="h2" className='main-title animate__animated animate__backInLeft animate__tada' variant="h5" sx={{ textAlign: 'center' }}>
+                    WIQ 2024!
                 </Typography>
             </div>
 

@@ -56,17 +56,21 @@ const Game = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleDialogOpen = () => {
+    setIsTimerActive(false);
     setOpenDialog(true);
   };
-
+  
   const handleDialogClose = () => {
+    setIsTimerActive(true);
     setOpenDialog(false);
+    runTimer();
   };
+  
 
   const runTimer = () => {
     // Calcular el tiempo restante para el temporizador
     const remainingTime = time; 
-    setTime(remainingTime); // Establecer el tiempo restante
+    setTime(remainingTime);
     setIsTimerActive(true);
   };
 
@@ -82,27 +86,27 @@ const Game = () => {
 
   
 
+ 
   useEffect(() => {
     const id = setInterval(() => {
-      if (isTimerActive) { // Solo decrementa el tiempo si el temporizador está activo
-        setTime((prev) => {
-          if (prev > 0) {
-            return prev - 1;
-          } else {
-            // Se acabó el tiempo
-            setTimedOut(true);
-            const buttons = document.querySelectorAll('button[title="btnsPreg"]');
-            buttons.forEach(button => {
-              button.disabled = true;
-              button.onmouse = null;
-            });
-          }
-        });
-      }
+      setTime(prev => {
+        if (prev > 0) {
+          return prev - 1;
+        } else {
+          setTimedOut(true);
+          const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+          buttons.forEach(button => {
+            button.disabled = true;
+            button.onmouse = null;
+          });
+          clearInterval(id); // Clear the interval when the time runs out
+        }
+      });
     }, 1000);
-
-    return () => clearInterval(id);
-  }, [isTimerActive, setIsTimerActive]);
+  
+    return () => clearInterval(id); // Clear the interval on component unmount
+  }, [isTimerActive, isTimedOut]);
+  
 
 
   // Calcular el porcentaje de tiempo transcurrido para el círculo del temporizador
@@ -122,6 +126,7 @@ const Game = () => {
   const restartTimer = () => {
     setTime(20); // Reiniciar el tiempo a 20 segundos
     setIsTimerActive(true);
+    setTimedOut(false);
   };
 
 
@@ -146,7 +151,7 @@ const Game = () => {
       setTimeout(() => {
         finishGame();
         setFinished(true);
-      }, 4000);
+      }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctCounter]);
@@ -164,6 +169,8 @@ const Game = () => {
   // This method will call the create question service
   const  handleShowQuestion = async () => {
     try{
+      setIsTimerActive(false);
+      
       // It makes a petition to the api and store the response
       const response = await axios.get(`${apiEndpoint}/createquestion`, { });
       // Extract all the info of the response and store it
@@ -188,22 +195,23 @@ const Game = () => {
 
       incrementQuestion();
 
-      // Poner temporizador a 20 segundos
-      restartTimer();
-      setTimedOut(false);
+      
       
 
     }catch (error){
       console.error('Error:', error);
     }  
 
+    // Poner temporizador a 20 segundos
+    restartTimer();
+    
 
   }
 
   // Method that checks if the answer clicked is the correct one
   const handleAnswerClick = (option, index) => {
-    // parar el temporizador
-    stopTimer();
+    // Detener el temporizador
+    setIsTimerActive(false);
 
     // Almacenar la opción seleccionada por el usuario en gameUserOptions
     setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
@@ -224,8 +232,6 @@ const Game = () => {
         const buttonIdCorrect = `button_${correctIndex}`;
         const correctButton = document.getElementById(buttonIdCorrect);
 
-        console.log("BOTON A COMPROBAR: " + correctButton.textContent);
-
         if (correctButton.textContent === correctOption) {
           correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
         }
@@ -240,7 +246,6 @@ const Game = () => {
       button.onmouse = null;
     });
     
-
     decrementQuestionsToAnswer();
 
     if (!isGameFinished()) {
@@ -341,13 +346,11 @@ const getQuestions = () => {
 
 
   useEffect(() => {
-    if (isTimedOut) {
+    if (isTimedOut && !isFinished) {
       // mostrar la respuesta correcta
       for (let correctIndex = 0; correctIndex < 4; correctIndex++){
         const buttonIdCorrect = `button_${correctIndex}`;
         const correctButton = document.getElementById(buttonIdCorrect);
-
-        console.log("BOTON A COMPROBAR: " + correctButton.textContent);
 
         if (correctButton.textContent === correctOption) {
           correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
@@ -399,7 +402,8 @@ const getQuestions = () => {
               <svg>
                 <circle cx="70" cy="70" r="70" />
                 <circle
-                  strokeDashoffset={440 - (percentageTime / 100) * 440}
+                  strokeDashoffset={(440 - (percentageTime / 100) * 440).toFixed(2)}
+
                   cx="70"
                   cy="70"
                   r="70"
@@ -417,7 +421,12 @@ const getQuestions = () => {
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
           {answerOptions.map((option, index) => (
-            <Button id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => { stopTimer(); setIsTimerActive(false); handleAnswerClick(option, index);  }}>
+            <Button id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => { 
+              
+              stopTimer();
+              handleAnswerClick(option, index);
+              
+              }}>
             {option}
           </Button>
           

@@ -10,6 +10,7 @@ import HistoricalUserData from './components/HistoricalUserData';
 import RegisteredUsers from './components/RegisteredUsers';
 
 import './index.css';
+import 'animate.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
