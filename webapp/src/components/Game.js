@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
 
+import '../index.css';
+
 import '../Timer.css';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
@@ -100,7 +102,7 @@ const Game = () => {
     }, 1000);
 
     return () => clearInterval(id);
-  }, [isTimerActive]);
+  }, [isTimerActive, setIsTimerActive]);
 
 
   // Calcular el porcentaje de tiempo transcurrido para el círculo del temporizador
@@ -371,6 +373,8 @@ const getQuestions = () => {
 
 
   return (
+
+
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
 
       {!isFinished && (
@@ -413,9 +417,10 @@ const getQuestions = () => {
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
           {answerOptions.map((option, index) => (
-            <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
-              {option}
-            </Button>
+            <Button id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => { stopTimer(); setIsTimerActive(false); handleAnswerClick(option, index);  }}>
+            {option}
+          </Button>
+          
           ))}
         </div>
 
@@ -457,9 +462,6 @@ const getQuestions = () => {
             <Button title='puntuacion' onMouseEnter={null} variant="contained" color="primary" disabled={true}>
               Puntuación: {percentage} % 
             </Button>
-            <Button variant="contained" color="primary" onClick={handleMainPage}>
-             Ir a la página principal
-          </Button>
           </div>
 
 
@@ -495,9 +497,7 @@ const getQuestions = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      
-
-
+    
     </Container>
   );
 };
