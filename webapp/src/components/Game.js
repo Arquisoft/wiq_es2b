@@ -364,7 +364,7 @@ const getQuestions = () => {
           }, 1000);
         }
 
-      }, 4000);
+      }, 2000);
 
       
     }
@@ -466,14 +466,19 @@ const getQuestions = () => {
 
 
         </Paper>
+        <div>
+          <Button title="contador" onClick={handleMainPage} variant="contained" color="secondary">
+          Volver al menú principal</Button>
+        </div>
         </div>
       )}
 
-
+      {!isGameFinished() && !isFinished &&(
       <div>
         <Button title="contador" onClick={handleDialogOpen} variant="contained" color="secondary">
         Volver al menú principal</Button>
       </div>
+      )}
 
 
       <Dialog
