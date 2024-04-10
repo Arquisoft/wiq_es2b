@@ -460,7 +460,7 @@ const getQuestions = () => {
           </Typography>
           <div>
             <Button title='puntuacion' onMouseEnter={null} variant="contained" color="primary" disabled={true}>
-              Puntuación: {percentage} % 
+              Puntuación: {percentage.toFixed(2)} % 
             </Button>
           </div>
 
