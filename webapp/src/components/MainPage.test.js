@@ -3,6 +3,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import MainPage from './MainPage';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -13,11 +14,9 @@ describe('MainPage component', () => {
 
   it('muestra la página principal correctamente', async () => {
 
-    render(<UserProvider>
-      <Router>
+    render(<Router>
         <MainPage />
-      </Router>
-    </UserProvider>);
+      </Router>);
 
     const element1 = screen.getByText(/¡Bienvenido a/);
     const element2 = screen.getByText(/WIQ 2024!/);
