@@ -49,7 +49,7 @@ app.post('/adduser', async (req, res) => {
 
 app.post('/addgame', async (req, res) => {
   try {
-    const userResponse = await axios.post(userServiceUrl+'/addgame', req.body);
+    const userResponse = await axios.post(retrieveServiceUrl+'/addgame', req.body);
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -60,7 +60,7 @@ app.post('/addgame', async (req, res) => {
 app.get('/getgamehistory/:username', async (req, res) => {
   try {
     const username = req.params.username;
-    const userResponse = await axios.get(`${userServiceUrl}/getgamehistory/${username}`);
+    const userResponse = await axios.get(`${retrieveServiceUrl}/getgamehistory/${username}`);
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -86,6 +86,17 @@ app.get('/getquestionshistory', async (req, res) => {
     const questionResponse = await axios.get(retrieveServiceUrl+'/getquestionshistory', req.body);
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.get('/getregisteredusers', async (req, res) => {
+  try {
+    // Create a petition to the URL (le llegará a retrieve-service.js) with the option /getregisteredusers and the req.body params
+    const registeredUsersResponse = await axios.get(userServiceUrl+'/getregisteredusers', req.body);
+    // Return a json response with what we obtained on the petition
+    res.json(registeredUsersResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }

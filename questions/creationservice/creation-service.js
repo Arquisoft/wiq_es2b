@@ -24,7 +24,7 @@ var randomQuerySelector;
 // Array of the possible queries
 var queries = ['SELECT DISTINCT ?questionObject ?questionObjectLabel ?answer ?answerLabel WHERE { ?questionObject wdt:P31 wd:Q6256. ?questionObject wdt:P36 ?answer. SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es".}}'];
 // Array of the possible questions
-var questions = ["¿Cual es la capital de "];
+var questions = ["¿Cuál es la capital de "];
 
 // Recieves the information of the query and select wich data use on the question
 function getQuestionInfo(info){
