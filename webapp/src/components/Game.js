@@ -289,7 +289,7 @@ const getQuestions = () => {
     console.log("finishGame " + correctCounter);
     var correctas = (correctCounter / numberOfQuestions) * 100;
     console.log("corr1 " + correctas);
-    if (!Number.isInteger(percentage)){
+    if (!Number.isInteger(correctas)){
       correctas = correctas.toFixed(2);
       console.log("dentro " + correctas);
     }

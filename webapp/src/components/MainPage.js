@@ -52,7 +52,7 @@ const MainPage = () => {
                     <Grid item xs={12} md={6}>
                         <div title='main'>
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowGame}  >
-                                Empezar juego
+                                Nuevo juego
                             </Button>
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalData}  >
                                 Histórico de preguntas

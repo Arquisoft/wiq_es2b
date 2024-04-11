@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button } from '@mui/material';
@@ -9,6 +9,12 @@ const HistoricalUserData = () => {
 
   const [gameHistory, setGameHistory] = useState([]);
   
+  
+  useEffect(() => {
+    handleLoadHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   const handleLoadHistory = async () => {
     try {
@@ -39,9 +45,6 @@ const HistoricalUserData = () => {
           Página anterior
         </Button>
      
-      <Button variant="contained" color="primary" onClick={handleLoadHistory}>
-        Cargar historial de partidas
-      </Button>
       <div>
         <h2>Historial de Partidas:</h2>
         <table>
