@@ -21,9 +21,9 @@ describe('MainPage component', () => {
     const element1 = screen.getByText(/¡Bienvenido a/);
     const element2 = screen.getByText(/WIQ 2024!/);
     const newGameButton = screen.getByRole('button', { name: 'Nuevo juego' });
-    const historicalQuestionsButton = screen.getByRole('button', { name: 'Historial de preguntas' });
-    const historialUserDataButton = screen.getByRole('button', { name: 'Historial del usuario' });
-    const registerUsersButton = screen.getByRole('button', { name: 'Usuarios Registrados' });
+    const historicalQuestionsButton = screen.getByRole('button', { name: 'Histórico de preguntas' });
+    const historialUserDataButton = screen.getByRole('button', { name: 'Histórico del usuario' });
+    const registerUsersButton = screen.getByRole('button', { name: 'Usuarios registrados' });
 
     // Verifica si el elemento se encuentra en el DOM
     expect(element1).toBeInTheDocument();
