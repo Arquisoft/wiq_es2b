@@ -8,6 +8,7 @@ const HistoricalUserData = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [gameHistory, setGameHistory] = useState([]);
+  const [expandedRows, setExpandedRows] = useState([]);
   
   
   useEffect(() => {
@@ -19,25 +20,33 @@ const HistoricalUserData = () => {
   const handleLoadHistory = async () => {
     try {
       const username = localStorage.getItem('username');
-    const response = await axios.get(`${apiEndpoint}/getgamehistory/${username}`);
+      const response = await axios.get(`${apiEndpoint}/getgamehistory/${username}`);
 
-    // Ordenar la lista de historial de partidas por fecha (de más reciente a más antigua)
-    const sortedHistory = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      // Ordenar la lista de historial de partidas por fecha (de más reciente a más antigua)
+      const sortedHistory = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    setGameHistory(sortedHistory);
-
-      console.log("el historial actual es  "+gameHistory);
-
+      setGameHistory(sortedHistory);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  const  handlePreviousPage = async () => {
-    let path= '/MainPage';
-    navigate(path); 
-  }
+  const handlePreviousPage = async () => {
+    let path = '/MainPage';
+    navigate(path);
+  };
 
+  const toggleRow = (index) => {
+    const newExpandedRows = [...expandedRows];
+    if (newExpandedRows.includes(index)) {
+      // Si la fila ya está expandida, la contraemos
+      newExpandedRows.splice(newExpandedRows.indexOf(index), 1);
+    } else {
+      // Si la fila no está expandida, la expandimos
+      newExpandedRows.push(index);
+    }
+    setExpandedRows(newExpandedRows);
+  };
 
   return (
     <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>
@@ -59,9 +68,9 @@ const HistoricalUserData = () => {
             </tr>
           </thead>
           <tbody>
-            {gameHistory.map((game) => (
+            {gameHistory.map((game, index) => (
               <React.Fragment key={game.id}>
-                <tr>
+                <tr onClick={() => toggleRow(index)}>
                   <td>{game.date}</td>
                   <td>{game.duration}</td>
                   <td>{game.percentage}%</td>
@@ -69,10 +78,10 @@ const HistoricalUserData = () => {
                   <td>{game.correctAnswers}</td>
                   <td>{game.incorrectAnswers}</td>
                 </tr>
-                {game.questions && game.questions.map((question, index) => (
-                  <tr key={index}>
+                {expandedRows.includes(index) && game.questions && game.questions.map((question, qIndex) => (
+                  <tr key={qIndex}>
                     <td colSpan="6">
-                      <p>Pregunta {index + 1}: {question.question}</p>
+                      <p>Pregunta {qIndex + 1}: {question.question}</p>
                       <p>Respuesta Correcta: {question.correctAnswer}</p>
                       <p>Respuesta del Usuario: {question.userAnswer}</p>
                       <p>La respuesta fue: {question.correctAnswer === question.userAnswer ? 'Correcta' : 'Incorrecta'}</p>
@@ -86,7 +95,7 @@ const HistoricalUserData = () => {
       </div>
     </Container>
   );
-  
+
 };
 
 export default HistoricalUserData;
