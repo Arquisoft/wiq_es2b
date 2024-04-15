@@ -19,6 +19,9 @@ function App() {
 
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <div title='main'>
+
+        
         <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
           Bienvenido a WIQ 2024 del curso de Arquitectura del Software
         </Typography>
@@ -35,6 +38,7 @@ function App() {
                 )}
 
               </Typography>
+              </div>
       </Container>
 
   );

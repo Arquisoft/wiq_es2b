@@ -66,6 +66,14 @@ app.get('/getgamehistory/:username', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
+app.get('/getScoreBoard', async (req, res) => {
+  try {
+    const userResponse = await axios.get(`${retrieveServiceUrl}/getScoreBoard`);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
 
 
 

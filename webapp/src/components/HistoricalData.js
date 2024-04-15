@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate} from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, Button, TablePagination  } from '@mui/material';
 import './HistoricalData.css';
@@ -25,6 +25,11 @@ const HistoricalData = () => {
 
   
 
+  useEffect(() => {
+    handleShowHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const  handleShowHistory = async () => {
     try{
       // It makes a petition to the api and store the response
@@ -49,9 +54,7 @@ const HistoricalData = () => {
           Página anterior
         </Button>
 
-        <Button variant="contained" color="primary" onClick={handleShowHistory}> 
-          Cargar histórico
-        </Button>
+
     </div>
     <div>
       <TableContainer>
