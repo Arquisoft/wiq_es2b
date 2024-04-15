@@ -55,10 +55,10 @@ const MainPage = () => {
                                 Nuevo juego
                             </Button>
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalData}  >
-                                Histórico de preguntas
+                                Historial de preguntas
                             </Button>
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalUserData}  >
-                                Histórico del usuario
+                                Historial de usuario
                             </Button>
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowRegisteredUsers}  >
                                 Usuarios registrados
