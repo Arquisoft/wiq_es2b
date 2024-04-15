@@ -14,7 +14,7 @@ button[title="btnsPreg"]{
     margin: 0.5em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
-    background-color: rgba(41, 120, 152, 0.764);
+    background-color: rgba(29, 86, 109, 0.764);
 }
 
 button[title="puntuacion"]:disabled{

@@ -1,12 +1,72 @@
-div[title="main"]{
+div[title="main"] {
     display: grid;
     grid-template-columns: 1fr;
 }
 
-div[title="main"]>button{
-    margin: 1em;
-    padding: 0.5em;
-    background-color: rgba(31, 60, 134, 0.764);
-    color: white;
-    font-size: 1em;
+div[title="main-title"] > h1 {
+    margin: 1.5rem;
+    color: rgb(24, 46, 63);
+    font-size: 3rem;
+    font-weight: 400;
 }
+
+div[title="main-title"] > h2 {
+    margin: -2rem;
+    color: #4c8dbf;
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+@keyframes slide {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(20px);
+    }
+}
+
+
+div[title="main"]>button:hover {
+    background-color: rgb(189, 216, 255);
+    color: #007dfe;
+    font-weight: 600;
+    width: auto;
+    font-size: 1em;
+    height: 3rem;
+}
+
+div[title="main"]>button{
+    background-color: #0155B7;
+    color: white;
+    font-weight: 600;
+    width: auto;
+    font-size: 1em;
+    height: 3rem;
+
+    margin: 1rem;
+}
+
+
+
+.img-container {
+    text-align: center;
+    margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+}
+
+.img-container img {
+    width: 75%;
+    height: auto;
+    animation: slide 3s ease infinite alternate;
+}
+
+@media (min-width: 768px) {
+    .img-container {
+        text-align: left;
+    }
+}
+
+
+
