@@ -38,7 +38,7 @@ const Game = () => {
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
 
-  const [seconds, setSeconds] = useState(120);
+  const [seconds, setSeconds] = useState(0);
 
 
 
@@ -137,9 +137,9 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
-    console.log("eyou");
+    //console.log("eyou");
     const intervalId = setInterval(() => {
-      setSeconds(prevSeconds => prevSeconds - 1);
+      setSeconds(prevSeconds => prevSeconds + 1);
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -286,14 +286,14 @@ const getQuestions = () => {
       button.disabled = true;
       button.onmouse = null;
     });
-    console.log("finishGame " + correctCounter);
+    //console.log("finishGame " + correctCounter);
     var correctas = (correctCounter / numberOfQuestions) * 100;
-    console.log("corr1 " + correctas);
+    //console.log("corr1 " + correctas);
     if (!Number.isInteger(correctas)){
       correctas = correctas.toFixed(2);
-      console.log("dentro " + correctas);
+      //console.log("dentro " + correctas);
     }
-    console.log("corr2 " + correctas);
+    //console.log("corr2 " + correctas);
     setPercentage(correctas);
     
     //a partir de aqui guardar la partida 
@@ -307,14 +307,14 @@ const getQuestions = () => {
       correctAnswers: correctCounter,
       incorrectAnswers: numberOfQuestions-correctCounter
     };
-    console.log("Se va a guardar la siguiente partida:");
-    console.log("Username:", newGame.username);
-    console.log("Duración:", newGame.duration);
-    console.log("Preguntas:", newGame.questions);
-    console.log("Porcentaje de Aciertos:", newGame.percentage);
-    console.log("Número Total de Preguntas:", newGame.totalQuestions);
-    console.log("Número de Respuestas Correctas:", newGame.correctAnswers);
-    console.log("Número de Respuestas Incorrectas:", newGame.incorrectAnswers);
+    //console.log("Se va a guardar la siguiente partida:");
+    //console.log("Username:", newGame.username);
+    //console.log("Duración:", newGame.duration);
+    //console.log("Preguntas:", newGame.questions);
+    //console.log("Porcentaje de Aciertos:", newGame.percentage);
+    //console.log("Número Total de Preguntas:", newGame.totalQuestions);
+    //console.log("Número de Respuestas Correctas:", newGame.correctAnswers);
+    //console.log("Número de Respuestas Incorrectas:", newGame.incorrectAnswers);
     
   
   
