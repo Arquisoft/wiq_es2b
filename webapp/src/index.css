@@ -24,3 +24,11 @@ div[title="main"]>h1{
   color: white;
 }
 
+
+.btn-show-more {
+  background-color: #1f3c86c3;
+  color: white;
+  font-weight: 600;
+  border-radius: 20%;
+  margin: 0.5rem;
+}

@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('username');
-    navigate("/"); // Redirige a la página de inicio de sesión
+    navigate("/");
   };
   
 
@@ -43,7 +43,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/RegisteredUsers">Usuarios registrados</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/ScoreBoard">ScoreBoard</Link>
+              <Link className="nav-link" to="/ScoreBoard">Ranking</Link>
             </li>
             <li className="nav-item">
                 <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
