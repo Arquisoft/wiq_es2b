@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [historialDropdownOpen, setHistorialDropdownOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleHistorialDropdown = () => {
     setHistorialDropdownOpen(!historialDropdownOpen);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    navigate("/"); // Redirige a la página de inicio de sesión
+  };
+  
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -36,6 +42,10 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/RegisteredUsers">Usuarios registrados</Link>
             </li>
+            <li className="nav-item">
+                <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
+            </li>
+
           </ul>
         </div>
       </div>
