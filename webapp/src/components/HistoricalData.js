@@ -48,7 +48,7 @@ const HistoricalData = () => {
           Historial de preguntas
       </Typography>
     
-    <Container component="main" className='contenedor' >
+    <Container component="main" className='contenedor containerTable' >
     <div>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="customized table">
