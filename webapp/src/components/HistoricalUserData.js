@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Container, Button } from '@mui/material';
+import { Container } from '@mui/material';
+import Navbar from './Navbar';
 
 const HistoricalUserData = () => {
-  const navigate = useNavigate();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [gameHistory, setGameHistory] = useState([]);
@@ -31,11 +30,6 @@ const HistoricalUserData = () => {
     }
   };
 
-  const handlePreviousPage = async () => {
-    let path = '/MainPage';
-    navigate(path);
-  };
-
   const toggleRow = (index) => {
     const newExpandedRows = [...expandedRows];
     if (newExpandedRows.includes(index)) {
@@ -49,11 +43,12 @@ const HistoricalUserData = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>
-      <Button variant="contained" color="primary" onClick={handlePreviousPage}> 
-          Página anterior
-        </Button>
-     
+    <>
+
+    <Navbar />
+    
+    
+    <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>     
       <div>
         <h2>Historial de Partidas:</h2>
         <table>
@@ -94,6 +89,7 @@ const HistoricalUserData = () => {
         </table>
       </div>
     </Container>
+    </>
   );
 
 };

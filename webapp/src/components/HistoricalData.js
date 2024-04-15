@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect} from 'react';
-import { useNavigate} from 'react-router-dom';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, Button, TablePagination  } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination  } from '@mui/material';
 import './HistoricalData.css';
+import Navbar from './Navbar';
 
 const HistoricalData = () => {
-  const navigate = useNavigate();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [questionsHistory, setQuestionsHistory] = useState([]);
@@ -40,22 +39,12 @@ const HistoricalData = () => {
     }    
   }
 
-  const  handlePreviousPage = async () => {
-    let path= '/MainPage';
-    navigate(path); 
-  }
-
   return (
+
+    <>
+    <Navbar />
     
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
-      
-      <div title='botones'>
-        <Button variant="contained" color="primary" onClick={handlePreviousPage}> 
-          Página anterior
-        </Button>
-
-
-    </div>
+    <Container component="main" className='contenedor' >
     <div>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="customized table">
@@ -89,6 +78,8 @@ const HistoricalData = () => {
       />
     </div>
   </Container>
+
+  </>
 
   );
 };

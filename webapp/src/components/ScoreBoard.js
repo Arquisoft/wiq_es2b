@@ -10,6 +10,7 @@ const ScoreBoard = () => {
 
   useEffect(() => {
     loadScoreboard();
+    // eslint-disable-next-line
   }, []);
 
   const loadScoreboard = async () => {

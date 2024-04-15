@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useNavigate} from 'react-router-dom';
-import { Container, Button} from '@mui/material';
+import { Container} from '@mui/material';
+import Navbar from './Navbar';
 
 const RegisteredUsers = () => {
-  const navigate = useNavigate();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -24,20 +23,12 @@ const RegisteredUsers = () => {
     }    
   }
 
-  const  handlePreviousPage = async () => {
-    let path= '/MainPage';
-    navigate(path); 
-  }
-
   return (
-    
+
+    <>
+    <Navbar />
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
-      
-      <div title='botones'>
-        <Button variant="contained" color="primary" onClick={handlePreviousPage}> 
-          Página anterior
-        </Button>
-    </div>
+
     <div>
         <table>
           <thead>
@@ -58,6 +49,7 @@ const RegisteredUsers = () => {
         </table>
       </div>
   </Container>
+  </>
 
   );
 };
