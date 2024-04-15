@@ -38,7 +38,7 @@ const Game = () => {
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
 
-  const [seconds, setSeconds] = useState(120);
+  const [seconds, setSeconds] = useState(0);
 
 
 
@@ -139,7 +139,7 @@ const Game = () => {
   useEffect(() => {
     console.log("eyou");
     const intervalId = setInterval(() => {
-      setSeconds(prevSeconds => prevSeconds - 1);
+      setSeconds(prevSeconds => prevSeconds + 1);
     }, 1000);
 
     return () => clearInterval(intervalId);
