@@ -43,6 +43,9 @@ const Navbar = () => {
               <Link className="nav-link" to="/RegisteredUsers">Usuarios registrados</Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/ScoreBoard">ScoreBoard</Link>
+            </li>
+            <li className="nav-item">
                 <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
             </li>
 

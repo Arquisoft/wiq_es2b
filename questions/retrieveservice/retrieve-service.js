@@ -79,6 +79,45 @@ app.get('/getgamehistory/:username', async (req, res) => {
       });
   }
 });
+app.get('/getScoreBoard', async (req, res) => {
+  try {
+    // Obtener todas las partidas
+    const games = await Game.find({});
+    
+    // Objeto para almacenar el scoreboard
+    const scoreboard = {};
+
+    // Calcular el scoreboard para cada usuario
+    games.forEach(game => {
+      if (!scoreboard[game.username]) {
+        scoreboard[game.username] = {
+          username: game.username,
+          totalCorrect: 0,
+          totalIncorrect: 0,
+          points: 0
+        };
+      }
+
+      // Sumar el número total de preguntas acertadas y falladas
+      scoreboard[game.username].totalCorrect += game.correctAnswers;
+      scoreboard[game.username].totalIncorrect += game.incorrectAnswers;
+
+      // Calcular los puntos totales
+      scoreboard[game.username].points += (game.correctAnswers * 15) - (game.incorrectAnswers * 5);
+    });
+
+    // Convertir el objeto de scoreboard en un array de objetos
+    const scoreboardArray = Object.values(scoreboard);
+
+    // Enviar la respuesta con el scoreboard
+    res.json(scoreboardArray);
+  } catch (error) {
+    res.status(400).json({
+      error: error.message
+    });
+  }
+});
+
 
 const server = app.listen(port, () => {
   console.log(`Creation Service listening at http://localhost:${port}`);

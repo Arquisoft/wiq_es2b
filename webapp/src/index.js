@@ -8,6 +8,7 @@ import HistoricalData from './components/HistoricalData';
 import MainPage from './components/MainPage';
 import HistoricalUserData from './components/HistoricalUserData';
 import RegisteredUsers from './components/RegisteredUsers';
+import ScoreBoard from './components/ScoreBoard';
 
 import './index.css';
 import 'animate.css';
@@ -26,6 +27,7 @@ root.render(
         <Route path="/historicaldata" element={<HistoricalData />}> </Route>
         <Route path="/historicalUserdata" element={<HistoricalUserData />}> </Route>
         <Route path="/RegisteredUsers" element={<RegisteredUsers />}> </Route>
+        <Route path="/ScoreBoard" element={<ScoreBoard />}> </Route>
       </Routes>
     </Router>
   </React.StrictMode>
