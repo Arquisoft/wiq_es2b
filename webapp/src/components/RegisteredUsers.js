@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Container} from '@mui/material';
+import { Container, Typography} from '@mui/material';
 import Navbar from './Navbar';
 
 const RegisteredUsers = () => {
@@ -30,11 +30,14 @@ const RegisteredUsers = () => {
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
 
     <div>
+        <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
+          Usuarios registrados
+        </Typography>
         <table>
           <thead>
             <tr>
-              <th title='pregunta'>Nombre de usuario</th>
-              <th title='correcta'>Fecha de registro</th>
+              <th className='text-center custom-td'>Nombre de usuario</th>
+              <th className='text-center custom-td'>Fecha de registro</th>
             </tr>
           </thead>
           <tbody>
