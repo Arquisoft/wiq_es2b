@@ -22,7 +22,7 @@ describe('MainPage component', () => {
     const element2 = screen.getByText(/WIQ 2024!/);
     const newGameButton = screen.getByRole('button', { name: 'Nuevo juego' });
     const historicalQuestionsButton = screen.getByRole('button', { name: 'Historial de preguntas' });
-    const historialUserDataButton = screen.getByRole('button', { name: 'Historial del usuario' });
+    const historialUserDataButton = screen.getByRole('button', { name: 'Historial de usuario' });
     const registerUsersButton = screen.getByRole('button', { name: 'Usuarios registrados' });
 
     // Verifica si el elemento se encuentra en el DOM
