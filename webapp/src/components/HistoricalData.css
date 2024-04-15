@@ -48,3 +48,18 @@ table {
   td{
     background-color: rgba(61, 178, 224, 0.764);
   }
+
+
+
+.custom-td{
+  background-color: #1f3c86c3;
+  color: white;
+  font-weight: 600;
+}
+
+.custom-td th{
+  background-color: #1f3c86c3;
+  color: white;
+  font-weight: 600;
+}
+

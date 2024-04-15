@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect} from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination  } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography  } from '@mui/material';
 import './HistoricalData.css';
 import Navbar from './Navbar';
 
@@ -9,7 +9,7 @@ const HistoricalData = () => {
 
   const [questionsHistory, setQuestionsHistory] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const paginatedData = questionsHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
@@ -18,7 +18,7 @@ const HistoricalData = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 5));
     setPage(0);
   };
 
@@ -43,13 +43,17 @@ const HistoricalData = () => {
 
     <>
     <Navbar />
+
+    <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
+          Historial de preguntas
+      </Typography>
     
     <Container component="main" className='contenedor' >
     <div>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <TableRow className='custom-td'>
               <TableCell>Pregunta</TableCell>
               <TableCell>Opción correcta</TableCell>
               <TableCell>Opción incorrecta 1</TableCell>
@@ -75,6 +79,7 @@ const HistoricalData = () => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        rowsPerPageOptions={[5, 10, 15, 20, 25]}
       />
     </div>
   </Container>
