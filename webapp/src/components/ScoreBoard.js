@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Container, Button } from '@mui/material';
+import { Container, Typography } from '@mui/material';
+import Navbar from './Navbar';
 
 const ScoreBoard = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
-  const navigate = useNavigate();
   const [scoreboard, setScoreboard] = useState([]);
 
   useEffect(() => {
@@ -21,20 +20,20 @@ const ScoreBoard = () => {
       console.error('Error:', error);
     }
   };
-  const handlePreviousPage = async () => {
-    let path = '/MainPage';
-    navigate(path);
-  };
+
   return (
-    <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>
-      <Button variant="contained" color="primary" onClick={handlePreviousPage}> 
-          Página anterior
-        </Button>
+
+    <>
+    <Navbar />
+    <Container component="main" maxWidth="md" sx={{ marginTop: 4,  overflowY: 'auto' }} className='containerTable'>
       <div>
-        <h2>Tabla de Puntuaciones</h2>
+        <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
+          Ranking de Puntuaciones
+        </Typography>
         <table>
           <thead>
             <tr>
+              <th>Puesto</th>
               <th>Usuario</th>
               <th>Preguntas Totales Acertadas</th>
               <th>Preguntas Totales Falladas</th>
@@ -44,16 +43,18 @@ const ScoreBoard = () => {
           <tbody>
             {scoreboard.map((user, index) => (
               <tr key={index}>
-                <td>{user.username}</td>
-                <td>{user.totalCorrect}</td>
-                <td>{user.totalIncorrect}</td>
-                <td>{user.points}</td>
+                <td className="custom-td">{index + 1}</td>
+                <td className="custom-td">{user.username}</td>
+                <td className="custom-td">{user.totalCorrect}</td>
+                <td className="custom-td">{user.totalIncorrect}</td>
+                <td className="custom-td">{user.points}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </Container>
+    </>
   );
 };
 
