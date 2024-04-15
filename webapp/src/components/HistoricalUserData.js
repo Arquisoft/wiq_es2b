@@ -71,7 +71,7 @@ const HistoricalUserData = () => {
 
 
 
-      <Container component="main" sx={{ marginTop: 2, maxHeight: '400px', overflowY: 'auto' }}>
+      <Container component="main" sx={{ marginTop: 2, maxHeight: '400px', overflowX: 'auto' }} className='containerTable'>
         <div>
           <table>
             <thead>
