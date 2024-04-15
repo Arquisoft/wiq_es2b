@@ -231,3 +231,92 @@ paths:
                     type: string
                     description: Error information.
                     example: User not found.
+
+  /getScoreBoard:
+    get:
+      summary: Get the scoreboard.
+      operationId: getScoreBoard
+      responses:
+        '200':
+          description: Scoreboard retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      description: Username of the player.
+                      example: player1
+                    score:
+                      type: integer
+                      description: Score achieved by the player.
+                      example: 100
+
+/createquestion:
+  get:
+    summary: Create a new question.
+    operationId: createQuestion
+    responses:
+      '200':
+        description: Question created successfully.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The created question.
+                  example: What is the capital of France?
+                answer:
+                  type: string
+                  description: The answer to the question.
+                  example: Paris
+
+
+/getquestionshistory:
+  get:
+    summary: Get the history of generated questions.
+    operationId: getQuestionsHistory
+    responses:
+      '200':
+        description: Questions history retrieved successfully.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  question:
+                    type: string
+                    description: The question.
+                    example: What is 2 + 2?
+                  answer:
+                    type: integer
+                    description: The correct answer to the question.
+                    example: 4
+
+
+
+/getregisteredusers:
+  get:
+    summary: Get the list of registered users.
+    operationId: getRegisteredUsers
+    responses:
+      '200':
+        description: List of registered users retrieved successfully.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: Username of the registered user.
+                    example: user1
