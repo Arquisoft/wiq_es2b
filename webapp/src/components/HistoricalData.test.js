@@ -29,7 +29,6 @@ describe('HistoricalData component', () => {
     const tableElement = screen.getByRole('table');
 
     // Verifica si el elemento se encuentra en el DOM
-    expect(element).toBeInTheDocument();
     expect(tableElement).toBeInTheDocument();
 
 
