@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, Paper} from '@mui/material';
+import { Container, Typography, Button, Paper, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@mui/material';
+
 import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
+
+import '../index.css';
 
 import '../Timer.css';
 
@@ -35,7 +38,7 @@ const Game = () => {
   const [gameCorrectOptions, setGameCorrectOptions] = useState([]);
   const [gameQuestions, setGameQuestions] = useState([]);
 
-  const [seconds, setSeconds] = useState(120);
+  const [seconds, setSeconds] = useState(0);
 
 
 
@@ -44,30 +47,66 @@ const Game = () => {
   const [time, setTime] = useState(20);
   const [isTimedOut, setTimedOut] = useState(false);
 
+
   // Estado para controlar si el temporizador está activo o no
   const [isTimerActive, setIsTimerActive] = useState(true);
 
+
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleDialogOpen = () => {
+    setIsTimerActive(false);
+    setOpenDialog(true);
+  };
+  
+  const handleDialogClose = () => {
+    setIsTimerActive(true);
+    setOpenDialog(false);
+    runTimer();
+  };
+  
+
+  const runTimer = () => {
+    // Calcular el tiempo restante para el temporizador
+    const remainingTime = time; 
+    setTime(remainingTime);
+    setIsTimerActive(true);
+  };
+
+  
+  useEffect(() => {
+    if (openDialog) {
+      stopTimer();
+    } else {
+      runTimer();
+    }
+  });
+
+
+  
+
+ 
   useEffect(() => {
     const id = setInterval(() => {
-      if (isTimerActive) { // Solo decrementa el tiempo si el temporizador está activo
-        setTime((prev) => {
-          if (prev > 0) {
-            return prev - 1;
-          } else {
-            // Se acabó el tiempo
-            setTimedOut(true);
-            const buttons = document.querySelectorAll('button[title="btnsPreg"]');
-            buttons.forEach(button => {
-              button.disabled = true;
-              button.onmouse = null;
-            });
-          }
-        });
-      }
+      setTime(prev => {
+        if (prev > 0) {
+          return prev - 1;
+        } else {
+          setTimedOut(true);
+          const buttons = document.querySelectorAll('button[title="btnsPreg"]');
+          buttons.forEach(button => {
+            button.disabled = true;
+            button.onmouse = null;
+          });
+          clearInterval(id); // Clear the interval when the time runs out
+        }
+      });
     }, 1000);
-
-    return () => clearInterval(id);
-  }, [isTimerActive]);
+  
+    return () => clearInterval(id); // Clear the interval on component unmount
+  }, [isTimerActive, isTimedOut]);
+  
 
 
   // Calcular el porcentaje de tiempo transcurrido para el círculo del temporizador
@@ -79,11 +118,17 @@ const Game = () => {
     setIsTimerActive(false);
   };
 
+
+  
+
+
   // Activar el temporizador
   const restartTimer = () => {
     setTime(20); // Reiniciar el tiempo a 20 segundos
     setIsTimerActive(true);
+    setTimedOut(false);
   };
+
 
 
   useEffect(() => {
@@ -92,9 +137,9 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
-    console.log("eyou");
+    //console.log("eyou");
     const intervalId = setInterval(() => {
-      setSeconds(prevSeconds => prevSeconds - 1);
+      setSeconds(prevSeconds => prevSeconds + 1);
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -103,16 +148,20 @@ const Game = () => {
   
   useEffect(() => {
     if (isGameFinished() && !isFinished){
-      finishGame();
-      setFinished(true);
+      setTimeout(() => {
+        finishGame();
+        setFinished(true);
+      }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctCounter]);
 
   useEffect(() => {
     if (isGameFinished() && !isFinished){
-      finishGame();
-      setFinished(true);
+      setTimeout(() => {
+        finishGame();
+        setFinished(true);
+      }, 4000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [incorrectCounter]);
@@ -120,6 +169,8 @@ const Game = () => {
   // This method will call the create question service
   const  handleShowQuestion = async () => {
     try{
+      setIsTimerActive(false);
+      
       // It makes a petition to the api and store the response
       const response = await axios.get(`${apiEndpoint}/createquestion`, { });
       // Extract all the info of the response and store it
@@ -144,20 +195,26 @@ const Game = () => {
 
       incrementQuestion();
 
-      // Resetear temporizador a 20 segundos
-      restartTimer();
+      
+      
 
     }catch (error){
       console.error('Error:', error);
-    }    
+    }  
+
+    // Poner temporizador a 20 segundos
+    restartTimer();
+    
+
   }
 
   // Method that checks if the answer clicked is the correct one
   const handleAnswerClick = (option, index) => {
+    // Detener el temporizador
+    setIsTimerActive(false);
+
     // Almacenar la opción seleccionada por el usuario en gameUserOptions
     setGameUserOptions(prevUserOptions => [...prevUserOptions, option]);
-    // parar el temporizador
-    stopTimer();
     if(option === correctOption) {
       const buttonId = `button_${index}`;
       const correctButton = document.getElementById(buttonId);
@@ -175,8 +232,6 @@ const Game = () => {
         const buttonIdCorrect = `button_${correctIndex}`;
         const correctButton = document.getElementById(buttonIdCorrect);
 
-        console.log("BOTON A COMPROBAR: " + correctButton.textContent);
-
         if (correctButton.textContent === correctOption) {
           correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
         }
@@ -191,7 +246,6 @@ const Game = () => {
       button.onmouse = null;
     });
     
-
     decrementQuestionsToAnswer();
 
     if (!isGameFinished()) {
@@ -232,14 +286,14 @@ const getQuestions = () => {
       button.disabled = true;
       button.onmouse = null;
     });
-    console.log("finishGame " + correctCounter);
+    //console.log("finishGame " + correctCounter);
     var correctas = (correctCounter / numberOfQuestions) * 100;
-    console.log("corr1 " + correctas);
-    if (!Number.isInteger(percentage)){
+    //console.log("corr1 " + correctas);
+    if (!Number.isInteger(correctas)){
       correctas = correctas.toFixed(2);
-      console.log("dentro " + correctas);
+      //console.log("dentro " + correctas);
     }
-    console.log("corr2 " + correctas);
+    //console.log("corr2 " + correctas);
     setPercentage(correctas);
     
     //a partir de aqui guardar la partida 
@@ -253,14 +307,14 @@ const getQuestions = () => {
       correctAnswers: correctCounter,
       incorrectAnswers: numberOfQuestions-correctCounter
     };
-    console.log("Se va a guardar la siguiente partida:");
-    console.log("Username:", newGame.username);
-    console.log("Duración:", newGame.duration);
-    console.log("Preguntas:", newGame.questions);
-    console.log("Porcentaje de Aciertos:", newGame.percentage);
-    console.log("Número Total de Preguntas:", newGame.totalQuestions);
-    console.log("Número de Respuestas Correctas:", newGame.correctAnswers);
-    console.log("Número de Respuestas Incorrectas:", newGame.incorrectAnswers);
+    //console.log("Se va a guardar la siguiente partida:");
+    //console.log("Username:", newGame.username);
+    //console.log("Duración:", newGame.duration);
+    //console.log("Preguntas:", newGame.questions);
+    //console.log("Porcentaje de Aciertos:", newGame.percentage);
+    //console.log("Número Total de Preguntas:", newGame.totalQuestions);
+    //console.log("Número de Respuestas Correctas:", newGame.correctAnswers);
+    //console.log("Número de Respuestas Incorrectas:", newGame.incorrectAnswers);
     
   
   
@@ -290,7 +344,40 @@ const getQuestions = () => {
   }
 
 
+
+  useEffect(() => {
+    if (isTimedOut && !isFinished) {
+      // mostrar la respuesta correcta
+      for (let correctIndex = 0; correctIndex < 4; correctIndex++){
+        const buttonIdCorrect = `button_${correctIndex}`;
+        const correctButton = document.getElementById(buttonIdCorrect);
+
+        if (correctButton.textContent === correctOption) {
+          correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
+        }
+      }
+
+      incrementIncorrect();
+      decrementQuestionsToAnswer();
+
+      setTimeout(() => {
+        if (!isGameFinished()) {
+          setTimeout(() => {
+            handleShowQuestion();          
+          }, 1000);
+        }
+
+      }, 2000);
+
+      
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTimedOut]);
+
+
   return (
+
+
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
 
       {!isFinished && (
@@ -315,7 +402,8 @@ const getQuestions = () => {
               <svg>
                 <circle cx="70" cy="70" r="70" />
                 <circle
-                  strokeDashoffset={440 - (percentageTime / 100) * 440}
+                  strokeDashoffset={(440 - (percentageTime / 100) * 440).toFixed(2)}
+
                   cx="70"
                   cy="70"
                   r="70"
@@ -328,40 +416,20 @@ const getQuestions = () => {
 
       )}
 
-      {isTimedOut && (
-        <Container>
-          <Paper elevation={3} className="modal">
-            <Typography variant="h6">¡Tiempo agotado!</Typography>
-            <Button onClick={() => {
-              setTimedOut(false);
-              incrementIncorrect();
-              decrementQuestionsToAnswer();
-              restartTimer();
-
-
-              if (!isGameFinished()) {
-                setTimeout(() => {
-                  handleShowQuestion();
-                }, 1000);
-              }
-
-
-            }}>Cerrar</Button>
-          </Paper>
-        </Container>
-      )}
-
-
-
-      
         <Typography variant="body1" paragraph>
           Pregunta {questionCounter}: {questionObject}
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
           {answerOptions.map((option, index) => (
-            <Button  id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => handleAnswerClick(option,index)} >
-              {option}
-            </Button>
+            <Button id={`button_${index}`} title="btnsPreg" key={index} variant="contained" color="primary" onClick={() => { 
+              
+              stopTimer();
+              handleAnswerClick(option, index);
+              
+              }}>
+            {option}
+          </Button>
+          
           ))}
         </div>
 
@@ -403,17 +471,47 @@ const getQuestions = () => {
             <Button title='puntuacion' onMouseEnter={null} variant="contained" color="primary" disabled={true}>
               Puntuación: {percentage} % 
             </Button>
-            <Button variant="contained" color="primary" onClick={handleMainPage}>
-             Ir a la página principal
-          </Button>
           </div>
 
 
         </Paper>
+        <div>
+          <Button title="contador" onClick={handleMainPage} variant="contained" color="secondary">
+          Volver al menú principal</Button>
+        </div>
         </div>
       )}
 
+      {!isGameFinished() && !isFinished &&(
+      <div>
+        <Button title="contador" onClick={handleDialogOpen} variant="contained" color="secondary">
+        Volver al menú principal</Button>
+      </div>
+      )}
 
+
+      <Dialog
+        open={openDialog}
+        onClose={handleDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirmación</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            ¿Estás seguro de que deseas volver al menú principal? Perderás el progreso actual de la partida.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleMainPage} color="primary" autoFocus>
+            Confirmar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    
     </Container>
   );
 };

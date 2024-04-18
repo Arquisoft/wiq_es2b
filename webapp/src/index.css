@@ -1,3 +1,10 @@
+html, body, main, #root {
+  background-color: #a5b8d4;
+  overflow: hidden;
+}
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +12,42 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+div[title="main"]>h1{
+  color: white;
+}
+
+
+.btn-show-more {
+  background-color: #1f3c86c3;
+  color: white;
+  font-weight: 600;
+  border-radius: 20%;
+  margin: 0.5rem;
+}
+
+
+.containerTable {
+  overflow-y: auto;
+}
+
+
+.custom-td{
+  background-color: #1f3c86c3;
+  color: white;
+  font-weight: 600;
+}
+
+.custom-td th{
+  background-color: #1f3c86c3;
+  color: white;
+  font-weight: 600;
 }

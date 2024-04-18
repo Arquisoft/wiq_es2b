@@ -1,49 +1,73 @@
-import React, {  } from 'react';
-import { Container, Typography, Button } from '@mui/material';
+import React from 'react';
+import { Container, Typography, Button, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
+
+import Navbar from './Navbar';
 
 const MainPage = () => {
     const navigate = useNavigate();
 
     const handleShowGame = () => {
-        let path= '/Game';
+        let path = '/Game';
         navigate(path);
     };
 
     const handleShowHistoricalData = () => {
-        let path= '/HistoricalData';
+        let path = '/HistoricalData';
         navigate(path);
     };
 
     const handleShowHistoricalUserData = () => {
-        let path= '/HistoricalUserData';
+        let path = '/HistoricalUserData';
         navigate(path);
     };
 
+    const handleShowRegisteredUsers = () => {
+        let path = '/RegisteredUsers';
+        navigate(path);
+    };
 
     return (
-        <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-            <div title='main'>
-                <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-                ¡Bienvenido a WIQ 2024!
-                </Typography>
+        <>
+            <Navbar />
 
-                <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-                Puedes comenzar la partida o ver tu historial.
+            <div title='main-title'>
+                <Typography component="h1" className='main-title' variant="h5" sx={{ textAlign: 'center' }}>
+                    ¡Bienvenido a
                 </Typography>
-
-                <Button variant="contained" color="primary" onClick={handleShowGame}>
-                Empezar juego
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleShowHistoricalData}> 
-                Histórico de preguntas
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleShowHistoricalUserData}> 
-                Histórico del usuario
-                </Button>
+                <Typography component="h2" className='main-title animate__animated animate__backInLeft animate__tada' variant="h5" sx={{ textAlign: 'center' }}>
+                    WIQ 2024!
+                </Typography>
             </div>
-          </Container>
+
+            <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>
+                
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                        <div className="img-container">
+                            <img src='/questions-illustration.png' alt='Imagen de prueba' className="img-fluid" />
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <div title='main'>
+                            <Button variant="contained" color="primary" fullWidth onClick={handleShowGame}  >
+                                Nuevo juego
+                            </Button>
+                            <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalData}  >
+                                Historial de preguntas
+                            </Button>
+                            <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalUserData}  >
+                                Historial de usuario
+                            </Button>
+                            <Button variant="contained" color="primary" fullWidth onClick={handleShowRegisteredUsers}  >
+                                Usuarios registrados
+                            </Button>
+                            </div>
+                    </Grid>
+                </Grid>
+            </Container>
+        </>
     )
 }
 
