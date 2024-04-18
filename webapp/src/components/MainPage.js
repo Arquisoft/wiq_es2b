@@ -1,12 +1,45 @@
-import React from 'react';
-import { Container, Typography, Button, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Container, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
+
+import { ConfigProvider } from './ConfigContext';
+
 
 import Navbar from './Navbar';
 
 const MainPage = () => {
     const navigate = useNavigate();
+
+    // Configuración de la partida
+    const [open, setOpen] = useState(false);
+    const [numQuestions, setNumQuestions] = useState(5);
+    const [timePerQuestion, setTimePerQuestion] = useState(10);
+
+
+    const handleNumQuestionsChange = (event) => {
+        setNumQuestions(event.target.value);
+    };
+
+    const handleTimePerQuestionChange = (event) => {
+        setTimePerQuestion(event.target.value);
+    };
+
+    const handleOpenDialog = () => {
+        setOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpen(false);
+    };
+
+    // Función para manejar cambios en el valor del campo de entrada
+    const handleInputChange = (event) => {
+        // Evita actualizar el estado si el usuario intenta ingresar manualmente
+        event.preventDefault();
+    };
+
+
 
     const handleShowGame = () => {
         let path = '/Game';
@@ -28,6 +61,11 @@ const MainPage = () => {
         navigate(path);
     };
 
+    const handleRanking = () => {
+        let path = '/ScoreBoard';
+        navigate(path);
+    }
+
     return (
         <>
             <Navbar />
@@ -42,7 +80,7 @@ const MainPage = () => {
             </div>
 
             <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>
-                
+
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                         <div className="img-container">
@@ -54,19 +92,54 @@ const MainPage = () => {
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowGame}  >
                                 Nuevo juego
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalData}  >
-                                Historial de preguntas
+                            <Button variant="contained" color="primary" fullWidth onClick={handleRanking}  >
+                                Ranking
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalUserData}  >
-                                Historial de usuario
+                            <Button variant="contained" color="primary" fullWidth onClick={handleOpenDialog}  >
+                                Configuración
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleShowRegisteredUsers}  >
-                                Usuarios registrados
-                            </Button>
-                            </div>
+
+                        </div>
                     </Grid>
                 </Grid>
             </Container>
+
+            <Dialog open={open} onClose={handleCloseDialog}>
+                <DialogTitle>Configuración del juego</DialogTitle>
+                <DialogContent>
+                    <Typography variant="body1">Ingrese el número de preguntas:</Typography>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="numQuestions"
+                        label="Número de preguntas (min. 5)"
+                        type="number"
+                        fullWidth
+                        value={numQuestions}
+                        onChange={handleNumQuestionsChange}
+                        inputProps={{ min: 5, onKeyDown: handleInputChange }}
+                    />
+
+                    <Typography variant="body1">Ingrese el tiempo por pregunta (segundos):</Typography>
+                    <TextField
+                        margin="dense"
+                        id="timePerQuestion"
+                        label="Tiempo por pregunta (mín. 10 segundos)"
+                        type="number"
+                        fullWidth
+                        value={timePerQuestion}
+                        onChange={handleTimePerQuestionChange}
+                        inputProps={{ min: 10, onKeyDown: handleInputChange }}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
         </>
     )
 }
