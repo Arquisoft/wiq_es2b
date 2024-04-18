@@ -59,7 +59,7 @@ The agents involved in the WIQ system environment are the following:
 
 
 
-image::03-TechnicalContextDiagram-Lucidchart.png[Technical Context Diagram]
+image::03-TechnicalContextDiagram-Lucidchart.jpeg[Technical Context Diagram]
 
 .WIQ
 [cols="1,2,3"]
