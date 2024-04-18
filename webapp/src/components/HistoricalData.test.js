@@ -14,7 +14,7 @@ describe('HistoricalData', () => {
 
   it('muestra la página con el histórico de preguntas generadas', async () => {
 
-    mockAxios.onGet("http://localhost:8000/historicaldata").reply(200, 
+    mockAxios.onGet("http://localhost:8000/getquestionshistory").reply(200, 
         [{ question: "¿Cual es la capital de Venezuela?",
           correctOption: "Caracas",
           incorrectOption1: "Doha",
