@@ -477,8 +477,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
 <li><a href="#_level_2">5.2. Level 2</a></li>
+<li><a href="#_level_3">5.3. Level 3</a></li>
 </ul>
 </li>
+<li><a href="#section-runtime-view">6. Runtime View</a>
+<ul class="sectlevel2">
+<li><a href="#_user_plays_a_game">6.1. User plays a game</a></li>
+</ul>
+</li>
+<li><a href="#section-deployment-view">7. Deployment View</a>
+<ul class="sectlevel2">
+<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
+</ul>
+</li>
+<li><a href="#section-concepts">8. Cross-cutting Concepts</a>
+<ul class="sectlevel2">
+<li><a href="#_domain_model">8.1. Domain model</a></li>
+<li><a href="#_performance">8.2. Performance</a></li>
+<li><a href="#_usability">8.3. Usability</a></li>
+<li><a href="#_maintainability">8.4. Maintainability</a></li>
+<li><a href="#_testeability">8.5. Testeability</a></li>
+</ul>
+</li>
+<li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
+<li><a href="#section-quality-scenarios">10. Quality Requirements</a>
+<ul class="sectlevel2">
+<li><a href="#_quality_tree">10.1. Quality Tree</a></li>
+<li><a href="#_quality_scenarios">10.2. Quality Scenarios</a></li>
+</ul>
+</li>
+<li><a href="#section-technical-risks">11. Risks and Technical Debts</a>
+<ul class="sectlevel2">
+<li><a href="#_technical_risks">11.1. Technical Risks</a></li>
+</ul>
+</li>
+<li><a href="#section-glossary">12. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -1127,347 +1160,467 @@ For documentation of your own system you use better the <em>plain</em> version.<
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Database</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the authentification of users.</p>
-<p class="tableblock">=== Level 3</p>
-<p class="tableblock">image::DOCsection5_3.drawio.png["Level 3"]</p>
-<p class="tableblock">.Motivation
-Detailed structure of the system. Focused on the components of the Webapp, Users API and Questions API.</p>
-<p class="tableblock">.Contained Building Blocks</p>
-<p class="tableblock">[options="header",cols="1,3"]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the authentification of users.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>| Name | Description</p>
+</div>
+<div class="sect2">
+<h3 id="_level_3">5.3. Level 3</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/DOCsection5_3.drawio.png" alt="Level 3">
+</div>
 </div>
 <div class="paragraph">
-<p>| <strong><em>User</em></strong>
-| Client/User of the application which will interact with it.</p>
+<div class="title">Motivation</div>
+<p>Detailed structure of the system. Focused on the components of the Webapp, Users API and Questions API.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. Contained Building Blocks</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client/User of the application which will interact with it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Games History</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component to store games played by each user and where user can watch their previous games.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Play New Game</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component to create all related to play a new game.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Questions History</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component to store previous questions and where user can watch them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Main Page</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that shows the main functionalities of the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Register Users</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component to see what users are registered on the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Login</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component to access the system by the user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Menu</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component to navigate through the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Users Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the creation of new users.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Questions Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the creation of the questions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Historial Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the history of users.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Authentification Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the authentification of users.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WIQ</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Main component that manages all the system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Wikidata</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Website where to get information for questions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Database</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component that manages the authentification of users.</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-runtime-view">6. Runtime View</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_user_plays_a_game">6.1. User plays a game</h3>
+<div class="paragraph">
+<p>When the game is started, the app will call the createquestion service that is in charge of provide generated questions from wikidata information.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Start%20a%20game.png" alt="Start a game" width="633" height="519">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-deployment-view">7. Deployment View</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/07-DeploymentView.drawio.png" alt="07 DeploymentView.drawio">
+</div>
+<div class="title">Figure 2. Deployment View</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/07-DeploymentViewTest.drawio.png" alt="07 DeploymentViewTest.drawio">
+</div>
+<div class="title">Figure 3. Deployment View Test environment</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Motivation</dt>
+<dd>
+<p>During the development phase of the application, each team member is using Docker to run all the necessary services on a local server. For the production environment, it is planned to use a Microsoft Azure cloud server for the deployment of the application.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>| <strong><em>Games History</em></strong>
-| Component to store games played by each user and where user can watch their previous games.</p>
+<p>The infrastructure includes user access via a user agent on their computer, which connects to the web interface of the WIQ application. In this configuration, several services will be active, such as the user authentication service, monitoring services and data analysis using Grafana and Prometheus. In addition, two internal APIs dedicated to the generation and retrieval of the history of questions asked and games played by each user are provided.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Quality and/or Performance Features</dt>
+<dd>
+<p>The quality and performance of the application have not yet been evaluated, but it is noted that we have high availability, reaching approximately 95%, thanks to the cloud service provided by Microsoft Azure.</p>
+</dd>
+<dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
+<dd>
+<p>For the implementation, it has been decided to implement the following elements in the infrastructure:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Quiz Game Application</strong>: The main application is deployed in the development environment inside different Docker containers on each team member&#8217;s local server, so that a web application made with React is deployed on port <code>3000</code>. In the case of the production environment, the application would be deployed in the Microsoft Azure cloud and can be accessed publicly.</p>
+</li>
+<li>
+<p><strong>Questions API</strong>: It is an API in charge of generating questions to the WikiData API dynamically and it also keeps a history of the questions already asked.</p>
+</li>
+<li>
+<p><strong>WikiData API</strong>: The application makes calls to the WikiData API to generate the game questions dynamically and it is accessed both in the development and production environment.</p>
+</li>
+<li>
+<p><strong>MongoDB Database</strong>: The database is executed inside a Docker container in the development environment, so that user data and game information is stored. In the production environment, this database will be managed in a Microsoft Azure service.</p>
+</li>
+<li>
+<p><strong>Authentication Service</strong>: The authentication service allows a user to register and log in to the application so that the data associated with their games are always linked and accessible to their user.</p>
+</li>
+<li>
+<p><strong>Monitoring data</strong>: The application data monitoring and analysis service is made up of two different services, one with Grafana and the other with Prometheus. Both services work together analysing and monitoring application data so that a record can be kept of the information obtained in the form of dashboards.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-concepts">8. Cross-cutting Concepts</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_domain_model">8.1. Domain model</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/DOCsection8_1.drawio.png" alt="Domain model">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_performance">8.2. Performance</h3>
+<div class="paragraph">
+<p>A system that performs well provides a positive user experience. Users expect applications and services to respond promptly to their requests. A higher performance leads to increased user satisfaction and engagement. Also, a good performance help to get a better efficiency.</p>
 </div>
 <div class="paragraph">
-<p>| <strong><em>Play New Game</em></strong>
-| Component to create all related to play a new game.</p>
+<p>We are going to look for a good performance with the code optimization, without overloading the system and memory and doing some performance test.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usability">8.3. Usability</h3>
+<div class="paragraph">
+<p>Usability is a fundamental aspect of any application, as it determines the ease and efficiency with which users can interact with it. To ensure the usability of our application, we have followed a series of specific practices and techniques.</p>
 </div>
 <div class="paragraph">
-<p>| <strong><em>Questions History</em></strong>
-| Component to store previous questions and where user can watch them.</p>
+<p>We have thoroughly researched user needs and expectations, which has allowed us to design an intuitive and easy-to-use user interface.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maintainability">8.4. Maintainability</h3>
+<div class="paragraph">
+<p>The maintainability of the application is an important section since it is necessary that the code is easily modifiable in case in the future we are asked for new features to implement.</p>
 </div>
 <div class="paragraph">
-<p>| <strong><em>Main Page</em></strong>
-| Component that shows the main functionalities of the system.</p>
+<p>We are going to use React, which is a framework that facilitates interactivity with the user interface, so it is important to reach users.</p>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Register Users</em></strong>
-| Component to see what users are registered on the system.</p>
 </div>
+<div class="sect2">
+<h3 id="_testeability">8.5. Testeability</h3>
 <div class="paragraph">
-<p>| <strong><em>Login</em></strong>
-| Component to access the system by the user.</p>
+<p>As a best practice, throughout development, we will subject our code to multiple unit tests, in order to ensure the robustness and effectiveness of our product before it is deployed on the web. As well, we will  test the functionality of the whole app itself, so that the user experience is the best possible.</p>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Menu</em></strong>
-| Component to navigate through the system.</p>
+<div style="page-break-after: always;"></div>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Users Service</em></strong>
-| Component that manages the creation of new users.</p>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Questions Service</em></strong>
-| Component that manages the creation of the questions.</p>
 </div>
+<div class="sect1">
+<h2 id="section-design-decisions">9. Architecture Decisions</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>| <strong><em>Historial Service</em></strong>
-| Component that manages the history of users.</p>
-</div>
-<div class="paragraph">
-<p>| <strong><em>Authentification Service</em></strong>
-| Component that manages the authentification of users.</p>
-</div>
-<div class="paragraph">
-<p>| <strong><em>WIQ</em></strong>
-| Main component that manages all the system.</p>
-</div>
-<div class="paragraph">
-<p>| <strong><em>Wikidata</em></strong>
-| Website where to get information for questions.</p>
-</div>
-<div class="paragraph">
-<p>| <strong><em>Database</em></strong>
-| Component that manages the authentification of users.</p>
+<div class="title">Contents</div>
+<p>Important, expensive, large scale or risky architecture decisions including rationales.
+With "decisions" we mean selecting one alternative based on given criteria.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 100%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-runtime-view"></a>
-== Runtime View</p>
-<p class="tableblock">=== User plays a game
-When the game is started, the app will call the createquestion service that is in charge of provide generated questions from wikidata information.
-[plantuml,"Start a game",png]
-----
-actor a as "User"
-participant q as "Game GUI"
-participant w as "CreateQuestions service"
-database d as "Database"</p>
-<p class="tableblock">a &#8594; q: Start the game
-loop number of questions
-q &#8594; w: Ask for a question
-w -&#8594;q: Returns the question
-q &#8594; d: Store the question
-q &#8594; a: Returns the question</p>
-<p class="tableblock">a &#8594; q: Pick an answer
-q &#8594; a: Shows if the answer was valid or not
-a &#8594; q: Asks for next question
-end
-q &#8594; a: Show the game stats
-q &#8594; d: Store the game with questions, answers and stats
-----</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-deployment-view"></a></p>
-<p class="tableblock">== Deployment View</p>
-<p class="tableblock">=== Infrastructure Level 1</p>
-<p class="tableblock">image::07-DeploymentView.drawio.png[title="Deployment View"]</p>
-<p class="tableblock">image::07-DeploymentViewTest.drawio.png[title="Deployment View Test environment"]</p>
-<p class="tableblock">Motivation::</p>
-<p class="tableblock">During the development phase of the application, each team member is using Docker to run all the necessary services on a local server. For the production environment, it is planned to use a Microsoft Azure cloud server for the deployment of the application.</p>
-<p class="tableblock">The infrastructure includes user access via a user agent on their computer, which connects to the web interface of the WIQ application. In this configuration, several services will be active, such as the user authentication service, monitoring services and data analysis using Grafana and Prometheus. In addition, two internal APIs dedicated to the generation and retrieval of the history of questions asked and games played by each user are provided.</p>
-<p class="tableblock">Quality and/or Performance Features::</p>
-<p class="tableblock">The quality and performance of the application have not yet been evaluated, but it is noted that we have high availability, reaching approximately 95%, thanks to the cloud service provided by Microsoft Azure.</p>
-<p class="tableblock">Mapping of Building Blocks to Infrastructure::
-For the implementation, it has been decided to implement the following elements in the infrastructure:</p>
-<p class="tableblock">- <strong>Quiz Game Application</strong>: The main application is deployed in the development environment inside different Docker containers on each team member&#8217;s local server, so that a web application made with React is deployed on port <code>3000</code>. In the case of the production environment, the application would be deployed in the Microsoft Azure cloud and can be accessed publicly.</p>
-<p class="tableblock">- <strong>Questions API</strong>: It is an API in charge of generating questions to the WikiData API dynamically and it also keeps a history of the questions already asked.</p>
-<p class="tableblock">- <strong>WikiData API</strong>: The application makes calls to the WikiData API to generate the game questions dynamically and it is accessed both in the development and production environment.</p>
-<p class="tableblock">- <strong>MongoDB Database</strong>: The database is executed inside a Docker container in the development environment, so that user data and game information is stored. In the production environment, this database will be managed in a Microsoft Azure service.</p>
-<p class="tableblock">- <strong>Authentication Service</strong>: The authentication service allows a user to register and log in to the application so that the data associated with their games are always linked and accessible to their user.</p>
-<p class="tableblock">- <strong>Monitoring data</strong>: The application data monitoring and analysis service is made up of two different services, one with Grafana and the other with Prometheus. Both services work together analysing and monitoring application data so that a record can be kept of the information obtained in the form of dashboards.</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-concepts"></a>
-== Cross-cutting Concepts</p>
-<p class="tableblock">=== Domain model</p>
-<p class="tableblock">image::DOCsection8_1.drawio.png["Domain model"]</p>
-<p class="tableblock">=== Performance
-A system that performs well provides a positive user experience. Users expect applications and services to respond promptly to their requests. A higher performance leads to increased user satisfaction and engagement. Also, a good performance help to get a better efficiency.</p>
-<p class="tableblock">We are going to look for a good performance with the code optimization, without overloading the system and memory and doing some performance test.</p>
-<p class="tableblock">=== Usability
-Usability is a fundamental aspect of any application, as it determines the ease and efficiency with which users can interact with it. To ensure the usability of our application, we have followed a series of specific practices and techniques.</p>
-<p class="tableblock">We have thoroughly researched user needs and expectations, which has allowed us to design an intuitive and easy-to-use user interface.</p>
-<p class="tableblock">=== Maintainability
-The maintainability of the application is an important section since it is necessary that the code is easily modifiable in case in the future we are asked for new features to implement.</p>
-<p class="tableblock">We are going to use React, which is a framework that facilitates interactivity with the user interface, so it is important to reach users.</p>
-<p class="tableblock">=== Testeability
-As a best practice, throughout development, we will subject our code to multiple unit tests, in order to ensure the robustness and effectiveness of our product before it is deployed on the web. As well, we will  test the functionality of the whole app itself, so that the user experience is the best possible.</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-design-decisions"></a>
-== Architecture Decisions</p>
-<p class="tableblock">.Contents
-Important, expensive, large scale or risky architecture decisions including rationales.
-With "decisions" we mean selecting one alternative based on given criteria.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">====</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Decision</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Consequences</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Risks</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Uso de React.js</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Facilitates the development of user interfaces.
                   - React.js is a widely popular library in the development community.
                   - Improves the efficiency of frontend development.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Limited experience with React.js.
                                                                - Possible learning curve for the team.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Uso de JavaScript</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Team&#8217;s prior knowledge in JavaScript.
                      - Extensive support and resources available.
                      - Suitable language for frontend and backend development.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Limitations in compile-time error detection.
                                                                - Potential challenges in performance for large projects.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Uso de MongoDB</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Flexible schema and horizontal scalability.
                  - Widely used in modern applications.
                  - Compatibility with unstructured data.
                  - Already implemented in user registration and login.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Not familiar with NoSQL databases.
                                                     - Possible learning curve.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Uso de Docker</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Containerization that facilitates deployment and scalability.
                  - Consistent environment in development and production.
                  - Streamlines dependency management.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Potential initial complexity in Docker configuration.
                                                       - Requires additional learning resources.</p></td>
 </tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-quality-scenarios">10. Quality Requirements</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_quality_tree">10.1. Quality Tree</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/10_1_Quality_Tree.png" alt="Business Context Diagram">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 42.8571%;">
+<col style="width: 42.8572%;">
+</colgroup>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">====</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-quality-scenarios"></a>
-== Quality Requirements</p>
-<p class="tableblock">=== Quality Tree</p>
-<p class="tableblock">image::10_1_Quality_Tree.png[Business Context Diagram]</p>
-<p class="tableblock">=== Quality Scenarios</p>
-<p class="tableblock">[options="header",cols="1,3,3"]</p></td>
+<th class="tableblock halign-left valign-top">Quality Requirements</th>
+<th class="tableblock halign-left valign-top">Scenarios</th>
+<th class="tableblock halign-left valign-top">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Performance</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We&#8217;ll run some performance testing and search for a good code optimization performance without taxing the system&#8217;s resources or memory. Optimize the setups, algorithms, and system parts as well.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Usability</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We want to offer the user the possibility to see his personal statistics, as well as a service of access to information and data storage, in an intuitive and efficient system for customers (as fast as possible).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Maintainability</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The design and architecture will allow for flexibility in the face of unexpected events during development, this feature is important because we want to reduce costs in terms of time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Testeability</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application will be subjected to unit, acceptance and load testing to prove that it works correctly. If new functionality is added to the map, it must be thoroughly tested before deployment.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>| Quality Requirements | Scenarios | Priority</p>
+<div style="page-break-after: always;"></div>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Performance</em></strong>
-| We&#8217;ll run some performance testing and search for a good code optimization performance without taxing the system&#8217;s resources or memory. Optimize the setups, algorithms, and system parts as well.
-| High</p>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Usability</em></strong>
-| We want to offer the user the possibility to see his personal statistics, as well as a service of access to information and data storage, in an intuitive and efficient system for customers (as fast as possible).
-| High</p>
 </div>
-<div class="paragraph">
-<p>| <strong><em>Maintainability</em></strong>
-| The design and architecture will allow for flexibility in the face of unexpected events during development, this feature is important because we want to reduce costs in terms of time.
-| Medium</p>
-</div>
-<div class="paragraph">
-<p>| <strong><em>Testeability</em></strong>
-| The application will be subjected to unit, acceptance and load testing to prove that it works correctly. If new functionality is added to the map, it must be thoroughly tested before deployment.
-| High</p>
-</div>
+<div class="sect1">
+<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_technical_risks">11.1. Technical Risks</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 100%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-technical-risks"></a>
-== Risks and Technical Debts</p>
-<p class="tableblock">=== Technical Risks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Risk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solution</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No knowladge of React</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Non member of the team has worked with React before.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read React&#8217;s documentation and search for exercises and tutorials of how to use the technology.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Most of us have use it, however, some have not in a project of that magnitude. Also there are some new features for everyone.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transfer the knowledge of essential operations in Github from those who now them to those who don&#8217;t, as well as search information about how to use the new features for everyone.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lost of team members</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any member could leave the project due to personal reasons. Risk that gets importance if we take into account we only are four members.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Don&#8217;t make any member categorically essential, so we can avoid any part of the project from being orphaned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">External dependencies</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As the app will be deployed on an external server, there could be a situation where we can not deployed it due to an external issue.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Have a second deployment server in order to replace the first if it is not available.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Insufficient tests</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The lack of tests could trigger the release of some features with a not expected behaviour.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make exhaustive tests on all the features that will be released  on the app.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>| Risk | Explanation | Solution
-| No knowladge of React | Non member of the team has worked with React before. | Read React&#8217;s documentation and search for exercises and tutorials of how to use the technology.
-| Github | Most of us have use it, however, some have not in a project of that magnitude. Also there are some new features for everyone. | Transfer the knowledge of essential operations in Github from those who now them to those who don&#8217;t, as well as search information about how to use the new features for everyone.
-| Lost of team members | Any member could leave the project due to personal reasons. Risk that gets importance if we take into account we only are four members. | Don&#8217;t make any member categorically essential, so we can avoid any part of the project from being orphaned.
-| External dependencies | As the app will be deployed on an external server, there could be a situation where we can not deployed it due to an external issue. | Have a second deployment server in order to replace the first if it is not available.
-| Insufficient tests | The lack of tests could trigger the release of some features with a not expected behaviour. | Make exhaustive tests on all the features that will be released  on the app.</p>
+<div style="page-break-after: always;"></div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-glossary">12. Glossary</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 100%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Term</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Definition</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-glossary"></a>
-== Glossary</p>
-<p class="tableblock">[cols="e,2e" options="header"]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript library that allows us to create interactive user interfaces in a simple way. It is based on components.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Git</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Software version control system.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>GitHub</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cloud-based service that hosts the aforementioned version control system.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Wikidata</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Website where the information is taken from</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docker</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A tool that makes it easy to create, deploy and run applications using containers.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Open source, document-oriented database system.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Interpreted programming language based on prototypes, imperative and dynamic.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>CSS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cascading Style Sheets. Graphic programming language oriented to define the repesentation of a document.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Draw.io</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Free application for diagramming.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Lucidchart</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Web-based diagramming tool that allows users to collaborate and work together in real time, creating flowcharts, flowcharts, website schematics, UML designs, mind maps, software prototypes and many other types of diagrams.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Visual Studio Code</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Independent source code editor.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Microsoft Azure</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cloud computing platform created by Microsoft to build, test, deploy and manage applications and services using its data centers.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Grafana</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Grafana is a real-time data analysis and visualisation platform, especially used for monitoring and observability.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Prometheus</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Prometheus is an open source monitoring and alarming system designed to collect metrics, store them and enable queries and alerts in modern technology environments.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API (Application Programming Interface)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A set of rules and tools that allow different software to communicate with each other. It facilitates the interaction and exchange of data, functions or services between different applications.</em></p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>|<strong>Term</strong> | <strong>Definition</strong></p>
-</div>
-<div class="paragraph">
-<p>| React
-| JavaScript library that allows us to create interactive user interfaces in a simple way. It is based on components.</p>
-</div>
-<div class="paragraph">
-<p>| Git
-| Software version control system.</p>
-</div>
-<div class="paragraph">
-<p>| GitHub
-| Cloud-based service that hosts the aforementioned version control system.</p>
-</div>
-<div class="paragraph">
-<p>| Wikidata
-| Website where the information is taken from</p>
-</div>
-<div class="paragraph">
-<p>| Docker
-| A tool that makes it easy to create, deploy and run applications using containers.</p>
-</div>
-<div class="paragraph">
-<p>| MongoDB
-| Open source, document-oriented database system.</p>
-</div>
-<div class="paragraph">
-<p>| JavaScript
-| Interpreted programming language based on prototypes, imperative and dynamic.</p>
-</div>
-<div class="paragraph">
-<p>| CSS
-| Cascading Style Sheets. Graphic programming language oriented to define the repesentation of a document.</p>
-</div>
-<div class="paragraph">
-<p>| Draw.io
-| Free application for diagramming.</p>
-</div>
-<div class="paragraph">
-<p>| Lucidchart
-| Web-based diagramming tool that allows users to collaborate and work together in real time, creating flowcharts, flowcharts, website schematics, UML designs, mind maps, software prototypes and many other types of diagrams.</p>
-</div>
-<div class="paragraph">
-<p>| Visual Studio Code
-| Independent source code editor.</p>
-</div>
-<div class="paragraph">
-<p>| Microsoft Azure
-| Cloud computing platform created by Microsoft to build, test, deploy and manage applications and services using its data centers.</p>
-</div>
-<div class="paragraph">
-<p>| Grafana
-| Grafana is a real-time data analysis and visualisation platform, especially used for monitoring and observability.</p>
-</div>
-<div class="paragraph">
-<p>| Prometheus
-| Prometheus is an open source monitoring and alarming system designed to collect metrics, store them and enable queries and alerts in modern technology environments.</p>
-</div>
-<div class="paragraph">
-<p>| API (Application Programming Interface)
-| A set of rules and tools that allow different software to communicate with each other. It facilitates the interaction and exchange of data, functions or services between different applications.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-</table>
-</div>
 </div>
 </div>
 </div>
