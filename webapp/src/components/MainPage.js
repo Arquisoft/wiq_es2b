@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { Container, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Toolbar, AppBar } from '@mui/material';
+// MainPage.js
+import React, { createContext, useContext, useState } from 'react';
+import { Container, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 
-import { ConfigProvider } from './ConfigContext';
-
-
 import Navbar from './Navbar';
 import Footer from './Footer';
+
+// Definición del contexto para la configuración del juego
+const ConfigContext = createContext();
+
+export const useConfig = () => useContext(ConfigContext);
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -16,7 +19,6 @@ const MainPage = () => {
     const [open, setOpen] = useState(false);
     const [numQuestions, setNumQuestions] = useState(5);
     const [timePerQuestion, setTimePerQuestion] = useState(10);
-
 
     const handleNumQuestionsChange = (event) => {
         setNumQuestions(event.target.value);
@@ -34,41 +36,37 @@ const MainPage = () => {
         setOpen(false);
     };
 
-    // Función para manejar cambios en el valor del campo de entrada
     const handleInputChange = (event) => {
-        // Evita actualizar el estado si el usuario intenta ingresar manualmente
         event.preventDefault();
     };
 
-
-
     const handleShowGame = () => {
         let path = '/Game';
-        navigate(path);
-    };
 
-    const handleShowHistoricalData = () => {
-        let path = '/HistoricalData';
-        navigate(path);
-    };
+        // Configuración del juego
+        const gameConfig = {
+            numQuestions: numQuestions,
+            timePerQuestion: timePerQuestion
+        };
 
-    const handleShowHistoricalUserData = () => {
-        let path = '/HistoricalUserData';
-        navigate(path);
-    };
-
-    const handleShowRegisteredUsers = () => {
-        let path = '/RegisteredUsers';
-        navigate(path);
+        navigate(path, { state: { gameConfig } });
     };
 
     const handleRanking = () => {
         let path = '/ScoreBoard';
         navigate(path);
-    }
+    };
+
+    // Valor del contexto para la configuración del juego
+    const configValue = {
+        numQuestions,
+        timePerQuestion,
+        updateNumQuestions: setNumQuestions,
+        updateTimePerQuestion: setTimePerQuestion,
+    };
 
     return (
-        <>
+        <ConfigContext.Provider value={configValue}>
             <Navbar />
 
             <div title='main-title'>
@@ -99,7 +97,6 @@ const MainPage = () => {
                             <Button variant="contained" color="primary" fullWidth onClick={handleOpenDialog}  >
                                 Configuración
                             </Button>
-
                         </div>
                     </Grid>
                 </Grid>
@@ -149,13 +146,8 @@ const MainPage = () => {
                 </div>
             </Dialog>
 
-
-
-
             <Footer />
-
-
-        </>
+        </ConfigContext.Provider>
     )
 }
 

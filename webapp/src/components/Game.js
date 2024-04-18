@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Button, Paper, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@mui/material';
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import './Game.css';
-
 import '../index.css';
-
 import '../Timer.css';
 
 const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
@@ -17,6 +14,10 @@ const Game = () => {
   const navigate = useNavigate();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
+  // Configuración del juego
+  const location = useLocation();
+  const { gameConfig } = location.state;
+
   const [questionObject, setQuestionObject] = useState('');
   const [correctOption, setCorrectOption] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
@@ -24,9 +25,12 @@ const Game = () => {
 
   const [questionCounter, setQuestionCounter] = useState(0);
   const [incorrectCounter, setIncorrectCounter] = useState(0);
-  
-  const [numberOfQuestions] = useState(6);
-  const [questionsToAnswer, setQuestionsToAnswer] = useState(6);
+
+  const [numberOfQuestions] = useState(gameConfig.numQuestions);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState(gameConfig.numQuestions);
+
+
+
   const [isFinished, setFinished] = useState(false);
 
   // Porcentaje de aciertos
@@ -43,8 +47,8 @@ const Game = () => {
 
 
 
-  // Temporizador desde 20 segundos
-  const [time, setTime] = useState(20);
+  // Temporizador
+  const [time, setTime] = useState(gameConfig.timePerQuestion);
   const [isTimedOut, setTimedOut] = useState(false);
 
 
@@ -110,7 +114,7 @@ const Game = () => {
 
 
   // Calcular el porcentaje de tiempo transcurrido para el círculo del temporizador
-  const percentageTime = ((20 - time) / 20) * 100;
+  const percentageTime = ((gameConfig.timePerQuestion - time) / gameConfig.timePerQuestion) * 100;
 
 
   // Detener el temporizador
@@ -124,7 +128,7 @@ const Game = () => {
 
   // Activar el temporizador
   const restartTimer = () => {
-    setTime(20); // Reiniciar el tiempo a 20 segundos
+    setTime(gameConfig.timePerQuestion); // Reiniciar el tiempo
     setIsTimerActive(true);
     setTimedOut(false);
   };
@@ -202,7 +206,7 @@ const Game = () => {
       console.error('Error:', error);
     }  
 
-    // Poner temporizador a 20 segundos
+    // Poner temporizador a tiempo inicial
     restartTimer();
     
 
@@ -379,7 +383,6 @@ const getQuestions = () => {
 
 
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
-
       {!isFinished && (
       <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
         <Typography variant="h4" gutterBottom>
@@ -395,10 +398,7 @@ const getQuestions = () => {
           <div className="Timer">
             <div className="container">
               <div className="text">{time}</div>
-              <div
-                style={{ transform: `rotate(${percentageTime * 3.6}deg)` }}
-                className="dot"
-              ></div>
+
               <svg>
                 <circle cx="70" cy="70" r="70" />
                 <circle
