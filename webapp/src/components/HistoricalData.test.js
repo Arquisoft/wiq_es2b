@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockAxios = new MockAdapter(axios);
 
-describe('HistoricalData component', () => {
+describe('HistoricalData', () => {
   beforeEach(() => {
     mockAxios.reset();
   });
@@ -15,12 +15,12 @@ describe('HistoricalData component', () => {
   it('muestra la página con el histórico de preguntas generadas', async () => {
 
     mockAxios.onGet("http://localhost:8000/historicaldata").reply(200, 
-        { question: "¿Cual es la capital de Venezuela?",
+        [{ question: "¿Cual es la capital de Venezuela?",
           correctOption: "Caracas",
           incorrectOption1: "Doha",
           incorrectOption2: "Barcelona",
           incorrectOption3: "Nasáu"
-        });
+        }]);
 
     render(<Router>
         <HistoricalData />
