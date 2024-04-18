@@ -60,6 +60,8 @@ Shows how is the system internally in general terms.
 | *_Database_* 
 | Component that manages the authentification of users.
 
+|===
+
 === Level 3
 
 image::DOCsection5_3.drawio.png["Level 3"]
