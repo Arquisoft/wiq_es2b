@@ -7,7 +7,7 @@ import './Game.css';
 import '../index.css';
 import '../Timer.css';
 
-const colorPreguntas= 'rgba(51, 139, 173, 0.764)';
+const colorPreguntas= '#4c8dbf';
 const colorOnMousePreguntas= 'rgba(28, 84, 106, 0.764)';
 
 const Game = () => {
@@ -385,9 +385,28 @@ const getQuestions = () => {
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
       {!isFinished && (
       <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
-        <Typography variant="h4" gutterBottom>
+        <Typography component="h2" className='main-title animate__animated animate__backInLeft animate__tada' variant="h4" sx={{ textAlign: 'center' }}>
           Saber y Ganar Juego
         </Typography>
+
+        <div className="button-container">
+  {!isFinished && (
+    <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+      Preguntas restantes: {questionsToAnswer}
+    </Button>
+  )}
+  {!isFinished && (
+    <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+      Correctas: {correctCounter}
+    </Button>
+  )}
+  {!isFinished && (
+    <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
+      Incorrectas: {incorrectCounter}
+    </Button>
+  )}
+</div>
+
 
         {!isFinished && (
         <Typography variant="h4" gutterBottom>
@@ -416,8 +435,8 @@ const getQuestions = () => {
 
       )}
 
-        <Typography variant="body1" paragraph>
-          Pregunta {questionCounter}: {questionObject}
+        <Typography variant="body1" className='game-question' paragraph>
+          <h2><strong>Pregunta {questionCounter}:</strong> {questionObject}</h2>
         </Typography>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', marginTop: '2em' }}>
           {answerOptions.map((option, index) => (
@@ -437,21 +456,7 @@ const getQuestions = () => {
       </Paper>
      )}
 
-      {!isFinished && (
-      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
-        Preguntas restantes: {questionsToAnswer}
-      </Button>
-      )}
-      {!isFinished && (
-      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
-        Correctas: {correctCounter}
-      </Button>
-      )}
-      {!isFinished && (
-      <Button title="contador" onMouseEnter={null} variant="contained" color="primary" disabled={true}>
-        Incorrectas: {incorrectCounter}
-      </Button>
-      )}
+      
 
 
 
@@ -476,7 +481,7 @@ const getQuestions = () => {
 
         </Paper>
         <div>
-          <Button title="contador" onClick={handleMainPage} variant="contained" color="secondary">
+          <Button title="volver" onClick={handleMainPage} variant="contained">
           Volver al menú principal</Button>
         </div>
         </div>
@@ -484,7 +489,7 @@ const getQuestions = () => {
 
       {!isGameFinished() && !isFinished &&(
       <div>
-        <Button title="contador" onClick={handleDialogOpen} variant="contained" color="secondary">
+        <Button title="volver" onClick={handleDialogOpen} variant="contained">
         Volver al menú principal</Button>
       </div>
       )}

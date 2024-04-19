@@ -14,7 +14,7 @@
   
   .Timer .text {
     position: absolute;
-    color: #007bff;
+    color: #23384b;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -31,7 +31,7 @@
   
   .Timer .container svg circle {
     fill: transparent;
-    stroke: #415262;
+    stroke: #23384b;
     stroke-width: 4;
     transform: translate(5px, 5px);
     transition: all 2s;
@@ -40,7 +40,7 @@
   
   .Timer .container svg circle:nth-child(2) {
     fill: transparent;
-    stroke: #007bff;
+    stroke: #62bbff;
     stroke-width: 6;
     stroke-dasharray: 440;
     /* stroke-dashoffset: 0; */
@@ -60,12 +60,12 @@
     content: "";
     width: 20px;
     height: 20px;
-    background-color: #007bff;
+    background-color: #62bbff;
     z-index: 1000;
     position: absolute;
     border-radius: 10px;
     top: -2px;
     transform: translate(-10px);
-    box-shadow: 0 0 20px 4px #007bff;
+    box-shadow: 0 0 20px 4px #62bbff;
   }
   

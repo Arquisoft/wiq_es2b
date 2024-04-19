@@ -32,7 +32,7 @@ div[title="main-title"]>h2 {
 
 
 div[title="main"]>button:hover {
-    background-color: rgb(189, 216, 255);
+    background-color: #bdd8ff;
     color: #007dfe;
     font-weight: 600;
     width: auto;
