@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Navbar from './Navbar';
+import './HistoricalUserData.css';
 
 
 const HistoricalUserData = () => {

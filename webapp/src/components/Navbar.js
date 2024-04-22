@@ -11,14 +11,14 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('username');
-    navigate("/"); // Redirige a la página de inicio de sesión
+    navigate("/");
   };
   
 
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <Link className="navbar-brand" to="/">WIQ 2024</Link>
+        <Link className="navbar-brand" to="/mainPage">WIQ 2024</Link>
         <button className="navbar-toggler" type="button" onClick={toggleHistorialDropdown}>
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -26,9 +26,6 @@ const Navbar = () => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link" to="/mainPage">Página principal</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/game">Jugar</Link>
             </li>
             <li className={`nav-item dropdown ${historialDropdownOpen ? 'show' : ''}`} onClick={toggleHistorialDropdown}>
               <Link className="nav-link dropdown-toggle" to="#" role="button">
@@ -43,7 +40,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/RegisteredUsers">Usuarios registrados</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/ScoreBoard">ScoreBoard</Link>
+              <Link className="nav-link" to="/ScoreBoard">Ranking</Link>
             </li>
             <li className="nav-item">
                 <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
