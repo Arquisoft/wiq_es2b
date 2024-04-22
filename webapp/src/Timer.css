@@ -1,7 +1,7 @@
 .Timer {
     font-family: sans-serif;
     text-align: center;
-    height: 50vh;
+    height: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@
   
   .Timer .container {
     position: relative;
-    transform: scale(200%);
+    transform: scale(150%);
   }
   
   .Timer .text {
