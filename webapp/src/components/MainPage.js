@@ -1,35 +1,72 @@
-import React from 'react';
-import { Container, Typography, Button, Grid } from '@mui/material';
+// MainPage.js
+import React, { createContext, useContext, useState } from 'react';
+import { Container, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
+
+// Definición del contexto para la configuración del juego
+const ConfigContext = createContext();
+
+export const useConfig = () => useContext(ConfigContext);
 
 const MainPage = () => {
     const navigate = useNavigate();
 
+    // Configuración de la partida
+    const [open, setOpen] = useState(false);
+    const [numQuestions, setNumQuestions] = useState(5);
+    const [timePerQuestion, setTimePerQuestion] = useState(10);
+
+    const handleNumQuestionsChange = (event) => {
+        setNumQuestions(event.target.value);
+    };
+
+    const handleTimePerQuestionChange = (event) => {
+        setTimePerQuestion(event.target.value);
+    };
+
+    const handleOpenDialog = () => {
+        setOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpen(false);
+    };
+
+    const handleInputChange = (event) => {
+        event.preventDefault();
+    };
+
     const handleShowGame = () => {
         let path = '/Game';
+
+        // Configuración del juego
+        const gameConfig = {
+            numQuestions: numQuestions,
+            timePerQuestion: timePerQuestion
+        };
+
+        navigate(path, { state: { gameConfig } });
+    };
+
+    const handleRanking = () => {
+        let path = '/ScoreBoard';
         navigate(path);
     };
 
-    const handleShowHistoricalData = () => {
-        let path = '/HistoricalData';
-        navigate(path);
-    };
-
-    const handleShowHistoricalUserData = () => {
-        let path = '/HistoricalUserData';
-        navigate(path);
-    };
-
-    const handleShowRegisteredUsers = () => {
-        let path = '/RegisteredUsers';
-        navigate(path);
+    // Valor del contexto para la configuración del juego
+    const configValue = {
+        numQuestions,
+        timePerQuestion,
+        updateNumQuestions: setNumQuestions,
+        updateTimePerQuestion: setTimePerQuestion,
     };
 
     return (
-        <>
+        <ConfigContext.Provider value={configValue}>
             <Navbar />
 
             <div title='main-title'>
@@ -41,8 +78,8 @@ const MainPage = () => {
                 </Typography>
             </div>
 
-            <Container component="main" maxWidth="md" sx={{ marginTop: 4 }}>
-                
+            <Container component="main" maxWidth="md" sx={{ marginTop: 4, marginBottom: 10 }}>
+
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                         <div className="img-container">
@@ -54,20 +91,63 @@ const MainPage = () => {
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowGame}  >
                                 Nuevo juego
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalData}  >
-                                Historial de preguntas
+                            <Button variant="contained" color="primary" fullWidth onClick={handleRanking}  >
+                                Ranking
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleShowHistoricalUserData}  >
-                                Historial de usuario
+                            <Button variant="contained" color="primary" fullWidth onClick={handleOpenDialog}  >
+                                Configuración
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleShowRegisteredUsers}  >
-                                Usuarios registrados
-                            </Button>
-                            </div>
+                        </div>
                     </Grid>
                 </Grid>
             </Container>
-        </>
+
+            <Dialog open={open} onClose={handleCloseDialog}>
+                <div className="dialogContainer">
+                    <DialogTitle className="dialogTitle">
+                        <h2>Configuración del juego</h2>
+                    </DialogTitle>
+                    <DialogContent className="dialogContent">
+                        <div className="dialogImage">
+                            <img src="./questions-illustration.png" alt="Descripción de la imagen" />
+                        </div>
+                        <Typography variant="body1">Ingrese el número de preguntas:</Typography>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="numQuestions"
+                            label="Número de preguntas (min. 5)"
+                            type="number"
+                            fullWidth
+                            value={numQuestions}
+                            onChange={handleNumQuestionsChange}
+                            inputProps={{ min: 5, onKeyDown: handleInputChange }}
+                            className="dialogTextField"
+                        />
+
+                        <Typography variant="body1">Ingrese el tiempo por pregunta (segundos):</Typography>
+                        <TextField
+                            margin="dense"
+                            id="timePerQuestion"
+                            label="Tiempo por pregunta (mín. 10 segundos)"
+                            type="number"
+                            fullWidth
+                            value={timePerQuestion}
+                            onChange={handleTimePerQuestionChange}
+                            inputProps={{ min: 10, onKeyDown: handleInputChange }}
+                            className="dialogTextField"
+                        />
+                    </DialogContent>
+                    <DialogActions className="dialogButton">
+                        <Button variant="contained" color="primary" fullWidth onClick={handleCloseDialog}  >
+                            Aceptar
+                        </Button>
+                    </DialogActions>
+                </div>
+            </Dialog>
+
+            <Footer />
+        </ConfigContext.Provider>
     )
 }
 
