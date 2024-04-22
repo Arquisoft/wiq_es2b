@@ -1,8 +1,11 @@
-html, body, main, #root {
-  background-color: #a5b8d4;
-  overflow: hidden;
+* {
+  margin: 0;
+  padding: 0;
 }
 
+html, body, main, #root {
+  background-color: #a5b8d4;
+}
 
 
 body {
@@ -12,7 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+
 }
 
 code {
