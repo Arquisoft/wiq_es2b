@@ -3,7 +3,12 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.12",
-    "@mui/material": "^5.15.12"
+    "@mui/material": "^5.15.12",
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
