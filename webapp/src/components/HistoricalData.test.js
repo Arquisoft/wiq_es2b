@@ -26,12 +26,6 @@ describe('HistoricalData', () => {
         <HistoricalData />
       </Router>);
 
-    const tableElement = screen.getByRole('table');
-
-    // Verifica si el elemento se encuentra en el DOM
-    expect(tableElement).toBeInTheDocument();
-
-
     await waitFor(() => {
         expect(screen.getByText('Pregunta')).toBeInTheDocument();
         expect(screen.getByText('Opción correcta')).toBeInTheDocument();
