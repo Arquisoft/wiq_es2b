@@ -27,9 +27,6 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/mainPage">Página principal</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/game">Jugar</Link>
-            </li>
             <li className={`nav-item dropdown ${historialDropdownOpen ? 'show' : ''}`} onClick={toggleHistorialDropdown}>
               <Link className="nav-link dropdown-toggle" to="#" role="button">
                 Historial
