@@ -40,10 +40,6 @@ const HistoricalUserData = () => {
     }
   };
 
-  const handleClick = (event) => {
-    const buttonText = event.target.textContent;
-    event.target.textContent = buttonText === '+' ? '-' : '+';
-  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -56,7 +52,7 @@ const HistoricalUserData = () => {
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = ( newPage) => {
     setPage(newPage);
   };
 
@@ -93,7 +89,7 @@ const HistoricalUserData = () => {
                 {paginatedGameHistory.map((game, index) => (
                   <React.Fragment key={game.id}>
                     <TableRow>
-                      <TableCell><button onClick={() => toggleRow(index)} type="button" className="btn-show-more">+</button></TableCell>
+                      <TableCell><button onClick={() => toggleRow(index)} type="button" className="btn-show-more">{expandedRows.includes(index) ? '-' : '+'}</button></TableCell>
                       <TableCell className="custom-td">{formatDate(game.date)}</TableCell>
                       <TableCell className="custom-td">{game.duration} segundos</TableCell>
                       <TableCell className="custom-td">{game.percentage.toFixed(2)}%</TableCell>
