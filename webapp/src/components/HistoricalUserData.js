@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import Navbar from './Navbar';
 import './HistoricalUserData.css';
-
 
 const HistoricalUserData = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -33,15 +32,12 @@ const HistoricalUserData = () => {
   };
 
   const toggleRow = (index) => {
-    const newExpandedRows = [...expandedRows];
-    if (newExpandedRows.includes(index)) {
-      // Si la fila ya está expandida, la contraemos
-      newExpandedRows.splice(newExpandedRows.indexOf(index), 1);
+    const isExpanded = expandedRows.includes(index);
+    if (isExpanded) {
+      setExpandedRows(expandedRows.filter(i => i !== index));
     } else {
-      // Si la fila no está expandida, la expandimos
-      newExpandedRows.push(index);
+      setExpandedRows([...expandedRows, index]);
     }
-    setExpandedRows(newExpandedRows);
   };
 
   const handleClick = (event) => {
@@ -79,12 +75,11 @@ const HistoricalUserData = () => {
           Historial de partidas de { localStorage.getItem('username')}
       </Typography>
 
-      <Container component="main" sx={{ marginTop: 2, maxHeight: '400px', overflowX: 'auto' }} className='containerTable'>
-        <div>
-          <TableContainer>
-            <Table>
+      <Container component="main" className='contenedor containerTable' >
+          <TableContainer >
+            <Table sx={{ minWidth: 650 }} aria-label="customized table">
               <TableHead>
-                <TableRow>
+                <TableRow className='custom-td'>
                   <TableCell></TableCell>
                   <TableCell>Fecha</TableCell>
                   <TableCell>Tiempo de partida</TableCell>
@@ -97,8 +92,8 @@ const HistoricalUserData = () => {
               <TableBody>
                 {paginatedGameHistory.map((game, index) => (
                   <React.Fragment key={game.id}>
-                    <TableRow onClick={() => toggleRow(index)}>
-                      <TableCell><button onClick={handleClick} type="button" class="btn-show-more">+</button></TableCell>
+                    <TableRow>
+                      <TableCell><button onClick={() => toggleRow(index)} type="button" className="btn-show-more">+</button></TableCell>
                       <TableCell className="custom-td">{formatDate(game.date)}</TableCell>
                       <TableCell className="custom-td">{game.duration} segundos</TableCell>
                       <TableCell className="custom-td">{game.percentage.toFixed(2)}%</TableCell>
@@ -130,11 +125,10 @@ const HistoricalUserData = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
             rowsPerPageOptions={[5, 10, 15]}
           />
-        </div>
+        
       </Container>
     </>
   );
-
 };
 
 export default HistoricalUserData;
