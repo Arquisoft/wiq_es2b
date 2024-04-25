@@ -62,13 +62,22 @@ const HistoricalData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((row, rowIndex) => (
+            {/* {paginatedData.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
                 {row.map((cell, cellIndex) => (
                   <TableCell key={cellIndex}>{cell}</TableCell>
                 ))}
               </TableRow>
-            ))}
+            ))} */}
+            {paginatedData.map((row, rowIndex) => (
+                  <TableRow key={rowIndex}>
+                    <TableCell>{row[0]}</TableCell>
+                    <TableCell>{row[1]}</TableCell>
+                    <TableCell>{row[2]}</TableCell>
+                    <TableCell>{row[3]}</TableCell>
+                    <TableCell>{row[4]}</TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>

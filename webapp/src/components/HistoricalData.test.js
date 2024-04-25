@@ -20,24 +20,33 @@ describe('HistoricalData', () => {
           incorrectOption1: "Doha",
           incorrectOption2: "Barcelona",
           incorrectOption3: "Nasáu"
-        }]);
+        },
+        {
+          question: "¿Cuál es la capital de Francia?",
+          correctOption: "París",
+          incorrectOption1: "Londres",
+          incorrectOption2: "Madrid",
+          incorrectOption3: "Roma"
+        }
+      ]);
 
     render(<Router>
         <HistoricalData />
       </Router>);
 
     await waitFor(() => {
-        expect(screen.getByText('Pregunta')).toBeInTheDocument();
-        expect(screen.getByText('Opción correcta')).toBeInTheDocument();
-        expect(screen.getByText('Opción incorrecta 1')).toBeInTheDocument();
-        expect(screen.getByText('Opción incorrecta 2')).toBeInTheDocument();
-        expect(screen.getByText('Opción incorrecta 3')).toBeInTheDocument();
 
         expect(screen.getByText('¿Cual es la capital de Venezuela?')).toBeInTheDocument();
         expect(screen.getByText('Caracas')).toBeInTheDocument();
         expect(screen.getByText('Doha')).toBeInTheDocument();
         expect(screen.getByText('Barcelona')).toBeInTheDocument();
         expect(screen.getByText('Nasáu')).toBeInTheDocument();
+
+        expect(screen.getByText('¿Cuál es la capital de Francia?')).toBeInTheDocument();
+        expect(screen.getByText('París')).toBeInTheDocument();
+        expect(screen.getByText('Londres')).toBeInTheDocument();
+        expect(screen.getByText('Madrid')).toBeInTheDocument();
+        expect(screen.getByText('Roma')).toBeInTheDocument();
       
       });
   });

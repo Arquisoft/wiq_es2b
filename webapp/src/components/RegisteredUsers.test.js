@@ -25,7 +25,6 @@ describe('Registered Users component', () => {
 
   await waitFor(() => {
 
-
     expect(screen.getByText('pablo')).toBeInTheDocument();
     expect(screen.getByText('4/23/2024')).toBeInTheDocument();
     });
