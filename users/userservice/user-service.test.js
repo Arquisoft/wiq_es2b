@@ -6,6 +6,11 @@ const User = require('./user-model');
 let mongoServer;
 let app;
 
+const user = {
+  username: 'testuser',
+  password: 'testpassword',
+};
+
 async function addUser(user){
   const hashedPassword = await bcrypt.hash(user.password, 10);
   const newUser = new User({
@@ -21,6 +26,7 @@ beforeAll(async () => {
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
   app = require('./user-service'); 
+  await addUser(user);
 });
 
 afterAll(async () => {
@@ -29,16 +35,26 @@ afterAll(async () => {
 });
 
 describe('User Service', () => {
+
+  //
+  it('should get the registered users on /getregisteredusers', async () => {
+    
+    const response = await request(app).get('/getregisteredusers');
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+    expect(Array.from(response.body[0])[0]).toBe('testuser');
+  });
+
   //
   it('should add a new user on POST /adduser', async () => {
     const newUser = {
-      username: 'testuser',
-      password: 'testpassword',
+      username: 'testuser2',
+      password: 'testpassword2',
     };
 
     const response = await request(app).post('/adduser').send(newUser);
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('username', 'testuser');
+    expect(response.body).toHaveProperty('username', 'testuser2');
   });
 
   //
@@ -52,15 +68,5 @@ describe('User Service', () => {
     expect(response.body).toHaveProperty( "error" , "Missing required field: username" );
   });
 
-  //
-  it('should get the registered users on /getregisteredusers', async () => {
-    addUser(user = {
-      username: 'testuser',
-      password: 'testpassword',
-    });
-    const response = await request(app).get('/getregisteredusers');
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
-    expect(Array.from(response.body[0])[0]).toBe('testuser');
-  });
+  
 });
