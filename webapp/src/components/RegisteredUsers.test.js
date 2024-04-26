@@ -13,10 +13,9 @@ describe('Registered Users component', () => {
   });
 
   it('muestra todos los usuarios registrados', async () => {
-
-    mockAxios.onGet("http://localhost:8000/RegisteredUsers").reply(200, 
-    [{  username: "pablo",
-      fecha: "4/23/2024"}]);
+    const user1 = ['pablo', '4/23/2024'];
+    const mockUsers = [user1];
+    mockAxios.onGet("http://localhost:8000/getregisteredusers").reply(200, mockUsers);
 
     render(
       <Router>

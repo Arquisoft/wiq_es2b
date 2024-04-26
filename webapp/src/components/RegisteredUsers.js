@@ -54,6 +54,7 @@ const RegisteredUsers = () => {
                 <td>{row[1]}</td>
               </tr>
             ))}
+            
           </tbody>
         </table>
       </div>

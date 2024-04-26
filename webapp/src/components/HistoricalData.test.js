@@ -7,28 +7,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockAxios = new MockAdapter(axios);
 
-describe('HistoricalData', () => {
+describe('HistoricalData component', () => {
   beforeEach(() => {
     mockAxios.reset();
   });
 
   it('muestra la página con el histórico de preguntas generadas', async () => {
 
-    mockAxios.onGet("http://localhost:8000/getquestionshistory").reply(200, 
-        [{ question: "¿Cual es la capital de Venezuela?",
-          correctOption: "Caracas",
-          incorrectOption1: "Doha",
-          incorrectOption2: "Barcelona",
-          incorrectOption3: "Nasáu"
-        },
-        {
-          question: "¿Cuál es la capital de Francia?",
-          correctOption: "París",
-          incorrectOption1: "Londres",
-          incorrectOption2: "Madrid",
-          incorrectOption3: "Roma"
-        }
-      ]);
+    const question1 = ['¿Cual es la capital de Venezuela?', 'Caracas', 'Doha', 'Barcelona', 'Nasáu'];
+    const question2 = ['¿Cual es la capital de Francia?', 'París', 'Londres', 'Madrid', 'Roma'];
+    const mockUsers = [question1, question2];
+    mockAxios.onGet("http://localhost:8000/getquestionshistory").reply(200, mockUsers);
 
     render(<Router>
         <HistoricalData />
@@ -42,7 +31,7 @@ describe('HistoricalData', () => {
         expect(screen.getByText('Barcelona')).toBeInTheDocument();
         expect(screen.getByText('Nasáu')).toBeInTheDocument();
 
-        expect(screen.getByText('¿Cuál es la capital de Francia?')).toBeInTheDocument();
+        expect(screen.getByText('¿Cual es la capital de Francia?')).toBeInTheDocument();
         expect(screen.getByText('París')).toBeInTheDocument();
         expect(screen.getByText('Londres')).toBeInTheDocument();
         expect(screen.getByText('Madrid')).toBeInTheDocument();
