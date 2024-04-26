@@ -41,13 +41,20 @@ const RegisteredUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {registeredUsers.map((row, rowIndex) => (
+            {/* {registeredUsers.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {row.map((cell, cellIndex) => (
                   <td key={cellIndex}>{cell}</td>
                 ))}
               </tr>
+            ))} */}
+            {registeredUsers.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                <td>{row[0]}</td>
+                <td>{row[1]}</td>
+              </tr>
             ))}
+            
           </tbody>
         </table>
       </div>
