@@ -37,44 +37,41 @@ const RegisteredUsers = () => {
 
   return (
     <>
-      <Navbar />
-      <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
-        <div>
-          <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
-            Usuarios registrados
-          </Typography>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell className='text-center custom-td'>Nombre de usuario</TableCell>
-                  <TableCell className='text-center custom-td'>Fecha de registro</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {paginatedRegisteredUsers.map((row, rowIndex) => (
-                  <TableRow key={rowIndex}>
-                  {row.map((cell, cellIndex) => (
-                  <TableCell key={cellIndex}>{cell}</TableCell>
-                  ))}
-                   </TableRow>
-                   ))}
-              </TableBody>
+    <Navbar />
+    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
 
-            </Table>
-          </TableContainer>
-          <TablePagination
-            component="div"
-            count={registeredUsers.length}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            rowsPerPageOptions={[5, 10, 15]}
-          />
-        </div>
-      </Container>
-    </>
+    <div>
+        <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
+          Usuarios registrados
+        </Typography>
+        <table>
+          <thead>
+            <tr>
+              <th className='text-center custom-td'>Nombre de usuario</th>
+              <th className='text-center custom-td'>Fecha de registro</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* {registeredUsers.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex}>{cell}</td>
+                ))}
+              </tr>
+            ))} */}
+            {registeredUsers.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                <td>{row[0]}</td>
+                <td>{row[1]}</td>
+              </tr>
+            ))}
+            
+          </tbody>
+        </table>
+      </div>
+  </Container>
+  </>
+
   );
 };
 

@@ -42,45 +42,54 @@ const HistoricalData = () => {
       <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
         Historial de preguntas
       </Typography>
-      <Container component="main" className='contenedor containerTable' >
-        <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="customized table">
-            <TableHead>
-              <TableRow className='custom-td'>
-                <TableCell>Pregunta</TableCell>
-                <TableCell>Opción correcta</TableCell>
-                <TableCell>Opción incorrecta 1</TableCell>
-                <TableCell>Opción incorrecta 2</TableCell>
-                <TableCell>Opción incorrecta 3</TableCell>
+    
+    <Container component="main" className='contenedor containerTable' >
+    <div>
+      <TableContainer>
+        <Table sx={{ minWidth: 650 }} aria-label="customized table">
+          <TableHead>
+            <TableRow className='custom-td'>
+              <TableCell>Pregunta</TableCell>
+              <TableCell>Opción correcta</TableCell>
+              <TableCell>Opción incorrecta 1</TableCell>
+              <TableCell>Opción incorrecta 2</TableCell>
+              <TableCell>Opción incorrecta 3</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* {paginatedData.map((row, rowIndex) => (
+              <TableRow key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <TableCell key={cellIndex}>{cell}</TableCell>
+                ))}
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {paginatedData.map((row, rowIndex) => (
-                 <TableRow key={rowIndex}>
-                 {row.map((cell, cellIndex) => (
-                   <TableCell key={cellIndex}>{cell}</TableCell>
-                 ))}
-               </TableRow>
-              ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={5} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 15, 20]} // Opciones de filas por página
-          component="div"
-          count={questionsHistory.length} // Total de filas
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Container>
-    </>
+            ))} */}
+            {paginatedData.map((row, rowIndex) => (
+                  <TableRow key={rowIndex}>
+                    <TableCell>{row[0]}</TableCell>
+                    <TableCell>{row[1]}</TableCell>
+                    <TableCell>{row[2]}</TableCell>
+                    <TableCell>{row[3]}</TableCell>
+                    <TableCell>{row[4]}</TableCell>
+                  </TableRow>
+                ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        component="div"
+        count={questionsHistory.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        rowsPerPageOptions={[5, 10, 15, 20, 25]}
+      />
+    </div>
+  </Container>
+
+  </>
+
   );
 };
 

@@ -12,6 +12,11 @@ const user = {
   password: 'testpassword',
 };
 
+const user2 = {
+  username: 'testuser',
+  password: 'wrongpass',
+};
+
 async function addUser(user){
   const hashedPassword = await bcrypt.hash(user.password, 10);
   const newUser = new User({
@@ -42,4 +47,20 @@ describe('Auth Service', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('username', 'testuser');
   });
+
+  it('Should perform a fail login operation du to incorrect answer /login', async () => {
+    const response = await request(app).post('/login').send(user2);
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('error', 'Invalid credentials');
+  });
+
+  it('Should perform a server error due to missing value /login', async () => {
+    const response = await request(app).post('/login')
+    .send(user3 = {
+      username: 'testuser',
+    });
+    expect(response.status).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Internal Server Error');
+  });
+  
 });
