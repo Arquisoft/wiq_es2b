@@ -33,6 +33,57 @@ describe('Login component', () => {
       });
   });
 
+  it('should handle error when logging in', async () => {
+    render(
+      <Router>
+        <Login />
+      </Router>);
+  
+    const usernameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/i);
+    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+  
+    // Mock the axios.post request to simulate an error response
+    mockAxios.onPost('http://localhost:8000/login').reply(401, { error: 'Invalid credentials' });
+  
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+  
+    fireEvent.click(loginButton);
+  
+    await waitFor(() => {
+      expect(screen.getByText(/Error: Invalid credentials/i)).toBeInTheDocument();
+    });
+  });
+  
+  it('should redirect to MainPage after successful login', async () => {
+    render(
+      <Router>
+        <Login />
+      </Router>);
+  
+    const usernameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/i);
+    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+  
+    // Mock the axios.post request to simulate a successful response
+    mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
+  
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+  
+    fireEvent.click(loginButton);
+  
+    await waitFor(() => {
+      expect(screen.getByText(/Login successful/i)).toBeInTheDocument();
+    });
+  
+    // Check if the redirection happens after the successful login
+    expect(screen.history.action).toBe('PUSH');
+    expect(screen.history.location.pathname).toBe('/MainPage');
+  });
+  
+
   /*it('should handle error when logging in', async () => {
     render(
       <Router>

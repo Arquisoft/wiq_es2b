@@ -18,17 +18,13 @@ describe('AddUser component', () => {
     const passwordInput = screen.getByLabelText(/Password/i);
     const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
-    // Mock the axios.post request to simulate a successful response
     mockAxios.onPost('http://localhost:8000/adduser').reply(200);
 
-    // Simulate user input
     fireEvent.change(usernameInput, { target: { value: 'testUser' } });
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
 
-    // Trigger the add user button click
     fireEvent.click(addUserButton);
 
-    // Wait for the Snackbar to be open
     await waitFor(() => {
       expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
     });
@@ -41,21 +37,123 @@ describe('AddUser component', () => {
     const passwordInput = screen.getByLabelText(/Password/i);
     const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
-    // Mock the axios.post request to simulate an error response
     mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
 
-    // Simulate user input
     fireEvent.change(usernameInput, { target: { value: 'testUser' } });
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
 
-    // Trigger the add user button click
     fireEvent.click(addUserButton);
 
-    // Wait for the error Snackbar to be open
+    await waitFor(() => {
+      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+    });
+  });
+
+  it('should close success Snackbar after autoHideDuration', async () => {
+    jest.useFakeTimers();
+
+    render(<AddUser />);
+
+    const usernameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/i);
+    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+
+    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
+
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+    fireEvent.click(addUserButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+    });
+
+    jest.runAllTimers();
+
+    expect(screen.queryByText(/User added successfully/i)).toBeNull();
+  });
+
+  it('should close error Snackbar after autoHideDuration', async () => {
+    jest.useFakeTimers();
+
+    render(<AddUser />);
+
+    const usernameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/i);
+    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+
+    mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
+
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+    fireEvent.click(addUserButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+    });
+
+    jest.runAllTimers();
+
+    expect(screen.queryByText(/Error: Internal Server Error/i)).toBeNull();
+  });
+
+  it('should display proper labels and inputs', () => {
+    render(<AddUser />);
+
+    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Crear usuario/i })).toBeInTheDocument();
+  });
+
+  it('should display success Snackbar with autoHideDuration', async () => {
+    jest.useFakeTimers();
+
+    render(<AddUser />);
+
+    const usernameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/i);
+    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+
+    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
+
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+    fireEvent.click(addUserButton);
+
+    jest.runAllTimers();
+
+    expect(screen.queryByText(/User added successfully/i)).toBeNull();
+
+    await waitFor(() => {
+      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+    });
+  });
+
+  it('should display error Snackbar with autoHideDuration', async () => {
+    jest.useFakeTimers();
+
+    render(<AddUser />);
+
+    const usernameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/i);
+    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+
+    mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
+
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+    fireEvent.click(addUserButton);
+
+    jest.runAllTimers();
+
+    expect(screen.queryByText(/Error: Internal Server Error/i)).toBeNull();
+
     await waitFor(() => {
       expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
     });
   });
 });
-
-
