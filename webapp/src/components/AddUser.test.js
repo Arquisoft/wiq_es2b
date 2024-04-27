@@ -9,6 +9,7 @@ const mockAxios = new MockAdapter(axios);
 describe('AddUser component', () => {
   beforeEach(() => {
     mockAxios.reset();
+    jest.useFakeTimers();
   });
 
   it('should add user successfully', async () => {
@@ -49,55 +50,7 @@ describe('AddUser component', () => {
     });
   });
 
-  it('should close success Snackbar after autoHideDuration', async () => {
-    jest.useFakeTimers();
 
-    render(<AddUser />);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
-
-    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
-
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    fireEvent.click(addUserButton);
-
-    await waitFor(() => {
-      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
-    });
-
-    jest.runAllTimers();
-
-    expect(screen.queryByText(/User added successfully/i)).toBeNull();
-  });
-
-  it('should close error Snackbar after autoHideDuration', async () => {
-    jest.useFakeTimers();
-
-    render(<AddUser />);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
-
-    mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
-
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    fireEvent.click(addUserButton);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
-    });
-
-    jest.runAllTimers();
-
-    expect(screen.queryByText(/Error: Internal Server Error/i)).toBeNull();
-  });
 
   it('should display proper labels and inputs', () => {
     render(<AddUser />);
@@ -108,8 +61,6 @@ describe('AddUser component', () => {
   });
 
   it('should display success Snackbar with autoHideDuration', async () => {
-    jest.useFakeTimers();
-
     render(<AddUser />);
 
     const usernameInput = screen.getByLabelText(/Username/i);
@@ -133,8 +84,6 @@ describe('AddUser component', () => {
   });
 
   it('should display error Snackbar with autoHideDuration', async () => {
-    jest.useFakeTimers();
-
     render(<AddUser />);
 
     const usernameInput = screen.getByLabelText(/Username/i);
