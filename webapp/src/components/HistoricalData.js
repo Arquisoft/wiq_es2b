@@ -33,7 +33,7 @@ const HistoricalData = () => {
     setPage(0); // Reiniciar a la primera página cuando cambia el número de filas por página
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, questionsHistory.length - page * rowsPerPage);
+  
   const paginatedData = questionsHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (

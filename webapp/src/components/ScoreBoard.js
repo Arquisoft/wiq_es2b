@@ -54,9 +54,9 @@ const ScoreBoard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {paginatedScoreboard.map((user, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
+                {paginatedScoreboard.map((user, id) => (
+                  <TableRow key={user.id}>
+                    <TableCell>{id + 1}</TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.totalCorrect}</TableCell>
                     <TableCell>{user.totalIncorrect}</TableCell>
