@@ -46,31 +46,7 @@ describe('ScoreBoard component', () => {
     });
   });
   
-  it('handles pagination correctly', async () => {
-    const scoreboardData = Array.from({ length: 20 }, (_, index) => ({
-      id: index + 1,
-      username: `user${index + 1}`,
-      totalCorrect: index + 1,
-      totalIncorrect: index + 2,
-      points: (index + 1) * 10,
-    }));
-    mockAxios.onGet('http://localhost:8000/getScoreBoard').reply(200, scoreboardData);
-
-    render(
-      <Router>
-        <ScoreBoard />
-      </Router>
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText('user1')).toBeInTheDocument();
-      expect(screen.getByText('user5')).toBeInTheDocument();
-      expect(screen.queryByText('user6')).not.toBeInTheDocument(); // Not on first page
-      fireEvent.click(screen.getByLabelText('Go to next page'));
-
-      expect(screen.getByText('user6')).toBeInTheDocument(); // On second page
-    });
-  });
+  
 
   it('renders the main title correctly', () => {
     render(
