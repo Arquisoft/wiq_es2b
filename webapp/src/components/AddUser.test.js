@@ -6,6 +6,21 @@ import AddUser from './AddUser';
 
 const mockAxios = new MockAdapter(axios);
 
+const renderAddUserComponent = () => {
+  render(<AddUser />);
+};
+
+const addUser = async () => {
+  const usernameInput = screen.getByLabelText(/Username/i);
+  const passwordInput = screen.getByLabelText(/Password/i);
+  const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+
+  fireEvent.change(usernameInput, { target: { value: 'testUser' } });
+  fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+  fireEvent.click(addUserButton);
+};
+
 describe('AddUser component', () => {
   beforeEach(() => {
     mockAxios.reset();
@@ -13,18 +28,11 @@ describe('AddUser component', () => {
   });
 
   it('should add user successfully', async () => {
-    render(<AddUser />);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+    renderAddUserComponent();
 
     mockAxios.onPost('http://localhost:8000/adduser').reply(200);
 
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    fireEvent.click(addUserButton);
+    await addUser();
 
     await waitFor(() => {
       expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
@@ -32,28 +40,19 @@ describe('AddUser component', () => {
   });
 
   it('should handle error when adding user', async () => {
-    render(<AddUser />);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+    renderAddUserComponent();
 
     mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
 
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    fireEvent.click(addUserButton);
+    await addUser();
 
     await waitFor(() => {
       expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
     });
   });
 
-
-
   it('should display proper labels and inputs', () => {
-    render(<AddUser />);
+    renderAddUserComponent();
 
     expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
@@ -61,18 +60,11 @@ describe('AddUser component', () => {
   });
 
   it('should display success Snackbar with autoHideDuration', async () => {
-    render(<AddUser />);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+    renderAddUserComponent();
 
     mockAxios.onPost('http://localhost:8000/adduser').reply(200);
 
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    fireEvent.click(addUserButton);
+    await addUser();
 
     jest.runAllTimers();
 
@@ -84,18 +76,11 @@ describe('AddUser component', () => {
   });
 
   it('should display error Snackbar with autoHideDuration', async () => {
-    render(<AddUser />);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
+    renderAddUserComponent();
 
     mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
 
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    fireEvent.click(addUserButton);
+    await addUser();
 
     jest.runAllTimers();
 
