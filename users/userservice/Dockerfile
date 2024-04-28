@@ -1,21 +1,25 @@
-# Use an official Node.js runtime as a parent image
+# Usa una imagen oficial de Node.js como imagen base
 FROM node:20
 
-# Set the working directory in the container
+# Establece el directorio de trabajo en el contenedor
 WORKDIR /usr/src/userservice
 
-# Copy package.json and package-lock.json to the working directory
+# Copia package.json y package-lock.json al directorio de trabajo
 COPY package*.json ./
 
-# Install app dependencies
-RUN npm install bcrypt --ignore-scripts && \
-    npm install --ignore-scripts
+# Instala las dependencias de la aplicación
+RUN npm install --ignore-scripts
 
-# Copy the app source code to the working directory
+# Copia el código fuente de la aplicación al directorio de trabajo
 COPY . .
 
-# Expose the port the app runs on
+# Cambia a un usuario no privilegiado
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+USER nonroot
+
+# Expone el puerto en el que se ejecuta la aplicación
 EXPOSE 8001
 
-# Define the command to run your app
+# Define el comando para ejecutar la aplicación
 CMD ["node", "user-service.js"]
