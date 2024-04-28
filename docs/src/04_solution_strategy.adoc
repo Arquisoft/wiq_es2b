@@ -16,6 +16,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 | _Wikidata_ | _Website where the information is taken from_ 
 | _Javascript_ | _An interpreted programming language based on prototypes, imperative and dynamic. We will use it on both frontend and backend._
 | _CSS_ | _A graphic programming language oriented to define the repesentation of a document._
+| _Bootstrap_ | _A popular front-end framework for building responsive websites._
 |===
 
 === Decisions on how to achieve key quality goals
