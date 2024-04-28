@@ -21,15 +21,26 @@ describe('MainPage component', () => {
     const element1 = screen.getByText(/¡Bienvenido a/);
     const element2 = screen.getByText(/WIQ 2024!/);
     const newGameButton = screen.getByRole('button', { name: 'Nuevo juego' });
+    const rankingButton = screen.getByRole('button', { name: 'Ranking' });
+    const configButton = screen.getByRole('button', { name: 'Configuración' });
 
-    // Verifica si el elemento se encuentra en el DOM
     expect(element1).toBeInTheDocument();
     expect(element2).toBeInTheDocument();
 
-    // Simulate user input
     await act(async () => {
         fireEvent.click(newGameButton);
       });
+    
+    expect(window.location.pathname).toBe('/Game');
+
+    fireEvent.click(rankingButton);
+
+    expect(window.location.pathname).toBe('/ScoreBoard');
+
+    fireEvent.click(configButton);
+
+    const dialogTitle = screen.getByText('Configuración del juego');
+    expect(dialogTitle).toBeInTheDocument();
   });
 });
 
