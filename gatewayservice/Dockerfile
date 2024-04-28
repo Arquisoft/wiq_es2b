@@ -13,5 +13,8 @@ RUN npm install --ignore-scripts
 # Copy the app source code to the working directory
 COPY . .
 
+ARG API_ORIGIN_URI="http://localhost:3000"
+ENV REACT_APP_API_ORIGIN_ENDPOINT=$API_ORIGIN_URI
+
 # Define the command to run your app
 CMD ["node", "gateway-service.js"]
