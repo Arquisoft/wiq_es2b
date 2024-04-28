@@ -9,7 +9,7 @@ const YAML = require('yaml')
 
 
 const app = express();
-app.disable('x-powerde-by');
+app.disable('x-powered-by');
 const port = 8000;
 
 const originEndpoint = process.env.REACT_APP_API_ORIGIN_ENDPOINT || 'http://localhost:3000';
