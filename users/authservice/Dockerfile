@@ -8,19 +8,9 @@ WORKDIR /usr/src/authservice
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install --ignore-scripts
-
+RUN npm install
 # Copy the app source code to the working directory
 COPY . .
-
-# Create a new non-root user and group
-RUN addgroup -S myusergroup && adduser -S myuser -G myusergroup
-
-# Change the ownership of the working directory to the newly created user
-RUN chown -R myuser:myusergroup /usr/src/authservice
-
-# Switch to the new non-root user
-USER myuser
 
 # Expose the port the app runs on
 EXPOSE 8002
