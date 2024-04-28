@@ -9,17 +9,17 @@ const YAML = require('yaml')
 
 
 const app = express();
-app.disable('x-powerde-by');
+app.disable('x-powered-by');
 const port = 8000;
 
-const originEndpoint = process.env.REACT_APP_API_ORIGIN_ENDPOINT || 'http://localhost:3000';
+//const originEndpoint = process.env.REACT_APP_API_ORIGIN_ENDPOINT || 'http://localhost:3000';
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
 const creationServiceUrl = process.env.CREATION_SERVICE_URL || 'http://localhost:8005';
 const retrieveServiceUrl = process.env.RETRIEVE_SERVICE_URL || 'http://localhost:8004';
 
 const corsOptions = {
-  origin: originEndpoint, 
+  origin: '*', 
   methods: ['GET', 'POST'], 
   allowedHeaders: ['Content-Type', 'Authorization'] 
 };

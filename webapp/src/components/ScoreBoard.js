@@ -17,7 +17,9 @@ const ScoreBoard = () => {
   const loadScoreboard = async () => {
     try {
       const response = await axios.get(`${apiEndpoint}/getScoreBoard`);
-      setScoreboard(response.data);
+      const sortedScoreboard = response.data.sort((a, b) => b.points - a.points);
+
+    setScoreboard(sortedScoreboard);
     } catch (error) {
       console.error('Error:', error);
     }
