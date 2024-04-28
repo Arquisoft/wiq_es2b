@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography, Snackbar } from '@mui/material';
 import './HistoricalData.css';
 import Navbar from './Navbar';
 
@@ -57,13 +57,6 @@ const HistoricalData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {paginatedData.map((row, rowIndex) => (
-              <TableRow key={rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <TableCell key={cellIndex}>{cell}</TableCell>
-                ))}
-              </TableRow>
-            ))} */}
             {paginatedData.map((row, rowIndex) => (
                   <TableRow key={rowIndex}>
                     <TableCell>{row[0]}</TableCell>
