@@ -16,7 +16,7 @@ const Game = () => {
 
   // Configuración del juego
   const location = useLocation();
-  const { gameConfig } = location.state;
+  const { gameConfig } = location.state ?? { gameConfig: { numQuestions: 5, timePerQuestion: 10 } }; // Valor por defecto para gameConfig
 
   const [questionObject, setQuestionObject] = useState('');
   const [correctOption, setCorrectOption] = useState('');

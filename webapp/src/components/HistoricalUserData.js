@@ -40,7 +40,6 @@ const HistoricalUserData = () => {
     }
   };
 
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -52,7 +51,7 @@ const HistoricalUserData = () => {
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   };
 
-  const handleChangePage = ( newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
@@ -61,7 +60,9 @@ const HistoricalUserData = () => {
     setPage(0);
   };
 
-  const paginatedGameHistory = gameHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const startIndex = page * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const paginatedGameHistory = gameHistory.slice(startIndex, endIndex);
 
   return (
     <>
