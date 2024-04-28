@@ -9,14 +9,18 @@ let app;
 //test user
 const user = {
   username: 'testuser',
-  password: 'testpassword',
+  password: 'a8d4Ae6_Ws',
+};
+
+const user2 = {
+  username: 'testuser',
+  password: 'md32_sU634',
 };
 
 async function addUser(user){
-  const hashedPassword = await bcrypt.hash(user.password, 10);
   const newUser = new User({
     username: user.username,
-    password: hashedPassword,
+    password: await bcrypt.hash(user.password, 10),
   });
 
   await newUser.save();
@@ -42,4 +46,20 @@ describe('Auth Service', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('username', 'testuser');
   });
+
+  it('Should perform a fail login operation du to incorrect answer /login', async () => {
+    const response = await request(app).post('/login').send(user2);
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('error', 'Invalid credentials');
+  });
+
+  it('Should perform a server error due to missing value /login', async () => {
+    const response = await request(app).post('/login')
+    .send(user3 = {
+      username: 'testuser',
+    });
+    expect(response.status).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Internal Server Error');
+  });
+  
 });

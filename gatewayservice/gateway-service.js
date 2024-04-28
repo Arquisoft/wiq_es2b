@@ -46,7 +46,6 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
-
 app.post('/addgame', async (req, res) => {
   try {
     const userResponse = await axios.post(retrieveServiceUrl+'/addgame', req.body);
@@ -55,7 +54,6 @@ app.post('/addgame', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
-
 
 app.get('/getgamehistory/:username', async (req, res) => {
   try {
@@ -74,8 +72,6 @@ app.get('/getScoreBoard', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
-
-
 
 app.get('/createquestion', async (req, res) => {
   try {
@@ -110,10 +106,8 @@ app.get('/getregisteredusers', async (req, res) => {
   }
 });
 
-
-
 // Read the OpenAPI YAML file synchronously
-openapiPath='./openapi.yaml'
+const openapiPath='./openapi.yaml';
 if (fs.existsSync(openapiPath)) {
   const file = fs.readFileSync(openapiPath, 'utf8');
 

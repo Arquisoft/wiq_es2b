@@ -16,10 +16,13 @@ afterAll(async () => {
     await mongoServer.stop();
 });
 
-describe('Retrieve Service', () => {
+describe('Creation Service', () => {
   it('should add a new user on GET /createquestion', async () => {
 
     const response = await request(app).get('/createquestion');
     expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("responseQuestionObject");
+    expect(response.body).toHaveProperty("responseCorrectOption");
+    expect(response.body).toHaveProperty("responseAnswerOptions");
   });
 });
