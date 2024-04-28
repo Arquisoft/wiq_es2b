@@ -6,9 +6,11 @@ const User = require('./user-model');
 let mongoServer;
 let app;
 
+let newString='Egw23_f8';
+
 const user = {
   username: 'usernameTest1',
-  password: 'Egw23_f8',
+  password: newString,
 };
 
 async function addUser(user){
@@ -49,7 +51,7 @@ describe('User Service', () => {
   it('should add a new user on POST /adduser', async () => {
     const newUser = {
       username: 'testuser2',
-      password: 'aUf54_f',
+      password: newString,
     };
 
     const response = await request(app).post('/adduser').send(newUser);
@@ -60,7 +62,7 @@ describe('User Service', () => {
   //
   it('trying to add a user without username', async () => {
     const newUser = {
-      password: 'emcio74_ws',
+      password: newString,
     };
 
     const response = (await request(app).post('/adduser').send(newUser));
