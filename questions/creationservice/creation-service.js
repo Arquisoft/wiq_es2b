@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const crypto = require('crypto');
 const Question = require('./creation-model');
 
 const app = express();
@@ -37,7 +38,8 @@ function getQuestionInfo(info){
 
   // Select 4 random rows of the data
   for (let i = 0; i<optionsNumber; i++){
-    let indexRow = Math.floor(Math.random() * numEles);
+    //let indexRow = Math.floor(Math.random() * numEles);
+    let indexRow = crypto.randomInt(0,numEles);
     if(info[indexRow].answerLabel.value.charAt(0)=='Q' || info[indexRow].questionObjectLabel.value.charAt(0)=='Q'){
       i = i - 1;
     }else{
@@ -48,14 +50,16 @@ function getQuestionInfo(info){
   }
   
   // Select the row where it will extract the country and capital
-  var indexQuestion = Math.floor(Math.random() * optionsNumber);
+  //var indexQuestion = Math.floor(Math.random() * optionsNumber);
+  var indexQuestion = crypto.randomInt(0,optionsNumber);
   // Store the country choosen and its capital
   questionObject= questions[randomQuerySelector] + fourRows[indexQuestion].questionObjectLabel.value + "?";
   correctOption = fourRows[indexQuestion].answerLabel.value;
 }
 
 function selectRandomQuery(){
-  randomQuerySelector = Math.floor(Math.random() * queries.length);
+  //randomQuerySelector = Math.floor(Math.random() * queries.length);
+  randomQuerySelector = crypto.randomInt(0,queries.length);
 }
 
 async function saveQuestion(){
