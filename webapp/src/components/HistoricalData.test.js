@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import HistoricalData from './HistoricalData';
@@ -36,6 +36,8 @@ describe('HistoricalData component', () => {
         expect(screen.getByText('Londres')).toBeInTheDocument();
         expect(screen.getByText('Madrid')).toBeInTheDocument();
         expect(screen.getByText('Roma')).toBeInTheDocument();
+
+        expect(screen.getByText('Rows per page:')).toBeInTheDocument();
       
       });
   });
