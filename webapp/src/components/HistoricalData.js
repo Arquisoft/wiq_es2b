@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState, useEffect} from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography  } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography } from '@mui/material';
 import './HistoricalData.css';
 import Navbar from './Navbar';
 
@@ -11,41 +11,36 @@ const HistoricalData = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const paginatedData = questionsHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  useEffect(() => {
+    handleShowHistory();
+  }, []); // No es necesario deshabilitar eslint, ya que no hay dependencias externas
+
+  const handleShowHistory = async () => {
+    try {
+      const response = await axios.get(`${apiEndpoint}/getquestionshistory`);
+      setQuestionsHistory(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 5));
-    setPage(0);
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reiniciar a la primera página cuando cambia el número de filas por página
   };
 
   
-
-  useEffect(() => {
-    handleShowHistory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const  handleShowHistory = async () => {
-    try{
-      // It makes a petition to the api and store the response
-      const response = await axios.get(`${apiEndpoint}/getquestionshistory`, { });
-      setQuestionsHistory(response.data);
-    }catch (error){
-      console.error('Error:', error);
-    }    
-  }
+  const paginatedData = questionsHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-
     <>
-    <Navbar />
-
-    <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
-          Historial de preguntas
+      <Navbar />
+      <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
+        Historial de preguntas
       </Typography>
     
     <Container component="main" className='contenedor containerTable' >

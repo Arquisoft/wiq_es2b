@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Container, Typography} from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Navbar from './Navbar';
 
 const RegisteredUsers = () => {
@@ -8,23 +8,25 @@ const RegisteredUsers = () => {
 
   const [registeredUsers, setRegisteredUsers] = useState([]);
 
+
   useEffect(() => {
     handleShowHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const  handleShowHistory = async () => {
-    try{
-      // It makes a petition to the api and store the response
-      const response = await axios.get(`${apiEndpoint}/getregisteredusers`, { });
+  const handleShowHistory = async () => {
+    try {
+      const response = await axios.get(`${apiEndpoint}/getregisteredusers`, {});
       setRegisteredUsers(response.data);
-    }catch (error){
+    } catch (error) {
       console.error('Error:', error);
-    }    
-  }
+    }
+  };
+
+  
+
 
   return (
-
     <>
     <Navbar />
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }} className='contenedor' >
