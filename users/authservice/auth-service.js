@@ -30,9 +30,9 @@ app.post('/login', async (req, res) => {
     validateRequiredFields(req, ['username', 'password']);
 
     const { username, password } = req.body;
-
+    let query = {username};
     // Find the user by username in the database
-    const user = await User.findOne({ username });
+    const user = await User.findOne(query);
 
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
