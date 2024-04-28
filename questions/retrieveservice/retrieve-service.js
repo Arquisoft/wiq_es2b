@@ -5,6 +5,7 @@ const Game = require('./playedGame-model')
 const QuestionAnswered = require('./question-model')
 
 const app = express();
+app.disable('x-powered-by');
 const port = 8004;
 
 app.use(express.json());

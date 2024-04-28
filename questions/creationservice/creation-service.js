@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const Question = require('./creation-model');
 
 const app = express();
+app.disable('x-powered-by');
 const port = 8005;
 
 app.use(express.json());
