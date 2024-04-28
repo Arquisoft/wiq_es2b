@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography, Snackbar } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container, TablePagination, Typography } from '@mui/material';
 import './HistoricalData.css';
 import Navbar from './Navbar';
 
@@ -13,6 +13,7 @@ const HistoricalData = () => {
 
   useEffect(() => {
     handleShowHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // No es necesario deshabilitar eslint, ya que no hay dependencias externas
 
   const handleShowHistory = async () => {
