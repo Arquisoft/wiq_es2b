@@ -41,6 +41,19 @@ describe('MainPage component', () => {
 
     const dialogTitle = screen.getByText('Configuración del juego');
     expect(dialogTitle).toBeInTheDocument();
+
+    const numQuestionsInput = screen.getByLabelText('Número de preguntas (min. 5)');
+    const timePerQuestionInput = screen.getByLabelText('Tiempo por pregunta (mín. 10 segundos)');
+    const acceptButton = screen.getByRole('button', { name: 'Aceptar' });
+
+    expect(dialogTitle).toBeVisible();
+    expect(numQuestionsInput).toBeInTheDocument();
+    expect(timePerQuestionInput).toBeInTheDocument();
+    expect(acceptButton).toBeInTheDocument();
+
+    fireEvent.change(numQuestionsInput, { target: { value: '10' } });
+    fireEvent.change(timePerQuestionInput, { target: { value: '15' } });
+    fireEvent.click(acceptButton);
   });
 });
 
