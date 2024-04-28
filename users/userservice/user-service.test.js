@@ -7,8 +7,8 @@ let mongoServer;
 let app;
 
 const user = {
-  username: 'testuser',
-  password: 'testpassword',
+  username: 'usernameTest1',
+  password: 'Egw23_f8',
 };
 
 async function addUser(user){
@@ -42,14 +42,14 @@ describe('User Service', () => {
     const response = await request(app).get('/getregisteredusers');
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
-    expect(Array.from(response.body[0])[0]).toBe('testuser');
+    expect(Array.from(response.body[0])[0]).toBe('usernameTest1');
   });
 
   //
   it('should add a new user on POST /adduser', async () => {
     const newUser = {
       username: 'testuser2',
-      password: 'testpassword2',
+      password: 'aUf54_f',
     };
 
     const response = await request(app).post('/adduser').send(newUser);
@@ -60,7 +60,7 @@ describe('User Service', () => {
   //
   it('trying to add a user without username', async () => {
     const newUser = {
-      password: 'testpassword',
+      password: 'emcio74_ws',
     };
 
     const response = (await request(app).post('/adduser').send(newUser));

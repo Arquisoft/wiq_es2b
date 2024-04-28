@@ -9,19 +9,18 @@ let app;
 //test user
 const user = {
   username: 'testuser',
-  password: 'testpassword',
+  password: 'a8d4Ae6_Ws',
 };
 
 const user2 = {
   username: 'testuser',
-  password: 'wrongpass',
+  password: 'md32_sU634',
 };
 
 async function addUser(user){
-  const hashedPassword = await bcrypt.hash(user.password, 10);
   const newUser = new User({
     username: user.username,
-    password: hashedPassword,
+    password: await bcrypt.hash(user.password, 10),
   });
 
   await newUser.save();
