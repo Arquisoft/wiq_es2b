@@ -8,8 +8,8 @@ WORKDIR /usr/src/userservice
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install bcrypt
-RUN npm install --ignore-scripts
+RUN npm install bcrypt --ignore-scripts && \
+    npm install --ignore-scripts
 
 # Copy the app source code to the working directory
 COPY . .
