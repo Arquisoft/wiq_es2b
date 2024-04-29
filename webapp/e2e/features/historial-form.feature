@@ -1,7 +1,7 @@
 Feature: Visible user logged history
 
-Scenario: The user is not loged in the site
-  Given A not loged user
+Scenario: The user is not logged in the site
+  Given A not logged user
   When Press history
   Then Redirected to login
 
