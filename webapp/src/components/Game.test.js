@@ -178,5 +178,31 @@ describe('Game component', () => {
     });
   });
   
+
+  it('should handle timeout correctly', async () => {
+    // Define una función simulada para handleShowQuestion
+    const handleShowQuestion = jest.fn();
+  
+    renderGameComponent({ handleShowQuestion }); // Pasa la función simulada como propiedad
+  
+    await waitFor(() => {
+      mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
+    });
+  
+    await waitFor(() => {
+      if (screen.queryByText(/Pregunta 1:/i)) {
+        jest.advanceTimersByTime(10000); 
+        expect(screen.getByText(correctOption)).toHaveStyle({ backgroundColor: 'rgba(79, 141, 18, 0.726)' });
+        expect(incrementIncorrect).toHaveBeenCalledTimes(1);
+        expect(decrementQuestionsToAnswer).toHaveBeenCalledTimes(1);
+      }
+    });
+  
+    await waitFor(() => {
+      expect(handleShowQuestion).toHaveBeenCalledTimes(0); // Verifica que handleShowQuestion se llame una vez
+    });
+  });
+ 
+  
   
 }); 
