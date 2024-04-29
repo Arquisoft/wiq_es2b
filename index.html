@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.22">
+<meta name="generator" content="Asciidoctor 2.0.21">
 <title>WIQ ES-2B Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -512,6 +512,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#section-glossary">12. Glossary</a></li>
+<li><a href="#section-technical-risks">13. Testability</a>
+<ul class="sectlevel2">
+<li><a href="#_load_testing">13.1. Load Testing</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1028,6 +1033,10 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>CSS</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>A graphic programming language oriented to define the repesentation of a document.</em></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bootstrap</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A popular front-end framework for building responsive websites.</em></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1406,7 +1415,7 @@ With "decisions" we mean selecting one alternative based on given criteria.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Risks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de React.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use of React.js</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Facilitates the development of user interfaces.
                   - React.js is a widely popular library in the development community.
                   - Improves the efficiency of frontend development.</p></td>
@@ -1414,7 +1423,7 @@ With "decisions" we mean selecting one alternative based on given criteria.</p>
                                                                - Possible learning curve for the team.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de JavaScript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use of JavaScript</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Team&#8217;s prior knowledge in JavaScript.
                      - Extensive support and resources available.
                      - Suitable language for frontend and backend development.</p></td>
@@ -1422,7 +1431,7 @@ With "decisions" we mean selecting one alternative based on given criteria.</p>
                                                                - Potential challenges in performance for large projects.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use of MongoDB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Flexible schema and horizontal scalability.
                  - Widely used in modern applications.
                  - Compatibility with unstructured data.
@@ -1431,12 +1440,20 @@ With "decisions" we mean selecting one alternative based on given criteria.</p>
                                                     - Possible learning curve.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uso de Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use of Docker</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Containerization that facilitates deployment and scalability.
                  - Consistent environment in development and production.
                  - Streamlines dependency management.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Potential initial complexity in Docker configuration.
                                                       - Requires additional learning resources.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use of Bootstrap</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Simplifies and accelerates the development of responsive and mobile-first web applications.
+                   - Provides a wide range of pre-designed components and styles.
+                   - Offers extensive documentation and community support.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Learning curve for team members unfamiliar with Bootstrap.
+                                                                   - Risk of over-reliance on Bootstrap components, leading to less customizability.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1621,13 +1638,82 @@ With "decisions" we mean selecting one alternative based on given criteria.</p>
 </tr>
 </tbody>
 </table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-technical-risks">13. Testability</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Testability is a crucial aspect of software development. It refers to the ease with which a software system can be tested to ensure its correctness and reliability. By writing tests, developers can verify that their code behaves as expected and identify any potential issues or bugs. There are various types of tests that can be performed, such as unit tests, integration tests, and end-to-end tests. Unit tests focus on testing individual components or functions in isolation, while integration tests verify the interaction between different components. End-to-end tests simulate real-world scenarios to ensure the entire system functions correctly.</p>
+</div>
+<div class="paragraph">
+<p>To achieve good testability, it is important to write code that is modular, decoupled, and follows best practices such as dependency injection. Additionally, using testing frameworks and tools can simplify the process of writing and executing tests.</p>
+</div>
+<div class="sect2">
+<h3 id="_load_testing">13.1. Load Testing</h3>
+<div class="paragraph">
+<p>These tests will focus on evaluating the performance of our system under high traffic and heavy usage conditions. This type of testing is crucial to identify bottlenecks and ensure that our application can effectively handle the volume of users and transactions expected in production, without compromising performance and stability.</p>
+</div>
+<div class="paragraph">
+<p>Initially, a test was carried out with the following procedure:
+1. Create a new user
+2. Log in with this new user
+3. View the main page</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/add1User.png" alt="add1User">
+</div>
+<div class="title">Figure 4. 1 User</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/add20Users.png" alt="add20Users">
+</div>
+<div class="title">Figure 5. 20 User</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/add100Users.png" alt="add100Users">
+</div>
+<div class="title">Figure 6. 100 User</div>
+</div>
+<div class="paragraph">
+<p>Then, a slightly more complex test was then performed, which followed the following procedure:
+1. Log in to the app
+2. View the main page
+3. Play a new game
+4. View the game history
+5. View the previous game specific data
+6. View the history of questions</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/playGame1.png" alt="playGame1">
+</div>
+<div class="title">Figure 7. 1 User</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/playGame20.png" alt="playGame20">
+</div>
+<div class="title">Figure 8. 20 User</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/playGame100.png" alt="playGame100">
+</div>
+<div class="title">Figure 9. 100 User</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-22 14:20:26 +0200
+Last updated 2024-04-29 03:39:28 +0200
 </div>
 </div>
 </body>
