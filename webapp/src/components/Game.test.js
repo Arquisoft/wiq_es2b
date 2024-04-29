@@ -3,7 +3,7 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Game from './Game';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom'; // Importa MemoryRouter
 
 const mockAxios = new MockAdapter(axios);
 
@@ -25,6 +25,20 @@ describe('Game component', () => {
   beforeEach(() => {
     mockAxios.reset();
     jest.useFakeTimers();
+    jest.clearAllMocks();
+    localStorage.clear();
+  });
+
+  it('should display initial elements correctly', () => {
+    renderGameComponent();
+    
+    // Verificar que elementos iniciales se muestren correctamente
+    expect(screen.getByText('Saber y Ganar Juego')).toBeInTheDocument();
+    expect(screen.getByText('Preguntas restantes: 5')).toBeInTheDocument(); // Depende de la configuración del juego
+    expect(screen.getByText('Correctas: 0')).toBeInTheDocument();
+    expect(screen.getByText('Incorrectas: 0')).toBeInTheDocument();
+    expect(screen.getByText('Pregunta 0:')).toBeInTheDocument(); // La primera pregunta
+    expect(screen.getByText('Volver al menú principal')).toBeInTheDocument();
   });
 
   it('should display question and answer options', async () => {
@@ -45,6 +59,7 @@ describe('Game component', () => {
       }
     });
   });
+
   it('should handle correct answer click', async () => {
     renderGameComponent();
   
@@ -56,14 +71,11 @@ describe('Game component', () => {
         // Una vez que se muestre la pregunta, hacer clic en la respuesta correcta
         fireEvent.click(screen.getByText('4'));
         // Verificar si afectó correctamente al conteo de respuestas correctas
-    
-        console.log(screen.getByText(/Correctas: 1/i).textContent);
         expect(screen.getByText(/Correctas: 1/i)).toBeInTheDocument();
-      
+        // Verificar si el color del botón cambió a verde
+        expect(screen.getByText('4')).toHaveStyle({ backgroundColor: 'rgba(79, 141, 18, 0.726)' });
       }
     });
-  
-    
   });
   
   it('should handle incorrect answer click', async () => {
@@ -76,13 +88,11 @@ describe('Game component', () => {
       if (screen.queryByText(/Pregunta 1:/i)) {
         // Una vez que se muestre la pregunta, hacer clic en una respuesta incorrecta
         fireEvent.click(screen.getByText('2'));
-
-        console.log(screen.getByText(/Incorrectas: 1/i).textContent);
         expect(screen.getByText(/Incorrectas: 1/i)).toBeInTheDocument();
+        // Verificar si el color del botón cambió a rojo
+        expect(screen.getByText('2')).toHaveStyle({ backgroundColor: 'rgba(208, 22, 22, 0.952)' });
       }
     });
-  
-    
   });
 
   it('should close confirmation dialog on cancel', async () => {
@@ -113,12 +123,11 @@ describe('Game component', () => {
     await waitFor(() => {
       expect(screen.queryByText('Game')).not.toBeInTheDocument();
     });
-  
   });
   
   it('should display end game message and enable "Back to Main Menu" button when game is finished', async () => {
     renderGameComponent();
-  
+
     
     for (let i = 1; i <= 5; i++) {
       mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
@@ -142,6 +151,32 @@ describe('Game component', () => {
       expect(screen.getByText(/Volver al menú principal/i)).toBeInTheDocument();
     }
   });
+
+ 
+  
   });
+
+
+
+
+  it('should disable buttons when time runs out', async () => {
+    renderGameComponent();
+    
+    mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
+  
+    // Esperar hasta que se muestre "Pregunta 1"
+    await waitFor(() => {
+      if (screen.queryByText(/Pregunta 1:/i)) {
+        jest.advanceTimersByTime(10000); // Avanzar el temporizador por 10 segundos
+        
+        // Verificar que los botones estén deshabilitados
+        const buttons = screen.getAllByRole('button', { name: /answer/i });
+        buttons.forEach(button => {
+          expect(button).toBeDisabled();
+        });
+      }
+    });
+  });
+  
   
 }); 
