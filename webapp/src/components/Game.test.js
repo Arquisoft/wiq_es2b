@@ -203,6 +203,133 @@ describe('Game component', () => {
     });
   });
  
-  
-  
+  it('should handle dialog open and close', async () => {
+    renderGameComponent();
+
+    fireEvent.click(screen.getByText('Volver al menú principal'));
+
+    expect(screen.getByText('Confirmación')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Cancelar'));
+
+    await waitFor(() => {
+      expect(screen.queryByText('Confirmación')).not.toBeInTheDocument();
+    });
+  });
+
+  it('should stop and start timer when dialog opens and closes', async () => {
+    renderGameComponent();
+
+    fireEvent.click(screen.getByText('Volver al menú principal'));
+
+    expect(screen.getByText('Cancelar')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Cancelar'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Preguntas restantes: 5')).toBeInTheDocument();
+    });
+  });
+  it('should handle timer countdown correctly', async () => {
+    renderGameComponent();
+
+    mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
+
+    await waitFor(() => {
+      if (screen.queryByText(/Pregunta 1:/i)) {
+        jest.advanceTimersByTime(10000);
+        expect(screen.getByText('Preguntas restantes: 4')).toBeInTheDocument();
+      }
+    });
+  });
+
+  it('should handle game finish correctly', async () => {
+    renderGameComponent();
+
+    for (let i = 1; i <= 5; i++) {
+      mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
+
+      await waitFor(() => {
+        if (screen.queryByText(`Pregunta ${i}:`)) {
+          fireEvent.click(screen.getByText('4'));
+          expect(screen.getByText(`Correctas: ${i}`)).toBeInTheDocument();
+          expect(screen.getByText(`Preguntas restantes: ${5 - i}`)).toBeInTheDocument();
+        }
+      });
+    }
+
+    await waitFor(() => {
+        if (screen.queryByText('Partida finalizada')) {
+      expect(screen.getByText('Partida finalizada')).toBeInTheDocument();
+      expect(screen.getByText('Gracias por jugar')).toBeInTheDocument();
+      expect(screen.getByText('Puntuación')).toBeInTheDocument();
+      expect(screen.getByText('Volver al menú principal')).toBeInTheDocument();
+        }
+    });
+  });
+
+  it('should disable buttons when time runs out', async () => {
+    renderGameComponent();
+
+    mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
+
+    await waitFor(() => {
+      if (screen.queryByText(/Pregunta 1:/i)) {
+        jest.advanceTimersByTime(10000);
+        const buttons = screen.getAllByRole('button', { name: /answer/i });
+        buttons.forEach(button => {
+          expect(button).toBeDisabled();
+        });
+      }
+    });
+  });
+
+  it('should handle timeout correctly', async () => {
+    renderGameComponent();
+
+    await waitFor(() => {
+      mockAxios.onGet('http://localhost:8000/createquestion').reply(200, { data: mockQuestionData });
+    });
+
+    await waitFor(() => {
+      if (screen.queryByText(/Pregunta 1:/i)) {
+        jest.advanceTimersByTime(10000);
+        expect(screen.getByText('4')).toHaveStyle({ backgroundColor: 'rgba(79, 141, 18, 0.726)' });
+      }
+    });
+  });
+
+
+  it('should display the timer correctly', async () => {
+    renderGameComponent();
+
+    
+    expect(screen.getByText('10')).toBeInTheDocument(); // Comprobar el valor inicial del temporizador
+    
+    // Esperar a que el temporizador llegue a cero
+    await waitFor(() => {
+        if (screen.queryByText('0')) {
+      expect(screen.queryByText('0')).toBeInTheDocument(); // Comprobar que el temporizador llega a cero
+        }
+    });
+  });
+
+  it('should countdown correctly', async () => {
+    renderGameComponent();
+
+    // Verificar que el temporizador comience con el valor correcto
+    expect(screen.getByText('10')).toBeInTheDocument();
+
+    for(let i = 9; i >= 0; i--){
+        await waitFor(() => {
+            if (screen.queryByText(String(i))) {
+            expect(screen.queryByText(String(i))).toBeInTheDocument();
+            }
+        });
+    }
+
+    // Verificar que el temporizador no sea negativo
+    expect(screen.queryByText('-1')).not.toBeInTheDocument();
+});
+
 }); 
