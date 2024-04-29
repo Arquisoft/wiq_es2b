@@ -45,7 +45,7 @@ defineFeature(feature, test => {
   },300000);
 
 
-  test('The user is not registered in the site', ({given,when,then}) => {
+  test('The user register in the site so he can see history', ({given,when,then}) => {
     
 
     given('A unregistered user, fill the register', async () => {
@@ -61,7 +61,7 @@ defineFeature(feature, test => {
       });
   });
 
-    when('I fill the data in the form and press submit', async () => {
+    when('I press history', async () => {
       await page.waitForSelector('[data-testid="historial-user"]', {
         visible: true,
       });
