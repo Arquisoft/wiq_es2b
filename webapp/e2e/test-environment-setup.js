@@ -18,8 +18,8 @@ async function startServer() {
     userservice = await require("../../users/userservice/user-service");
     authservice = await require("../../users/authservice/auth-service");
     gatewayservice = await require("../../gatewayservice/gateway-service");
-    questionservice = await require("../../questions/creationservice");
-    questionhistoryservice = await require("../../questions/retrieveservice");
+    questionservice = await require("../../questions/creation-service");
+    questionhistoryservice = await require("../../questions/retrieve-service");
   }
 
   startServer();
