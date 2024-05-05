@@ -1,7 +1,7 @@
-// src/components/AddUser.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -10,11 +10,17 @@ const AddUser = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate(); // Move useNavigate hook outside of the addUser function
 
   const addUser = async () => {
     try {
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
       setOpenSnackbar(true);
+
+      await axios.post(`${apiEndpoint}/login`, { username, password });
+      localStorage.setItem('username', username);
+      setOpenSnackbar(true);
+      navigate("/MainPage");
 
     } catch (error) {
       setError(error.response.data.error);
