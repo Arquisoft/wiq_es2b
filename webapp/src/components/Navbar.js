@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <Link className="navbar-brand" to="/mainPage">WIQ 2024</Link>
+        <a className="navbar-brd" href="/mainPage">WIQ 2024</a>
         <button className="navbar-toggler" type="button" onClick={toggleHistorialDropdown}>
           <span className="navbar-toggler-icon"></span>
         </button>

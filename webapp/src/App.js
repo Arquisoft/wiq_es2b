@@ -21,9 +21,15 @@ function App() {
       <div title='main'>
 
 
-        <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-          Bienvenido a WIQ 2024 del curso de Arquitectura del Software
+      <div title='main-title'>
+        <Typography component="h1" className='main-title' variant="h5" sx={{ textAlign: 'center' }}>
+        Bienvenido a WIQ 2024 del curso de
         </Typography>
+        <Typography component="h2" className='main-title animate__animated animate__backInLeft animate__tada' variant="h5" sx={{ textAlign: 'center' }}>
+        Arquitectura del Software
+        </Typography>
+      </div>
+
         {showLogin ? <Login /> : <AddUser />}
         <Typography component="div" align="center" sx={{ marginTop: 2 }}>
           {showLogin ? (

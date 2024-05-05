@@ -4,13 +4,13 @@ import { AppBar, Toolbar, Typography } from '@mui/material';
 
 const Footer = () => {
     return (
-        <AppBar className="footer">
+        <div className="footer footer-wiq">
             <Toolbar>
-                <Typography variant="body1" className='fs-6' color="textSecondary">
+                <p className='footer-text'>
                     © {new Date().getFullYear()} Hecho con ❤️ por <a href="https://github.com/coral2742">Coral</a>, <a href="https://github.com/baraganio">Carlos</a>, <a href="https://github.com/uo264915">Pablo</a> y <a href="https://github.com/UO290054">Raymond</a>. ASW - Curso 2023-24
-                </Typography>
+                </p>
             </Toolbar>
-        </AppBar>
+        </div>
     );
 };
 
