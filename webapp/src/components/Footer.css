@@ -18,3 +18,22 @@
 .footer a:hover {
     text-decoration: underline;
 }
+
+
+.footer-wiq{
+    background-color: #333;
+    font-size: 2rem;
+}
+
+.footer-text {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.footer-text a{
+    color: #4C8DBF;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: underline;
+}
