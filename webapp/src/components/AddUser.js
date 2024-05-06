@@ -10,15 +10,19 @@ const AddUser = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const navigate = useNavigate(); // Move useNavigate hook outside of the addUser function
+  const navigate = useNavigate();
+
   const addUser = async () => {
     try {
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
-  
       await axios.post(`${apiEndpoint}/login`, { username, password });
       localStorage.setItem('username', username);
       setOpenSnackbar(true);
-      navigate("/MainPage");
+      
+      // Redirige a la página de juego después de 3 segundos
+      setTimeout(() => {
+        navigate("/Game");
+      }, 3000);
     } catch (error) {
       setError("Error al crear usuario");
       setOpenSnackbar(true); // Abre el Snackbar en caso de error
@@ -55,7 +59,7 @@ const AddUser = () => {
       <Button variant="contained" color="primary" onClick={addUser}>
         Crear usuario
       </Button>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Usuario añadido correctamente" />
       {error && (
         <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
       )}

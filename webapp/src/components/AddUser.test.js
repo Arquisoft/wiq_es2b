@@ -3,11 +3,16 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import AddUser from './AddUser';
+import { MemoryRouter } from 'react-router-dom'; // Importa MemoryRouter en lugar de Router
 
 const mockAxios = new MockAdapter(axios);
 
 const renderAddUserComponent = () => {
-  render(<AddUser />);
+  return render(
+    <MemoryRouter> {/* Usa MemoryRouter en lugar de Router */}
+      <AddUser />
+    </MemoryRouter>
+  );
 };
 
 const addUser = async () => {
@@ -27,6 +32,8 @@ describe('AddUser component', () => {
     jest.useFakeTimers();
   });
 
+
+
   it('should add user successfully', async () => {
     renderAddUserComponent();
 
@@ -35,7 +42,7 @@ describe('AddUser component', () => {
     await addUser();
 
     await waitFor(() => {
-      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+      expect(screen.getByText(/Usuario añadido correctamente/i)).toBeInTheDocument();
     });
   });
 
@@ -68,10 +75,10 @@ describe('AddUser component', () => {
 
     jest.runAllTimers();
 
-    expect(screen.queryByText(/User added successfully/i)).toBeNull();
+    expect(screen.queryByText(/Usuario añadido correctamente/i)).toBeNull();
 
     await waitFor(() => {
-      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+      expect(screen.getByText(/Usuario añadido correctamente/i)).toBeInTheDocument();
     });
   });
 

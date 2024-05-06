@@ -44,7 +44,7 @@ describe('Login component', () => {
     const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
 
     // Mock del request axios.post para simular una respuesta de error
-    mockAxios.onPost('http://localhost:8000/login').reply(401, { error: 'Credenciales inválidas' });
+    mockAxios.onPost('http://localhost:8000/login').reply(401, { error: 'Error: Credenciales inválidas' });
 
     fireEvent.change(usernameInput, { target: { value: 'testUser' } });
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
@@ -80,7 +80,6 @@ describe('Login component', () => {
       expect(screen.getByText(/Inicio de sesión exitoso/i)).toBeInTheDocument();
     });
 
-    // Verificar si la redirección sucede después del inicio de sesión exitoso
     expect(history.location.pathname).toBe('/');
   });
 });
