@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
-  
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,7 +20,8 @@ const Login = () => {
       setOpenSnackbar(true);
       navigate("/MainPage");
     } catch (error) {
-      setError(error.response.data.error);
+      setError("Error al iniciar sesión");
+      setOpenSnackbar(true);
     }
   };
 
@@ -52,7 +53,7 @@ const Login = () => {
         <Button variant="contained" color="primary" onClick={loginUser}>
           Iniciar sesión
         </Button>
-        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
+        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Inicio de sesión exitoso" />
         {error && (
           <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
         )}

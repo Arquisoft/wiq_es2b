@@ -11,24 +11,23 @@ const AddUser = () => {
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate(); // Move useNavigate hook outside of the addUser function
-
   const addUser = async () => {
     try {
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
-      setOpenSnackbar(true);
-
+  
       await axios.post(`${apiEndpoint}/login`, { username, password });
       localStorage.setItem('username', username);
       setOpenSnackbar(true);
       navigate("/MainPage");
-
     } catch (error) {
       setError("Error al crear usuario");
+      setOpenSnackbar(true); // Abre el Snackbar en caso de error
     }
   };
-
+  
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
+    setError("");
   };
 
   return (

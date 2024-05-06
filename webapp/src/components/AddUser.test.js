@@ -11,8 +11,8 @@ const renderAddUserComponent = () => {
 };
 
 const addUser = async () => {
-  const usernameInput = screen.getByLabelText(/Username/i);
-  const passwordInput = screen.getByLabelText(/Password/i);
+  const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
+  const passwordInput = screen.getByLabelText(/Contraseña/i);
   const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
   fireEvent.change(usernameInput, { target: { value: 'testUser' } });
@@ -47,15 +47,15 @@ describe('AddUser component', () => {
     await addUser();
 
     await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+      expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
     });
   });
 
   it('should display proper labels and inputs', () => {
     renderAddUserComponent();
 
-    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Nombre de usuario/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Contraseña/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Crear usuario/i })).toBeInTheDocument();
   });
 
@@ -87,7 +87,7 @@ describe('AddUser component', () => {
     expect(screen.queryByText(/Error: Internal Server Error/i)).toBeNull();
 
     await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+      expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
     });
   });
 });
