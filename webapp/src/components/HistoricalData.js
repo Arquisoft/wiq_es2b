@@ -14,7 +14,7 @@ const HistoricalData = () => {
   useEffect(() => {
     handleShowHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // No es necesario deshabilitar eslint, ya que no hay dependencias externas
+  }, []);
 
   const handleShowHistory = async () => {
     try {
@@ -31,7 +31,7 @@ const HistoricalData = () => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reiniciar a la primera página cuando cambia el número de filas por página
+    setPage(0);
   };
 
   
