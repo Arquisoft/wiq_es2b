@@ -16,7 +16,7 @@ div[title="botones"]{
 button{
   margin: 1em;
   padding: 0.25em;
-  background-color: rgba(31, 60, 134, 0.764);
+  background-color: #1f3c86c3;
   color: white;
   font-size: 0.75em;
 }
@@ -30,7 +30,6 @@ table {
 th, td {
   padding: 0.25em;
   text-align: center;
-  border: 0.1em solid #000;
 }
 
 th[title='pregunta'] {
@@ -46,10 +45,12 @@ th[title='incorrecta'] {
 }
 
 td{
-  background-color: rgba(61, 178, 224, 0.764);
+  background-color: #3db2e0c3;
 }
 
 
 
-
-
+h2{
+  color: #1f3c86c3;
+  padding-bottom: 1rem;
+}

@@ -90,13 +90,13 @@ const HistoricalUserData = () => {
                 {paginatedGameHistory.map((game, index) => (
                   <React.Fragment key={game.id}>
                     <TableRow>
-                      <TableCell><button onClick={() => toggleRow(index)} type="button" className="btn-show-more">{expandedRows.includes(index) ? '-' : '+'}</button></TableCell>
-                      <TableCell className="custom-td">{formatDate(game.date)}</TableCell>
-                      <TableCell className="custom-td">{game.duration} segundos</TableCell>
-                      <TableCell className="custom-td">{game.percentage.toFixed(2)}%</TableCell>
-                      <TableCell className="custom-td">{game.totalQuestions}</TableCell>
-                      <TableCell className="custom-td">{game.correctAnswers}</TableCell>
-                      <TableCell className="custom-td">{game.incorrectAnswers}</TableCell>
+                      <td><button onClick={() => toggleRow(index)} type="button" className="btn-show-more">{expandedRows.includes(index) ? '-' : '+'}</button></td>
+                      <td className="custom-td">{formatDate(game.date)}</td>
+                      <td className="custom-td">{game.duration} segundos</td>
+                      <td className="custom-td">{game.percentage.toFixed(2)}%</td>
+                      <td className="custom-td">{game.totalQuestions}</td>
+                      <td className="custom-td">{game.correctAnswers}</td>
+                      <td className="custom-td">{game.incorrectAnswers}</td>
                     </TableRow>
                     {expandedRows.includes(index) && game.questions && game.questions.map((question, qIndex) => (
                       <TableRow key={qIndex}>

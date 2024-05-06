@@ -37,14 +37,14 @@ const Login = () => {
         <TextField
           margin="normal"
           fullWidth
-          label="Username"
+          label="Nombre de usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <TextField
           margin="normal"
           fullWidth
-          label="Password"
+          label="Contraseña"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

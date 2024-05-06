@@ -23,7 +23,7 @@ const AddUser = () => {
       navigate("/MainPage");
 
     } catch (error) {
-      setError(error.response.data.error);
+      setError("Error al crear usuario");
     }
   };
 
@@ -40,7 +40,7 @@ const AddUser = () => {
         name="username"
         margin="normal"
         fullWidth
-        label="Username"
+        label="Nombre de usuario"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
@@ -48,7 +48,7 @@ const AddUser = () => {
         name="password"
         margin="normal"
         fullWidth
-        label="Password"
+        label="Contraseña"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}

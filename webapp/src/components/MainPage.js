@@ -1,6 +1,6 @@
 // MainPage.js
 import React, { createContext, useContext, useState } from 'react';
-import { Container, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
+import { Container, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 
@@ -19,13 +19,18 @@ const MainPage = () => {
     const [open, setOpen] = useState(false);
     const [numQuestions, setNumQuestions] = useState(5);
     const [timePerQuestion, setTimePerQuestion] = useState(10);
+    const [error, setError] = useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
 
     const handleNumQuestionsChange = (event) => {
-        setNumQuestions(event.target.value);
+        let newValue = parseInt(event.target.value, 10);
+        setNumQuestions(newValue);
     };
 
     const handleTimePerQuestionChange = (event) => {
-        setTimePerQuestion(event.target.value);
+        let newValue = parseInt(event.target.value, 10);
+        setTimePerQuestion(newValue);
     };
 
     const handleOpenDialog = () => {
@@ -33,11 +38,14 @@ const MainPage = () => {
     };
 
     const handleCloseDialog = () => {
-        setOpen(false);
-    };
+        // Validar que el valor de preguntas sea al menos 5 y el tiempo por pregunta sea al menos 10
+        if (numQuestions < 5 || timePerQuestion < 10) {
+            setError('El número de preguntas debe ser al menos 5 y el tiempo por pregunta debe ser al menos 10 segundos.');
+            setOpenSnackbar(true);
+            return;
+        }
 
-    const handleInputChange = (event) => {
-        event.preventDefault();
+        setOpen(false);
     };
 
     const handleShowGame = () => {
@@ -65,6 +73,7 @@ const MainPage = () => {
         updateTimePerQuestion: setTimePerQuestion,
     };
 
+
     return (
         <ConfigContext.Provider value={configValue}>
             <Navbar />
@@ -83,7 +92,7 @@ const MainPage = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                         <div className="img-container">
-                            <img src='/questions-illustration.png' alt='Imagen de prueba' className="img-fluid" />
+                        <img src='/questions-illustration.png' alt='Imagen de prueba' className="img-fluid" style={{ width: '80%', height: 'auto' }} />
                         </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -121,7 +130,7 @@ const MainPage = () => {
                             fullWidth
                             value={numQuestions}
                             onChange={handleNumQuestionsChange}
-                            inputProps={{ min: 5, onKeyDown: handleInputChange }}
+                            inputProps={{ min: 5 }}
                             className="dialogTextField"
                         />
 
@@ -134,7 +143,7 @@ const MainPage = () => {
                             fullWidth
                             value={timePerQuestion}
                             onChange={handleTimePerQuestionChange}
-                            inputProps={{ min: 10, onKeyDown: handleInputChange }}
+                            inputProps={{ min: 10 }}
                             className="dialogTextField"
                         />
                     </DialogContent>
@@ -144,7 +153,14 @@ const MainPage = () => {
                         </Button>
                     </DialogActions>
                 </div>
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={6000}
+                    onClose={() => setOpenSnackbar(false)}
+                    message={error}
+                />
             </Dialog>
+
 
             <Footer />
         </ConfigContext.Provider>

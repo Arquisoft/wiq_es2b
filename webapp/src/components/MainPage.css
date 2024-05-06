@@ -12,8 +12,7 @@ div[title="main-title"]>h1 {
 }
 
 div[title="main-title"]>h2 {
-    /* margin-bottom: 2rem; */
-    color: #4c8dbf;
+    color: #0155B7;
     font-size: 4rem;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -58,7 +57,7 @@ div[title="main"]>button {
 }
 
 .img-container img {
-    width: 70rem;
+    width: 70%;
     height: auto;
     animation: slide 3s ease infinite alternate;
 }
@@ -88,4 +87,9 @@ div[title="main"]>button {
 
 .dialogImage img {
     width: 18rem;
+}
+
+
+.dialogContainer {
+    margin-bottom: 40%;
 }
