@@ -325,7 +325,7 @@ const getQuestions = () => {
     setGameData(newGame);
   
   
-    axios.post(`${apiEndpoint}/addgame`, gameData)
+    axios.post(`${apiEndpoint}/addgame`, newGame)
   .then(response => {
     console.log("Respuesta del servidor:", response.data);
   })

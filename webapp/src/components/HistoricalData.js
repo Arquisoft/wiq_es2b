@@ -14,7 +14,7 @@ const HistoricalData = () => {
   useEffect(() => {
     handleShowHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // No es necesario deshabilitar eslint, ya que no hay dependencias externas
+  }, []);
 
   const handleShowHistory = async () => {
     try {
@@ -31,7 +31,7 @@ const HistoricalData = () => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reiniciar a la primera página cuando cambia el número de filas por página
+    setPage(0);
   };
 
   
@@ -59,12 +59,12 @@ const HistoricalData = () => {
           </TableHead>
           <TableBody>
             {paginatedData.map((row, rowIndex) => (
-                  <TableRow key={rowIndex}>
-                    <TableCell>{row[0]}</TableCell>
-                    <TableCell>{row[1]}</TableCell>
-                    <TableCell>{row[2]}</TableCell>
-                    <TableCell>{row[3]}</TableCell>
-                    <TableCell>{row[4]}</TableCell>
+                  <TableRow key={rowIndex} style={{ border: '#000 solid 0.1rem' }}>
+                    <td>{row[0]}</td>
+                    <td style={{ backgroundColor: '#B8DEB8' }}>{row[1]}</td>
+                    <td style={{ backgroundColor: '#DAAEAE' }}>{row[2]}</td>
+                    <td style={{ backgroundColor: '#DAAEAE' }}>{row[3]}</td>
+                    <td style={{ backgroundColor: '#DAAEAE' }}>{row[4]}</td>
                   </TableRow>
                 ))}
           </TableBody>

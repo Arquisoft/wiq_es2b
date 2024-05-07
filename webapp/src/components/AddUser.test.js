@@ -3,16 +3,21 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import AddUser from './AddUser';
+import { BrowserRouter } from 'react-router-dom';
 
 const mockAxios = new MockAdapter(axios);
 
 const renderAddUserComponent = () => {
-  render(<AddUser />);
+  return render(
+    <BrowserRouter>
+      <AddUser />
+    </BrowserRouter>
+  );
 };
 
 const addUser = async () => {
-  const usernameInput = screen.getByLabelText(/Username/i);
-  const passwordInput = screen.getByLabelText(/Password/i);
+  const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
+  const passwordInput = screen.getByLabelText(/Contraseña/i);
   const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
   fireEvent.change(usernameInput, { target: { value: 'testUser' } });
@@ -35,7 +40,7 @@ describe('AddUser component', () => {
     await addUser();
 
     await waitFor(() => {
-      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+      expect(screen.getByText(/Usuario añadido correctamente/i)).toBeInTheDocument();
     });
   });
 
@@ -47,15 +52,15 @@ describe('AddUser component', () => {
     await addUser();
 
     await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+      expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
     });
   });
 
   it('should display proper labels and inputs', () => {
     renderAddUserComponent();
 
-    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Nombre de usuario/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Contraseña/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Crear usuario/i })).toBeInTheDocument();
   });
 
@@ -68,10 +73,10 @@ describe('AddUser component', () => {
 
     jest.runAllTimers();
 
-    expect(screen.queryByText(/User added successfully/i)).toBeNull();
+    expect(screen.queryByText(/Usuario añadido correctamente/i)).toBeNull();
 
     await waitFor(() => {
-      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+      expect(screen.getByText(/Usuario añadido correctamente/i)).toBeInTheDocument();
     });
   });
 
@@ -87,7 +92,7 @@ describe('AddUser component', () => {
     expect(screen.queryByText(/Error: Internal Server Error/i)).toBeNull();
 
     await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+      expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
     });
   });
 });

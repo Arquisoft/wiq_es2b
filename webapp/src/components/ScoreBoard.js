@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import Navbar from './Navbar';
+import './ScoreBoard.css';
 
 const ScoreBoard = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -18,8 +19,7 @@ const ScoreBoard = () => {
     try {
       const response = await axios.get(`${apiEndpoint}/getScoreBoard`);
       const sortedScoreboard = response.data.sort((a, b) => b.points - a.points);
-
-    setScoreboard(sortedScoreboard);
+      setScoreboard(sortedScoreboard);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -40,14 +40,20 @@ const ScoreBoard = () => {
     <>
       <Navbar />
       <Container component="main" maxWidth="md" sx={{ marginTop: 4, overflowY: 'auto' }} className='containerTable'>
-        <div>
+        <div className='content'>
           <Typography component="h2" style={{ marginTop: '1rem', marginBottom: '1rem' }} className='fs-2 main-title animate__animated animate__backInLeft' variant="h2" sx={{ textAlign: 'center' }}>
             Ranking de Puntuaciones
           </Typography>
-          <TableContainer>
-            <Table>
+
+          <div className="img-container">
+  <img src='/winners.png' alt='Imagen de ganadores' className="img-fluid" />
+</div>
+
+
+          <TableContainer className='table-container'>
+            <Table sx={{ minWidth: 650 }} aria-label="customized table">
               <TableHead>
-                <TableRow>
+                <TableRow className='custom-td'>
                   <TableCell>Puesto</TableCell>
                   <TableCell>Usuario</TableCell>
                   <TableCell>Preguntas Totales Acertadas</TableCell>
@@ -57,7 +63,7 @@ const ScoreBoard = () => {
               </TableHead>
               <TableBody>
                 {paginatedScoreboard.map((user, id) => (
-                  <TableRow key={user.id}>
+                  <TableRow key={`${user.username} - ${id}`} style={{ border: '#000 solid 0.2rem' }}>
                     <TableCell>{id + 1}</TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.totalCorrect}</TableCell>
@@ -68,6 +74,7 @@ const ScoreBoard = () => {
               </TableBody>
             </Table>
           </TableContainer>
+
           <TablePagination
             component="div"
             count={scoreboard.length}

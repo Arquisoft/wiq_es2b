@@ -30,23 +30,16 @@ table {
   th, td {
     padding: 0.25em;
     text-align: center;
-    border: #000 solid 0.5rem;
     font-weight: 600;
   }
-  
-  th[title='pregunta'] {
-    background-color: rgba(41, 120, 152, 0.764);
-  }
-  
-  th[title='correcta'] {
-    background-color: rgba(79, 141, 18, 0.726);
-  }
-  
-  th[title='incorrecta'] {
-    background-color: rgba(230, 72, 72, 0.952);
-  }
 
-  td{
-    background-color: rgba(61, 178, 224, 0.764);
-    border: #000 solid 0.5rem;
-  }
+
+  .img-container {
+    text-align: center;
+}
+
+.img-container img {
+    width: 40%;
+    height: auto;
+    animation: slide 3s ease infinite alternate;
+}

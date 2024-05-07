@@ -1,28 +1,30 @@
-// src/components/AddUser.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-const AddUser = () => {
+const AddUser = ({ onCloseSnackbar }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
 
   const addUser = async () => {
     try {
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
+      await axios.post(`${apiEndpoint}/login`, { username, password });
+      localStorage.setItem('username', username);
       setOpenSnackbar(true);
-
+      
+      // Redirige a la página de juego después de 3 segundos
+      navigate("/Game");
     } catch (error) {
-      setError(error.response.data.error);
+      setError("Error al crear usuario");
+      setOpenSnackbar(true); // Abre el Snackbar en caso de error
     }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
   };
 
   return (
@@ -34,7 +36,7 @@ const AddUser = () => {
         name="username"
         margin="normal"
         fullWidth
-        label="Username"
+        label="Nombre de usuario"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
@@ -42,7 +44,7 @@ const AddUser = () => {
         name="password"
         margin="normal"
         fullWidth
-        label="Password"
+        label="Contraseña"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -50,7 +52,7 @@ const AddUser = () => {
       <Button variant="contained" color="primary" onClick={addUser}>
         Crear usuario
       </Button>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={onCloseSnackbar} message="Usuario añadido correctamente" />
       {error && (
         <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
       )}
