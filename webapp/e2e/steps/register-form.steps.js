@@ -29,8 +29,8 @@ defineFeature(feature, test => {
     let password;
 
     given('An unregistered user', async () => {
-      username = "pablo"
-      password = "pabloasw"
+      username = "user_de_prueba"
+      password = "asw_user"
       await expect(page).toClick("button", { text: "¿No tienes una cuenta? Regístrate aquí." });
     });
 
@@ -41,7 +41,7 @@ defineFeature(feature, test => {
     });
 
     then('A confirmation message should be shown in the screen', async () => {
-        await expect(page).toMatchElement("div", { text: "User added successfully" });
+        expect(page).toMatchElement("div", { text: "Usuario añadido correctamente" });
     });
   })
 
