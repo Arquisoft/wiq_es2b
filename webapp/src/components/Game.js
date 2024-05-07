@@ -59,9 +59,6 @@ const Game = () => {
 
   const [openDialog, setOpenDialog] = useState(false);
 
-  const [gameData, setGameData] = useState(null); // Variable local para almacenar los datos de la partida
-
-
   const handleDialogOpen = () => {
     setIsTimerActive(false);
     setOpenDialog(true);
@@ -311,9 +308,7 @@ const getQuestions = () => {
      totalQuestions: numberOfQuestions,
       correctAnswers: correctCounter,
       incorrectAnswers: numberOfQuestions-correctCounter
-    };
-    setGameData(newGame);
-  
+    };  
   
     axios.post(`${apiEndpoint}/addgame`, newGame)
   .then(response => {

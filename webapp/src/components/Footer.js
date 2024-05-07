@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css'; // Importa el archivo de estilos CSS
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { Toolbar } from '@mui/material';
 
 const Footer = () => {
     return (

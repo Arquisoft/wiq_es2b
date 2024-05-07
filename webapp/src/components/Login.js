@@ -50,8 +50,14 @@ const Login = () => {
         </Button>
         <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={() => {setOpenSnackbar(false);}} message="Inicio de sesión exitoso" />
         {error && (
-          <Snackbar open={!!error} autoHideDuration={6000} onClose={() => {{setOpenSnackbar(true);setError('Error: Credenciales inválidas');}}} message={error} />
+          <Snackbar 
+            open={!!error} 
+            autoHideDuration={6000} 
+            onClose={() => { setOpenSnackbar(true); setError('Error: Credenciales inválidas'); }} 
+            message={error} 
+          />
         )}
+
       </div>
     </Container>
   );
