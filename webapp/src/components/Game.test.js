@@ -5,10 +5,6 @@ import MockAdapter from 'axios-mock-adapter';
 import Game from './Game';
 import { MemoryRouter } from 'react-router-dom'; // Importa MemoryRouter
 
-import MainPage from './MainPage';
-import { BrowserRouter as Router } from 'react-router-dom';
-
-
 const mockAxios = new MockAdapter(axios);
 
 const renderGameComponent = (numQuestions, timePerQuestion) => {
