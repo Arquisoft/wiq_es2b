@@ -3,15 +3,9 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import AddUser from './AddUser';
-import { MemoryRouter } from 'react-router-dom'; // Importa MemoryRouter en lugar de Router
-
-
-import { setOpenSnackbar, setError, handleCloseSnackbar } from './AddUser'; // Importa setOpenSnackbar, setError y handleCloseSnackbar
-
+import { BrowserRouter } from 'react-router-dom';
 
 const mockAxios = new MockAdapter(axios);
-
-import { BrowserRouter } from 'react-router-dom';
 
 const renderAddUserComponent = () => {
   return render(
@@ -37,8 +31,6 @@ describe('AddUser component', () => {
     mockAxios.reset();
     jest.useFakeTimers();
   });
-
-
 
   it('should add user successfully', async () => {
     renderAddUserComponent();
@@ -103,38 +95,4 @@ describe('AddUser component', () => {
       expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
     });
   });
-
-  it('should add user successfully', async () => {
-    renderAddUserComponent();
-  
-    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
-  
-    await addUser();
-  
-    await waitFor(() => {
-      expect(screen.getByText(/Usuario añadido correctamente/i)).toBeInTheDocument();
-    });
-  });
-
-  // Prueba para simular una respuesta de error del servidor al agregar un usuario
-it('should handle error when adding user', async () => {
-  renderAddUserComponent();
-
-  mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
-
-  await addUser();
-
-  await waitFor(() => {
-    expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
-  });
-});
-
-
-
-
-
-
-
-
-
 });

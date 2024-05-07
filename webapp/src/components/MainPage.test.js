@@ -7,17 +7,21 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockAxios = new MockAdapter(axios);
 
+const renderMainPageComponent = () => {
+  return render(
+    <Router>
+      <MainPage />
+    </Router>
+  );
+};
+
 describe('MainPage component', () => {
   beforeEach(() => {
     mockAxios.reset();
   });
 
   it('muestra la página principal correctamente', async () => {
-    render(
-      <Router>
-        <MainPage />
-      </Router>
-    );
+    renderMainPageComponent();
   
     const element1 = screen.getByText(/¡Bienvenido a/);
     const element2 = screen.getByText(/WIQ 2024!/);
@@ -34,11 +38,7 @@ describe('MainPage component', () => {
   });
 
   it('abre el diálogo de configuración y cierra correctamente', async () => {
-    render(
-      <Router>
-        <MainPage />
-      </Router>
-    );
+    renderMainPageComponent();
   
     const configButton = screen.getByRole('button', { name: 'Configuración' });
   
@@ -51,7 +51,6 @@ describe('MainPage component', () => {
     // Verificar que el diálogo se abre correctamente
     expect(numQuestionsInput).toBeInTheDocument();
     expect(timePerQuestionInput).toBeInTheDocument();
-
 
   
     // Simular el cambio de valor en los campos de entrada
@@ -68,11 +67,7 @@ describe('MainPage component', () => {
   });
 
   it('cierra el diálogo si las condiciones se cumplen', async () => {
-    render(
-      <Router>
-        <MainPage />
-      </Router>
-    );
+    renderMainPageComponent();
   
     const configButton = screen.getByRole('button', { name: 'Configuración' });
   
@@ -96,11 +91,7 @@ describe('MainPage component', () => {
   });
   
   it('muestra un mensaje de error si las condiciones no se cumplen', async () => {
-    render(
-      <Router>
-        <MainPage />
-      </Router>
-    );
+    renderMainPageComponent();
   
     const configButton = screen.getByRole('button', { name: 'Configuración' });
   
@@ -129,11 +120,7 @@ describe('MainPage component', () => {
   
 
   it('navega a la página de ScoreBoard al hacer clic en el botón "Ranking"', async () => {
-    render(
-      <Router>
-        <MainPage />
-      </Router>
-    );
+    renderMainPageComponent();
   
     const rankingButton = screen.getByRole('button', { name: 'Ranking' });
   
@@ -144,8 +131,6 @@ describe('MainPage component', () => {
       expect(window.location.pathname).toBe('/ScoreBoard');
     });
   });
-  
-
   
 });
 

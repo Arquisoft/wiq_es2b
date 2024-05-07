@@ -8,6 +8,13 @@ import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
 
+function getLoginElements() {
+  const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
+  const passwordInput = screen.getByLabelText(/Contraseña/i);
+  const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+  return { usernameInput, passwordInput, loginButton };
+}
+
 describe('Login component', () => {
   beforeEach(() => {
     mockAxios.reset();
@@ -20,9 +27,8 @@ describe('Login component', () => {
       </Router>
     );
 
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+    const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
 
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
 
@@ -39,9 +45,8 @@ describe('Login component', () => {
         <Login />
       </Router>);
 
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
 
     // Mock del request axios.post para simular una respuesta de error
     mockAxios.onPost('http://localhost:8000/login').reply(401, { error: 'Error: Credenciales inválidas' });
@@ -64,9 +69,8 @@ describe('Login component', () => {
       </Router>
     );
 
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+    const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
 
     // Mock del request axios.post para simular una respuesta exitosa
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
@@ -92,9 +96,8 @@ describe('Login component', () => {
       </Router>
     );
   
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+    const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
   
     // Mock del request axios.post para simular una respuesta exitosa
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
@@ -121,9 +124,8 @@ describe('Login component', () => {
       </Router>
     );
   
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+    const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
   
     // Mock del request axios.post para simular una respuesta de error
     mockAxios.onPost('http://localhost:8000/login').reply(401, { error: 'Error: Credenciales inválidas' });
@@ -147,9 +149,8 @@ describe('Login component', () => {
       </Router>
     );
   
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+    const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
   
     // Mock del request axios.post para simular una respuesta exitosa
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
@@ -175,9 +176,8 @@ describe('Login component', () => {
       </Router>
     );
   
-    const usernameInput = screen.getByLabelText(/Nombre de usuario/i);
-    const passwordInput = screen.getByLabelText(/Contraseña/i);
-    const loginButton = screen.getByRole('button', { name: /Iniciar sesión/i });
+    const { usernameInput, passwordInput, loginButton } = getLoginElements();
+
   
     // Mock del request axios.post para simular una respuesta exitosa
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
@@ -194,6 +194,7 @@ describe('Login component', () => {
     // Verificar que el Snackbar de éxito está abierto
     expect(screen.getByText(/Inicio de sesión exitoso/i)).toBeInTheDocument();
   });
+
   
   
   
