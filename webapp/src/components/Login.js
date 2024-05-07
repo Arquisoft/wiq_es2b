@@ -24,10 +24,6 @@ const Login = () => {
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
-
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
       <div>
@@ -52,9 +48,9 @@ const Login = () => {
         <Button variant="contained" color="primary" onClick={loginUser}>
           Iniciar sesión
         </Button>
-        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Inicio de sesión exitoso" />
+        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={() => {setOpenSnackbar(false);}} message="Inicio de sesión exitoso" />
         {error && (
-          <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('Error: Credenciales inválidas')} message={error} />
+          <Snackbar open={!!error} autoHideDuration={6000} onClose={() => {{setOpenSnackbar(true);setError('Error: Credenciales inválidas');}}} message={error} />
         )}
       </div>
     </Container>
