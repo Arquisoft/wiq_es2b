@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-const AddUser = () => {
+const AddUser = ({ onCloseSnackbar }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,18 +20,11 @@ const AddUser = () => {
       setOpenSnackbar(true);
       
       // Redirige a la página de juego después de 3 segundos
-      setTimeout(() => {
-        navigate("/Game");
-      }, 3000);
+      navigate("/Game");
     } catch (error) {
       setError("Error al crear usuario");
       setOpenSnackbar(true); // Abre el Snackbar en caso de error
     }
-  };
-  
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-    setError("");
   };
 
   return (
@@ -59,7 +52,7 @@ const AddUser = () => {
       <Button variant="contained" color="primary" onClick={addUser}>
         Crear usuario
       </Button>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Usuario añadido correctamente" />
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={onCloseSnackbar} message="Usuario añadido correctamente" />
       {error && (
         <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
       )}
