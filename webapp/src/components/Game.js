@@ -200,10 +200,8 @@ const Game = () => {
         button.onmouse = colorOnMousePreguntas;
       });
 
-      incrementQuestion();
-
-      
-      
+      setQuestionCounter(qc => qc + 1);
+     
 
     }catch (error){
       console.error('Error:', error);
@@ -227,7 +225,7 @@ const Game = () => {
       const correctButton = document.getElementById(buttonId);
       if (correctButton) {
         correctButton.style.backgroundColor = "rgba(79, 141, 18, 0.726)";
-        incrementCorrect();
+        setCorrectCounter(correct => correct + 1);
       }
     }else{
       const buttonId = `button_${index}`;
@@ -244,7 +242,7 @@ const Game = () => {
         }
       }
 
-      incrementIncorrect();
+      setIncorrectCounter(incorrect => incorrect + 1);
     }
 
     const buttons = document.querySelectorAll('button[title="btnsPreg"]');
@@ -253,7 +251,7 @@ const Game = () => {
       button.onmouse = null;
     });
     
-    decrementQuestionsToAnswer();
+    setQuestionsToAnswer(toAnswer => toAnswer - 1);
 
     if (!isGameFinished()) {
       setTimeout(() => {
@@ -314,14 +312,6 @@ const getQuestions = () => {
       correctAnswers: correctCounter,
       incorrectAnswers: numberOfQuestions-correctCounter
     };
-    //console.log("Se va a guardar la siguiente partida:");
-    //console.log("Username:", newGame.username);
-    //console.log("Duración:", newGame.duration);
-    //console.log("Preguntas:", newGame.questions);
-    //console.log("Porcentaje de Aciertos:", newGame.percentage);
-    //console.log("Número Total de Preguntas:", newGame.totalQuestions);
-    //console.log("Número de Respuestas Correctas:", newGame.correctAnswers);
-    //console.log("Número de Respuestas Incorrectas:", newGame.incorrectAnswers);
     setGameData(newGame);
   
   
@@ -334,24 +324,6 @@ const getQuestions = () => {
   });
   }
  
-  const incrementCorrect = () => {
-    setCorrectCounter(correct => correct + 1);
-  };
-
-  const incrementIncorrect = () => {
-    setIncorrectCounter(incorrect => incorrect + 1);
-  }
-
-  const decrementQuestionsToAnswer = () => {
-    setQuestionsToAnswer(toAnswer => toAnswer - 1);
-  }
-
-  const incrementQuestion = () => {
-    setQuestionCounter(qc => qc + 1);
-  }
-
-
-
   useEffect(() => {
     if (isTimedOut && !isFinished) {
       // mostrar la respuesta correcta
@@ -364,8 +336,8 @@ const getQuestions = () => {
         }
       }
 
-      incrementIncorrect();
-      decrementQuestionsToAnswer();
+      setIncorrectCounter(incorrect => incorrect + 1);
+      setQuestionsToAnswer(toAnswer => toAnswer - 1);
 
       setTimeout(() => {
         if (!isGameFinished()) {
@@ -417,7 +389,7 @@ const getQuestions = () => {
           </div>
 
 
-          <div className="Timer">
+          <div className="Timer" data-testid="Timer">
             <div className="container">
               <div className="text">{time}</div>
 
