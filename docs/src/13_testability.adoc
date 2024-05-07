@@ -1,6 +1,6 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
-[[section-technical-risks]]
+[[section-testability]]
 == Testability
 Testability is a crucial aspect of software development. It refers to the ease with which a software system can be tested to ensure its correctness and reliability. By writing tests, developers can verify that their code behaves as expected and identify any potential issues or bugs. There are various types of tests that can be performed, such as unit tests, integration tests, and end-to-end tests. Unit tests focus on testing individual components or functions in isolation, while integration tests verify the interaction between different components. End-to-end tests simulate real-world scenarios to ensure the entire system functions correctly.
 
