@@ -33,15 +33,15 @@ function App() {
         <Typography component="div" align="center" sx={{ marginTop: 2 }}>
          
           {showLogin ? (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            <a onClick={handleToggleView} className='gotoregister'>
+
+            <button onClick={handleToggleView} className='gotoregister' style={{ border: 'none', background: 'none', color: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}>
               ¿No tienes una cuenta? Regístrate aquí.
-            </a>
-          ) : (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            <a onClick={handleToggleView} className='gotoregister'>
+            </button>
+            ) : (
+            <button onClick={handleToggleView} className='gotoregister' style={{ border: 'none', background: 'none', color: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}>
               ¿Ya tienes cuenta? Inicia sesión aquí.
-            </a>
+            </button>
+
           )}
 
         </Typography>
