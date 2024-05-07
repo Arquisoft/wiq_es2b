@@ -22,21 +22,6 @@ const MainPage = () => {
     const [error, setError] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
-
-    const handleNumQuestionsChange = (event) => {
-        let newValue = parseInt(event.target.value, 10);
-        setNumQuestions(newValue);
-    };
-
-    const handleTimePerQuestionChange = (event) => {
-        let newValue = parseInt(event.target.value, 10);
-        setTimePerQuestion(newValue);
-    };
-
-    const handleOpenDialog = () => {
-        setOpen(true);
-    };
-
     const handleCloseDialog = () => {
         // Validar que el valor de preguntas sea al menos 5 y el tiempo por pregunta sea al menos 10
         if (numQuestions < 5 || timePerQuestion < 10) {
@@ -58,11 +43,6 @@ const MainPage = () => {
         };
 
         navigate(path, { state: { gameConfig } });
-    };
-
-    const handleRanking = () => {
-        let path = '/ScoreBoard';
-        navigate(path);
     };
 
     // Valor del contexto para la configuración del juego
@@ -92,7 +72,7 @@ const MainPage = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                         <div className="img-container">
-                        <img src='/questions-illustration.png' alt='Imagen de prueba' className="img-fluid" style={{ width: '80%', height: 'auto' }} />
+                            <img src='/questions-illustration.png' alt='Imagen de prueba' className="img-fluid" style={{ width: '80%', height: 'auto' }} />
                         </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -100,10 +80,10 @@ const MainPage = () => {
                             <Button variant="contained" color="primary" fullWidth onClick={handleShowGame}  >
                                 Nuevo juego
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleRanking}  >
+                            <Button variant="contained" color="primary" fullWidth onClick={() => navigate('/ScoreBoard')}  >
                                 Ranking
                             </Button>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleOpenDialog}  >
+                            <Button variant="contained" color="primary" fullWidth onClick={() => setOpen(true)}  >
                                 Configuración
                             </Button>
                         </div>
@@ -129,7 +109,10 @@ const MainPage = () => {
                             type="number"
                             fullWidth
                             value={numQuestions}
-                            onChange={handleNumQuestionsChange}
+                            onChange={(event) => {
+                                let newValue = parseInt(event.target.value, 10);
+                                setNumQuestions(newValue);
+                            }}
                             inputProps={{ min: 5 }}
                             className="dialogTextField"
                         />
@@ -142,7 +125,11 @@ const MainPage = () => {
                             type="number"
                             fullWidth
                             value={timePerQuestion}
-                            onChange={handleTimePerQuestionChange}
+                            onChange={(event) => {
+                                let newValue = parseInt(event.target.value, 10);
+                                setTimePerQuestion(newValue);
+
+                            }}
                             inputProps={{ min: 10 }}
                             className="dialogTextField"
                         />
@@ -156,11 +143,11 @@ const MainPage = () => {
                 <Snackbar
                     open={openSnackbar}
                     autoHideDuration={6000}
-                    onClose={() => setOpenSnackbar(false)}
+                    onClose={setOpenSnackbar}
                     message={error}
                 />
-            </Dialog>
 
+            </Dialog>
 
             <Footer />
         </ConfigContext.Provider>
