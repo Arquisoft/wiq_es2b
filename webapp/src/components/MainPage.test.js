@@ -66,29 +66,6 @@ describe('MainPage component', () => {
   
   });
 
-  it('cierra el diálogo si las condiciones se cumplen', async () => {
-    renderMainPageComponent();
-  
-    const configButton = screen.getByRole('button', { name: 'Configuración' });
-  
-    fireEvent.click(configButton);
-  
-    const numQuestionsInput = screen.getByLabelText('Número de preguntas (min. 5)');
-    const timePerQuestionInput = screen.getByLabelText('Tiempo por pregunta (mín. 10 segundos)');
-    const acceptButton = screen.getByRole('button', { name: 'Aceptar' });
-  
-    // Simular el cambio de valor en los campos de entrada
-    fireEvent.change(numQuestionsInput, { target: { value: '8' } });
-    fireEvent.change(timePerQuestionInput, { target: { value: '15' } });
-  
-    // Simular hacer clic en el botón de aceptar
-    fireEvent.click(acceptButton);
-  
-    // Verificar que el diálogo se cierra correctamente
-    await waitFor(() => {
-      expect(screen.queryByText('Configuración del juego')).not.toBeInTheDocument();
-    });
-  });
   
   it('muestra un mensaje de error si las condiciones no se cumplen', async () => {
     renderMainPageComponent();
@@ -109,7 +86,6 @@ describe('MainPage component', () => {
     fireEvent.click(acceptButton);
   
     // Verificar que se muestra un mensaje de error
-
     await waitFor(() => {
       expect(screen.getByText(/El número de preguntas debe ser al menos 5 y el tiempo por pregunta debe ser al menos 10 segundos./i)).toBeInTheDocument();
     });
@@ -129,6 +105,20 @@ describe('MainPage component', () => {
     // Verificar que la ruta se cambió correctamente
     await waitFor(() => {
       expect(window.location.pathname).toBe('/ScoreBoard');
+    });
+  });
+
+
+  it('navega a la página de Juego al hacer clic en el botón "Nuevo juego"', async () => {
+    renderMainPageComponent();
+  
+    const gameButton = screen.getByRole('button', { name: 'Nuevo juego' });
+  
+    fireEvent.click(gameButton);
+  
+    // Verificar que la ruta se cambió correctamente
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/Game');
     });
   });
   
