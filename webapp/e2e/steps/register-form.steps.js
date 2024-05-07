@@ -45,8 +45,11 @@ defineFeature(feature, test => {
     });
   })
 
-  afterAll(async ()=>{
-    browser.close()
-  })
+  afterAll(async () => {
+    if (!page.isClosed()) {
+      await browser.close();
+    }
+  });
+  
 
 });
