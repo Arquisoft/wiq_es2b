@@ -33,10 +33,12 @@ function App() {
         <Typography component="div" align="center" sx={{ marginTop: 2 }}>
          
           {showLogin ? (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a onClick={handleToggleView} className='gotoregister'>
               ¿No tienes una cuenta? Regístrate aquí.
             </a>
           ) : (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a onClick={handleToggleView} className='gotoregister'>
               ¿Ya tienes cuenta? Inicia sesión aquí.
             </a>
