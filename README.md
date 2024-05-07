@@ -4,18 +4,39 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es2b&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es2b)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es2b&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es2b)
 
-The direction of the webapp is: http://74.234.51.78:3000/
+## Welcome to WIQ2024!
+WIQ2024 is a web application based on the RTVE game Saber y Ganar developed for the Software Architecture subject (Course 2023-24). This is a base repo for the [Software Architecture course](http://arquisoft.github.io/) in [2023/2024 edition](https://arquisoft.github.io/course2324.html).
 
-This is a base repo for the [Software Architecture course](http://arquisoft.github.io/) in [2023/2024 edition](https://arquisoft.github.io/course2324.html). 
+> ✨ New URL: http://4.233.221.247:3000/
 
-This repo is a basic application composed of several components.
+### Team ES2B
 
-- **Gateway service**. Express service that is exposed to the public and serves as a proxy to the two previous ones.
-- **User service**. Express service that handles the insertion of new users in the system.
-- **Auth service**. Express service that handles the authentication of users.
-- **Webapp**. React web application that uses the gateway service to allow basic login and new user features.
+- Member 1 - [Carlos ](https://github.com/baraganio)
+- Member 2 - [Coral](https://github.com/coral2742)
+- Member 3 - [Pablo](https://github.com/uo264915)
+- Member 4 - [Raymond](https://github.com/UO290054)
 
-Both the user and auth service share a Mongo database that is accessed with mongoose.
+![Video of WIQ2024](./resources/WIQ%202024%20ES2B.gif)
+
+
+
+
+For the implementation it was decided to implement the following elements in the infrastructure:
+
+- **Quiz Game Application**: In the development environment, the main application will be deployed in different Docker containers on each team member's local server, so that a web application built with React is created. In the case of the production environment, the application would be deployed in the Microsoft Azure cloud and is publicly accessible.
+
+- **Questions API**: This is an API that dynamically generates questions for the WikiData API and also keeps a history of questions that have already been asked.
+
+- **WikiData API**: The application makes calls to the WikiData API to dynamically generate questions for the game, and is accessed in both the development and production environments.
+
+- **MongoDB database**: The database runs inside a Docker container in the development environment to store user data and game information. In the production environment, this database is managed in a Microsoft Azure service.
+
+- **Authentication Service**: The authentication service allows a user to register and log in to the application so that the data associated with their games is always linked and accessible to the user.
+
+- **Data Monitoring Service**: The application data monitoring and analysis service consists of two different services, one with Grafana and the other with Prometheus. Both services work together to analyse and monitor application data so that the information obtained can be recorded in the form of dashboards.
+
+> Both the user and auth service share a Mongo database that is accessed with mongoose.
+
 
 ## Quick start guide
 
