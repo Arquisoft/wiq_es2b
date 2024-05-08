@@ -41,8 +41,7 @@ defineFeature(feature, test => {
     });
 
     then('I should be redirected to main page', async () => {
-      await expect(page).toMatchElement("div", { text: "Usuario añadido correctamente" });
-
+      await expect(page).toMatchElement("h2", { text: "¡Bienvenido a" });
       
     });
   })
