@@ -42,7 +42,7 @@ defineFeature(feature, test => {
 
     then('I should be redirected to main page', async () => {
       const title = await page.$eval("h2", element => element.textContent);
-      expect(title).toBe("Saber y Ganar Juego");
+      expect(title).toBe("WIQ 2024");
       
     });
   })
