@@ -20,7 +20,9 @@ const AddUser = ({ onCloseSnackbar }) => {
       setOpenSnackbar(true);
       
       // Redirige a la página de juego después de 3 segundos
-      navigate("/Game");
+      setTimeout(() => {
+        navigate("/mainPage");
+      }, 3000);
     } catch (error) {
       setError("Error al crear usuario");
       setOpenSnackbar(true); // Abre el Snackbar en caso de error

@@ -89,7 +89,11 @@ app.get('/createquestion', async (req, res) => {
     // Return a json response with what we obtained on the petition
     res.json(questionResponse.data);
   } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
+    if (error.response) {
+      res.status(error.response.status).json({ error: error.response.data.error });
+    } else {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 });
 

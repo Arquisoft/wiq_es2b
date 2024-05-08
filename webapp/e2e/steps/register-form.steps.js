@@ -11,8 +11,8 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 100 });
-    page = await browser.newPage();
+      : await puppeteer.launch({ headless: "new", slowMo: 100 });
+      page = await browser.newPage();
     //Way of setting up the timeout
     setDefaultOptions({ timeout: 10000 })
 
@@ -41,7 +41,9 @@ defineFeature(feature, test => {
     });
 
     then('I should be redirected to main page', async () => {
-        await expect(page).toMatchElement("h2", { text: "¡Bienvenido a" });
+      await expect(page).toMatchElement("div", { text: "Usuario añadido correctamente" });
+
+      
     });
   })
 
