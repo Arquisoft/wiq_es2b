@@ -121,7 +121,83 @@ describe('MainPage component', () => {
       expect(window.location.pathname).toBe('/Game');
     });
   });
+
+  it('navega a la página de usuarios registrados', async () => {
+    renderMainPageComponent();
+  
+    const registeredUsersLink = screen.getByText('Usuarios registrados');
+
+    fireEvent.click(registeredUsersLink);
+  
+    // Verificar que la ruta se cambió correctamente
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/RegisteredUsers');
+    });
+  });
+
+
+  it('navega a la página principal', async () => {
+    renderMainPageComponent();
+  
+    const mainPageLink = screen.getByText('Página principal');
+
+    fireEvent.click(mainPageLink);
+  
+    // Verificar que la ruta se cambió correctamente
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/mainPage');
+    });
+  });
+
+
+  it('navega a la página de historial de preguntas', async () => {
+    renderMainPageComponent();
+  
+    const historialLink = screen.getByText('Historial');
+    fireEvent.click(historialLink);
+
+    const questionHistorialLink = screen.getByText('Historial de preguntas');
+    fireEvent.click(questionHistorialLink);
+  
+    // Verificar que la ruta se cambió correctamente
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/historicaldata');
+    });
+  });
+
+  it('navega a la página de historial de usuario', async () => {
+    renderMainPageComponent();
+  
+    const historialLink = screen.getByText('Historial');
+    fireEvent.click(historialLink);
+
+    const questionHistorialLink = screen.getByText('Historial de usuario');
+    fireEvent.click(questionHistorialLink);
+  
+    // Verificar que la ruta se cambió correctamente
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/historicalUserdata');
+    });
+  });
+
+  it('realiza un logout', async () => {
+    renderMainPageComponent();
+  
+    const logoutLink = screen.getByText('Logout');
+    fireEvent.click(logoutLink);
+  });
+
+
+  it('comprobar footer', async () => {
+    renderMainPageComponent();
+  
+    const footerText = screen.getByText(/© \d{4} Hecho con ❤️ por/);
+  
+    expect(footerText).toBeInTheDocument();
+  });
+  
+
+
+
   
 });
-
-
