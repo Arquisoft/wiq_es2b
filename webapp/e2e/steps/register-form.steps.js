@@ -40,8 +40,8 @@ defineFeature(feature, test => {
       await expect(page).toClick('button', { text: 'Crear usuario' })
     });
 
-    then('A confirmation message should be shown in the screen', async () => {
-        await expect(page).toMatchElement("div", { text: "Usuario añadido correctamente" });
+    then('I should be redirected to main page', async () => {
+        await expect(page).toMatchElement("h2", { text: "¡Bienvenido a" });
     });
   })
 
