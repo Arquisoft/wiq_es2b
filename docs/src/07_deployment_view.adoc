@@ -9,9 +9,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 === Infrastructure Level 1
 
 
-image::07-DeploymentView.drawio.png[title="Deployment View"]
-
-image::07-DeploymentViewTest.drawio.png[title="Deployment View Test environment"]
+image::07-Deployment View.drawio.png[title="Deployment View"]
 
 Motivation::
 
