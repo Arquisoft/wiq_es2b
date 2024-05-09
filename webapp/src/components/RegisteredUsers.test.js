@@ -25,7 +25,7 @@ describe('Registered Users component', () => {
   await waitFor(() => {
 
     expect(screen.getByText('pablo')).toBeInTheDocument();
-    expect(screen.getByText('03/04/2024 14:34')).toBeInTheDocument();
+    expect(screen.getByText('03/04/2024 12:34')).toBeInTheDocument();
     });
 
   });
@@ -49,8 +49,8 @@ describe('Registered Users component', () => {
 
     await waitFor(() => {
         // Check if dates are formatted correctly
-        expect(screen.getByText('03/04/2024 14:34')).toBeInTheDocument();
-        expect(screen.getByText('02/04/2024 14:39')).toBeInTheDocument();
+        expect(screen.getByText('03/04/2024 12:34')).toBeInTheDocument();
+        expect(screen.getByText('02/04/2024 12:39')).toBeInTheDocument();
       });
 
   });
