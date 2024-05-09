@@ -86,15 +86,6 @@ describe('Login component', () => {
     expect(history.location.pathname).toBe('/');
   });
 
-  it('comprobar footer', async () => {  
-    render(
-      <Router>
-        <Login />
-      </Router>);
-      
-    const footerText = screen.getByText(/© \d{4} Hecho con ❤️ por/);
-  
-    expect(footerText).toBeInTheDocument();
-  });
+
 
 });

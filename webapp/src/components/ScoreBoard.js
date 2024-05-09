@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import Navbar from './Navbar';
 import './ScoreBoard.css';
+import Footer from './Footer';
 
 const ScoreBoard = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -86,6 +87,7 @@ const ScoreBoard = () => {
           />
         </div>
       </Container>
+      <Footer />
     </>
   );
 };

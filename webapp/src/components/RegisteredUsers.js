@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Container, Typography } from '@mui/material';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const RegisteredUsers = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -13,6 +14,18 @@ const RegisteredUsers = () => {
     handleShowHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  };
 
   const handleShowHistory = async () => {
     try {
@@ -43,17 +56,10 @@ const RegisteredUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {registeredUsers.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <td key={cellIndex}>{cell}</td>
-                ))}
-              </tr>
-            ))} */}
             {registeredUsers.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 <td>{row[0]}</td>
-                <td>{row[1]}</td>
+                <td>{formatDate(row[1])}</td>
               </tr>
             ))}
             
@@ -61,6 +67,7 @@ const RegisteredUsers = () => {
         </table>
       </div>
   </Container>
+  <Footer />
   </>
 
   );

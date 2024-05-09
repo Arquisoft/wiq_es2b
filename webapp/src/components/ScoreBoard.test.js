@@ -57,4 +57,17 @@ describe('ScoreBoard component', () => {
     expect(screen.getByText('Ranking de Puntuaciones')).toBeInTheDocument();
   });
 
+
+  it('comprobar footer', async () => {
+    render(
+      <Router>
+        <ScoreBoard />
+      </Router>
+    );
+  
+    const footerText = screen.getByText(/© \d{4} Hecho con ❤️ por/);
+  
+    expect(footerText).toBeInTheDocument();
+  });
+
 });

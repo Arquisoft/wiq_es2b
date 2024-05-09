@@ -59,7 +59,6 @@ const AddUser = ({ onCloseSnackbar }) => {
       {error && (
         <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
       )}
-      <Footer />
     </Container>
   );
 };

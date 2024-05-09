@@ -103,11 +103,4 @@ describe('AddUser component', () => {
   });
 
 
-  it('comprobar footer', async () => {
-    renderAddUserComponent();
-  
-    const footerText = screen.getByText(/© \d{4} Hecho con ❤️ por/);
-  
-    expect(footerText).toBeInTheDocument();
-  });
 });
