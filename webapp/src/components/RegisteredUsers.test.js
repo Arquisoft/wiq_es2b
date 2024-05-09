@@ -35,8 +35,8 @@ describe('Registered Users component', () => {
 
   it('should format dates correctly', async () => {
     const mockRegisteredUsers = [
-      ['username1', '2024-01-01T12:34:56Z'],
-      ['username2', '2024-02-15T09:30:00Z'],
+      ['username1', '2024-04-03T12:34:56Z'],
+      ['username2', '2024-04-02T12:39:56Z'],
     ];
 
     mockAxios.onGet('http://localhost:8000/getregisteredusers').reply(200, mockRegisteredUsers);
@@ -49,8 +49,8 @@ describe('Registered Users component', () => {
 
     await waitFor(() => {
         // Check if dates are formatted correctly
-        expect(screen.getByText('01/01/2024 13:34')).toBeInTheDocument();
-        expect(screen.getByText('15/02/2024 10:30')).toBeInTheDocument();
+        expect(screen.getByText('03/04/2024 14:34')).toBeInTheDocument();
+        expect(screen.getByText('02/04/2024 14:39')).toBeInTheDocument();
       });
 
   });
