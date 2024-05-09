@@ -78,6 +78,12 @@ describe('AddUser component', () => {
     await waitFor(() => {
       expect(screen.getByText(/Usuario añadido correctamente/i)).toBeInTheDocument();
     });
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/');
+    });
+
+
   });
 
   it('should display error Snackbar with autoHideDuration', async () => {
@@ -94,5 +100,14 @@ describe('AddUser component', () => {
     await waitFor(() => {
       expect(screen.getByText(/Error: Error al crear usuario/i)).toBeInTheDocument();
     });
+  });
+
+
+  it('comprobar footer', async () => {
+    renderAddUserComponent();
+  
+    const footerText = screen.getByText(/© \d{4} Hecho con ❤️ por/);
+  
+    expect(footerText).toBeInTheDocument();
   });
 });
